@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saladpuk.PromptPay.App", "Saladpuk.PromptPay.App\Saladpuk.PromptPay.App.csproj", "{53ABD8A5-8BBD-4400-900A-DF4E39834010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saladpuk.PrompyPay", "Saladpuk.PrompyPay\Saladpuk.PrompyPay.csproj", "{AA0F2F1C-0883-4F87-9CCF-1AFBE0B8ED6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0C433077-08AF-4C77-959A-E99D9B986890}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saladpuk.PromptPay.Tests", "tests\Saladpuk.PromptPay.Tests\Saladpuk.PromptPay.Tests.csproj", "{E0C96719-DA05-47CE-A725-9807049DF454}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53ABD8A5-8BBD-4400-900A-DF4E39834010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53ABD8A5-8BBD-4400-900A-DF4E39834010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53ABD8A5-8BBD-4400-900A-DF4E39834010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53ABD8A5-8BBD-4400-900A-DF4E39834010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA0F2F1C-0883-4F87-9CCF-1AFBE0B8ED6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA0F2F1C-0883-4F87-9CCF-1AFBE0B8ED6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA0F2F1C-0883-4F87-9CCF-1AFBE0B8ED6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA0F2F1C-0883-4F87-9CCF-1AFBE0B8ED6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0C96719-DA05-47CE-A725-9807049DF454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0C96719-DA05-47CE-A725-9807049DF454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0C96719-DA05-47CE-A725-9807049DF454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0C96719-DA05-47CE-A725-9807049DF454}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E0C96719-DA05-47CE-A725-9807049DF454} = {0C433077-08AF-4C77-959A-E99D9B986890}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {449B70FF-0C6F-4653-BE02-62BE29BA90E0}
+	EndGlobalSection
+EndGlobal
