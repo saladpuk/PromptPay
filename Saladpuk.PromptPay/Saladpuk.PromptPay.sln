@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saladpuk.PromptPay.App", "Saladpuk.PromptPay.App\Saladpuk.PromptPay.App.csproj", "{53ABD8A5-8BBD-4400-900A-DF4E39834010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saladpuk.PrompyPay", "Saladpuk.PrompyPay\Saladpuk.PrompyPay.csproj", "{AA0F2F1C-0883-4F87-9CCF-1AFBE0B8ED6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saladpuk.PromptPay", "Saladpuk.PromptPay\Saladpuk.PromptPay.csproj", "{AA0F2F1C-0883-4F87-9CCF-1AFBE0B8ED6E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0C433077-08AF-4C77-959A-E99D9B986890}"
 EndProject

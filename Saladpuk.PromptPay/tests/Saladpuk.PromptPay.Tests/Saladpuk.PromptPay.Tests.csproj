@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Saladpuk.PrompyPay\Saladpuk.PrompyPay.csproj" />
+    <ProjectReference Include="..\..\Saladpuk.PromptPay\Saladpuk.PromptPay.csproj" />
   </ItemGroup>
 
 </Project>
