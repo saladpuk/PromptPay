@@ -9,10 +9,9 @@ namespace Saladpuk.PromptPay
     {
         private readonly List<QrDataObject> qrDataObjects;
 
-        public QrBuilder(string version = "01")
+        public QrBuilder()
         {
             qrDataObjects = new List<QrDataObject>();
-            Add(QrIdentifier.PayloadFormatIndicator, version);
         }
 
         public QrBuilder Add(QrIdentifier identifier, string data)
@@ -23,7 +22,7 @@ namespace Saladpuk.PromptPay
             }
 
             var id = ((int)identifier).ToString("00");
-            var digits = getDigits(data);
+            var digits = (data ?? string.Empty).Length.ToString("00");
             removeOldRecordIfExists(id);
             qrDataObjects.Add(new QrDataObject($"{id}{digits}{data}"));
             return this;
@@ -45,6 +44,48 @@ namespace Saladpuk.PromptPay
             return this;
         }
 
+        public QrBuilder SetStaticQR()
+        {
+            const string Reusable = "12";
+            Add(QrIdentifier.PointOfInitiationMethod, Reusable);
+            return this;
+        }
+
+        public QrBuilder SetDynamicQR()
+        {
+            const string OneTimeOnly = "11";
+            Add(QrIdentifier.PointOfInitiationMethod, OneTimeOnly);
+            return this;
+        }
+
+        public QrBuilder SetTransactionAmount(double amount)
+        {
+            var value = Math.Abs(amount).ToString("0.00");
+            Add(QrIdentifier.TransactionAmount, value);
+            return this;
+        }
+
+        public QrBuilder SetCountryCode(string code)
+        {
+            var region = new System.Globalization.RegionInfo(code);
+            Add(QrIdentifier.CountryCode, region.TwoLetterISORegionName);
+            return this;
+        }
+
+        public QrBuilder SetCurrencyCode(CurrencyCode code)
+        {
+            var value = ((int)code).ToString();
+            Add(QrIdentifier.TransactionCurrency, value);
+            return this;
+        }
+
+        public QrBuilder SetCyclicRedundancyCheck(int digits = 4)
+        {
+            var value = digits.ToString("00");
+            Add(QrIdentifier.CRC, value);
+            return this;
+        }
+
         private void removeOldRecordIfExists(string id)
         {
             var selected = qrDataObjects.FirstOrDefault(it => it.Id == id);
@@ -53,8 +94,6 @@ namespace Saladpuk.PromptPay
                 qrDataObjects.Remove(selected);
             }
         }
-
-        private string getDigits(string value) => (value ?? string.Empty).Length.ToString("00");
 
         public string GetQrCode(ICyclicRedundancyCheck crc)
         {

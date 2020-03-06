@@ -7,12 +7,11 @@ namespace Saladpuk.PromptPay.App
         static void Main(string[] args)
         {
             var builder = new QrBuilder()
-                .Add(QrIdentifier.PointOfInitiationMethod, "12") // No(11), Yes(12)
-                .Add(QrIdentifier.TransactionAmount, "50.00")
-                .Add(QrIdentifier.TransactionCurrency, "764") // Baht
-                .Add(QrIdentifier.CountryCode, "TH")
-                .Add(QrIdentifier.CRC, "04")
-                ;
+                .SetStaticQR()
+                .SetTransactionAmount(50.00)
+                .SetCurrencyCode(CurrencyCode.THB)
+                .SetCountryCode("th")
+                .SetCyclicRedundancyCheck();
 
             var code = builder.ToString();
             Console.WriteLine($"Raw: {code}");
