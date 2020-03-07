@@ -60,14 +60,25 @@ var qr = PPay.StaticQR.CustomerPresentedQR().GetCreditTransferQR();
 ```csharp
 // จ่ายเงินพร้อมเพย์ไปที่ เลขประจำตัวผู้เสียภาษี 0000000000000 + 99 (Suffix 2 หลัก)
 // รหัสอ้างอิง 1: 1234, รหัสอ้างอิง 2: 5678, จำนวน 50 บาท
-var qr = PPay.StaticQR.TaxId("000000000000099").BillerSuffix("02").BillRef1("1234").BillRef2("5678").Amount(50).GetBillPaymentQR();
+var qr = PPay.StaticQR
+    .TaxId("000000000000099")
+    .BillerSuffix("02")
+    .BillRef1("1234")
+    .BillRef2("5678")
+    .Amount(50)
+    .GetBillPaymentQR();
 ```
 
 ผู้ใช้เลือกจำนวนเงินที่จะจ่ายเองได้
 ```csharp
 // จ่ายเงินพร้อมเพย์ไปที่ เลขประจำตัวผู้เสียภาษี 0000000000000 + 99 (Suffix 2 หลัก)
 // รหัสอ้างอิง 1: 1234, รหัสอ้างอิง 2: 5678
-var qr = PPay.StaticQR.TaxId("000000000000099").BillerSuffix("02").BillRef1("1234").BillRef2("5678").GetBillPaymentQR();
+var qr = PPay.StaticQR
+    .TaxId("000000000000099")
+    .BillerSuffix("02")
+    .BillRef1("1234")
+    .BillRef2("5678")
+    .GetBillPaymentQR();
 ```
 
 ### เพิ่มเติม
