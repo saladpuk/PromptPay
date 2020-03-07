@@ -4,6 +4,7 @@
 1. [Thai QR Code - Payment Standard](https://www.bot.or.th/Thai/PaymentSystems/StandardPS/Documents/ThaiQRCode_Payment_Standard.pdf)
 
 > ใครอยากเอาไปปู้ยี้ปู้ยำอะไรก็ตามสบาย ถ้าทำแล้วดีหรือเจอจุดผิดก็ฝาก `pull-request` เข้ามาด้วยจะเป็นประคุณมาก
+
 > โค้ดตัวนี้ต้องใช้ **.NET Core version 3.0 ขึ้นไป** นะจ๊ะ
 
 ## การใช้งาน
@@ -26,7 +27,7 @@ QrBuilder builder = PPay.DynamicQR;
 var qr = PPay.StaticQR.MobileNumber("0914185401").Amount(50).GetCreditTransferQR();
 
 // โอนเงินพร้อมเพย์ไปที่ เลขประจำตัวประชาชน 0-0000-00000-00-0 จำนวน 50 บาท
-var qr = PPay.StaticQR..NationalId("0000000000000").Amount(50).GetCreditTransferQR();
+var qr = PPay.StaticQR.NationalId("0000000000000").Amount(50).GetCreditTransferQR();
 
 // โอนเงินพร้อมเพย์ไปที่ e-Wallet Id 000000000000000 จำนวน 50 บาท
 var qr = PPay.StaticQR.EWallet("000000000000000").Amount(50).GetCreditTransferQR();
@@ -38,7 +39,7 @@ var qr = PPay.StaticQR.EWallet("000000000000000").Amount(50).GetCreditTransferQR
 var qr = PPay.StaticQR.MobileNumber("0914185401").GetCreditTransferQR();
 
 // โอนเงินพร้อมเพย์ไปที่ เลขประจำตัวประชาชน 0-0000-00000-00-0
-var qr = PPay.StaticQR..NationalId("0000000000000").GetCreditTransferQR();
+var qr = PPay.StaticQR.NationalId("0000000000000").GetCreditTransferQR();
 
 // โอนเงินพร้อมเพย์ไปที่ e-Wallet Id 000000000000000
 var qr = PPay.StaticQR.EWallet("000000000000000").GetCreditTransferQR();
@@ -91,3 +92,10 @@ var qr = PPay.StaticQR.DomesticMerchant().GetBillPaymentQR();
 ```csharp
 var qr = PPay.StaticQR.CrossBorderMerchant().GetBillPaymentQR();
 ```
+
+## Progress
+|Feature|สถานะ|หมายเหตุ|
+|--|--|--|
+|สร้าง Bill Payment|ทำงานได้|ไม่มี Test cases cover|
+|สร้าง Transfer with PromptPayID|ทำงานได้|ไม่มี Test cases cover + ตัดเบอร์โทรกากๆไปก่อน|
+|อ่าน QR text แปลงเป็น model|ยังไม่ได้ทำ||
