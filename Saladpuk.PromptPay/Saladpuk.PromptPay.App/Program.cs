@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Saladpuk.PromptPay.Models;
+using System;
 
 namespace Saladpuk.PromptPay.App
 {
@@ -7,16 +8,15 @@ namespace Saladpuk.PromptPay.App
         static void Main(string[] args)
         {
             var builder = new QrBuilder()
+                .SetBillPayment(new BillPayment("1234567890123", "02", "ref1", "ref2"))
                 .SetStaticQR()
+                .SetPayloadFormatIndicator()
                 .SetTransactionAmount(50.00)
                 .SetCurrencyCode(CurrencyCode.THB)
                 .SetCountryCode("th")
-                .SetCyclicRedundancyCheck();
+                .SetCyclicRedundancyCheck(new SimpleCRC16());
 
-            var code = builder.ToString();
-            Console.WriteLine($"Raw: {code}");
-
-            var qrCode = builder.GetQrCode(new SimpleCRC16());
+            var qrCode = builder.ToString();
             Console.WriteLine($"QR code: {qrCode}");
         }
     }

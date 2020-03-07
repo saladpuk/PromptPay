@@ -74,11 +74,52 @@ namespace Saladpuk.PromptPay
             return Add(QrIdentifier.TransactionCurrency, value);
         }
 
-        public QrBuilder SetCyclicRedundancyCheck(int digits = 4)
+        public QrBuilder SetPayloadFormatIndicator(string version = "01")
+            => Add(QrIdentifier.PayloadFormatIndicator, version);
+
+        public QrBuilder SetCyclicRedundancyCheck(ICyclicRedundancyCheck crc)
         {
-            var value = digits.ToString("00");
-            return Add(QrIdentifier.CRC, value);
+            var id = ((int)QrIdentifier.CRC).ToString("00");
+            const string DefaultChecksumDigits = "04";
+            var currentCode = $"{ToString()}{id}{DefaultChecksumDigits}";
+            var crcValue = crc.ComputeChecksum(currentCode);
+            Add(QrIdentifier.CRC, crcValue);
+            return this;
         }
+
+        public QrBuilder SetBillPayment(BillPayment payment)
+        {
+            var aidRec = createAIDRecord();
+            var billerRec = createBillerRecord();
+            const string Reference1 = "02";
+            var ref1Rec = formatRecord(Reference1, payment.Reference1);
+            const string Reference2 = "03";
+            var ref2Rec = formatRecord(Reference2, payment.Reference2);
+
+            var value = $"{aidRec}{billerRec}{ref1Rec}{ref2Rec}";
+            var digits = value.Length.ToString("00");
+
+            const string BillPaymentId = "30";
+            Add($"{BillPaymentId}{digits}{value}");
+            return this;
+
+            string createAIDRecord()
+            {
+                const string AID = "00";
+                const string DomesticMerchant = "A000000677010112";
+                const string CrossBorderMerchant = "A000000677012006";
+                var value = payment.DomesticMerchant ? DomesticMerchant : CrossBorderMerchant;
+                return formatRecord(AID, value);
+            }
+            string createBillerRecord()
+            {
+                const string BillderId = "01";
+                return formatRecord(BillderId, $"{payment.NationalIdOrTaxId}{payment.Suffix}");
+            }
+        }
+
+        private string formatRecord(string id, string value)
+            => $"{id}{value.Length.ToString("00")}{value}";
 
         private void removeOldRecordIfExists(string id)
         {
@@ -87,13 +128,6 @@ namespace Saladpuk.PromptPay
             {
                 qrDataObjects.Remove(selected);
             }
-        }
-
-        public string GetQrCode(ICyclicRedundancyCheck crc)
-        {
-            var code = ToString();
-            var checksum = crc.ComputeChecksum(code);
-            return $"{code}{checksum}";
         }
 
         public override string ToString()
