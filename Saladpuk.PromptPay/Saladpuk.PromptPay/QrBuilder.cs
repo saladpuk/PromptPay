@@ -87,6 +87,85 @@ namespace Saladpuk.PromptPay
             return this;
         }
 
+        public QrBuilder SetCreditTransfer(CreditTransfer transfer)
+        {
+            var aidRec = createAIDRecord();
+            var mobileRec = createMobileRecord();
+            var receiverRec = createNationalOrTaxRecord();
+            var walletRec = createWalletRecord();
+            var bankAccRed = createBankAccountRecord();
+            var otaRec = createOTARecord();
+
+            var value = $"{aidRec}{mobileRec}{receiverRec}{walletRec}{bankAccRed}{otaRec}";
+            var digits = value.Length.ToString("00");
+
+            removeMerchantRecordsIfExists();
+            const string CreditTransferId = "29";
+            Add($"{CreditTransferId}{digits}{value}");
+            return this;
+
+            string createAIDRecord()
+            {
+                const string AID = "00";
+                const string MerchantPresentedQR = "A000000677010111";
+                const string CustomerPresentedQR = "A000000677010114";
+                var value = transfer.MerchantPresentedQR ? MerchantPresentedQR : CustomerPresentedQR;
+                return formatRecord(AID, value);
+            }
+            string createMobileRecord()
+            {
+                if (string.IsNullOrWhiteSpace(transfer.MobileNumber))
+                {
+                    return string.Empty;
+                }
+                const string MobileId = "01";
+                const string Prefix = "0066";
+                var mobileNo = transfer.MobileNumber;
+                if (!mobileNo.StartsWith(Prefix))
+                {
+                    // HACK: Stupid change prefix (refactor this later)
+                    mobileNo = $"{Prefix}{mobileNo.Substring(1, mobileNo.Length - 1)}";
+                }
+                return formatRecord(MobileId, mobileNo);
+            }
+            string createNationalOrTaxRecord()
+            {
+                if (string.IsNullOrWhiteSpace(transfer.NationalIdOrTaxId))
+                {
+                    return string.Empty;
+                }
+                const string NationalOrTaxId = "02";
+                return formatRecord(NationalOrTaxId, transfer.NationalIdOrTaxId);
+            }
+            string createWalletRecord()
+            {
+                if (string.IsNullOrWhiteSpace(transfer.EWalletId))
+                {
+                    return string.Empty;
+                }
+                const string EWalletId = "03";
+                return formatRecord(EWalletId, transfer.EWalletId);
+            }
+            string createBankAccountRecord()
+            {
+                if (string.IsNullOrWhiteSpace(transfer.BankAccount))
+                {
+                    return string.Empty;
+                }
+                const string BankAccountId = "04";
+                return formatRecord(BankAccountId, transfer.BankAccount);
+            }
+            string createOTARecord()
+            {
+                if (string.IsNullOrWhiteSpace(transfer.OTA))
+                {
+                    return string.Empty;
+                }
+                const string OTAId = "05";
+                return formatRecord(OTAId, transfer.OTA);
+            }
+        }
+
         public QrBuilder SetBillPayment(BillPayment payment)
         {
             var aidRec = createAIDRecord();
@@ -99,6 +178,7 @@ namespace Saladpuk.PromptPay
             var value = $"{aidRec}{billerRec}{ref1Rec}{ref2Rec}";
             var digits = value.Length.ToString("00");
 
+            removeMerchantRecordsIfExists();
             const string BillPaymentId = "30";
             Add($"{BillPaymentId}{digits}{value}");
             return this;
@@ -115,6 +195,16 @@ namespace Saladpuk.PromptPay
             {
                 const string BillderId = "01";
                 return formatRecord(BillderId, $"{payment.NationalIdOrTaxId}{payment.Suffix}");
+            }
+        }
+
+        private void removeMerchantRecordsIfExists()
+        {
+            var merchantIdentifierRange = Enumerable.Range(2, 50).Select(it => it.ToString());
+            var merchantRecords = qrDataObjects.Where(it => merchantIdentifierRange.Contains(it.Id)).ToList();
+            foreach (var item in merchantRecords)
+            {
+                qrDataObjects.Remove(item);
             }
         }
 

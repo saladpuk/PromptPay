@@ -8,7 +8,8 @@ namespace Saladpuk.PromptPay.App
         static void Main(string[] args)
         {
             var builder = new QrBuilder()
-                .SetBillPayment(new BillPayment("1234567890123", "02", "ref1", "ref2"))
+                //.SetBillPayment(new BillPayment("1234567890123", "02", "ref1", "ref2"))
+                .SetCreditTransfer(new CreditTransfer(true) { MobileNumber = "01234567891" })
                 .SetStaticQR()
                 .SetPayloadFormatIndicator()
                 .SetTransactionAmount(50.00)
