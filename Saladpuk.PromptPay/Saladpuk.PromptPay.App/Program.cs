@@ -1,5 +1,5 @@
-﻿using Saladpuk.PromptPay.Models;
-using System;
+﻿using System;
+using Saladpuk.PromptPay.Facades;
 
 namespace Saladpuk.PromptPay.App
 {
@@ -7,18 +7,20 @@ namespace Saladpuk.PromptPay.App
     {
         static void Main(string[] args)
         {
-            var builder = new QrBuilder()
-                //.SetBillPayment(new BillPayment("1234567890123", "02", "ref1", "ref2"))
-                .SetCreditTransfer(new CreditTransfer(true) { MobileNumber = "01234567891" })
-                .SetStaticQR()
-                .SetPayloadFormatIndicator()
-                .SetTransactionAmount(50.00)
-                .SetCurrencyCode(CurrencyCode.THB)
-                .SetCountryCode("th")
-                .SetCyclicRedundancyCheck(new SimpleCRC16());
+            var billPaymentQR = PPay.StaticQR
+                .TaxId("001122334455667")
+                .BillerSuffix("02")
+                .BillRef1("ref1")
+                .BillRef2("ref2")
+                .Amount(50)
+                .GetBillPaymentQR();
+            Console.WriteLine($"Bill Payment: {billPaymentQR}");
 
-            var qrCode = builder.ToString();
-            Console.WriteLine($"QR code: {qrCode}");
+            var creditTransferQR = PPay.StaticQR
+                .MobileNumber("0914185401")
+                .Amount(50)
+                .GetCreditTransferQR();
+            Console.WriteLine($"Credit Transfer: {creditTransferQR}");
         }
     }
 }

@@ -7,10 +7,14 @@ namespace Saladpuk.PromptPay
 {
     public class QrBuilder
     {
+        internal BillPayment billPayment;
+        internal CreditTransfer creditTransfer;
         private readonly List<QrDataObject> qrDataObjects;
 
         public QrBuilder()
         {
+            billPayment = new BillPayment();
+            creditTransfer = new CreditTransfer();
             qrDataObjects = new List<QrDataObject>();
         }
 
@@ -89,6 +93,9 @@ namespace Saladpuk.PromptPay
 
         public QrBuilder SetCreditTransfer(CreditTransfer transfer)
         {
+            creditTransfer = transfer;
+            billPayment.NationalIdOrTaxId = creditTransfer.NationalIdOrTaxId;
+
             var aidRec = createAIDRecord();
             var mobileRec = createMobileRecord();
             var receiverRec = createNationalOrTaxRecord();
@@ -168,6 +175,9 @@ namespace Saladpuk.PromptPay
 
         public QrBuilder SetBillPayment(BillPayment payment)
         {
+            billPayment = payment;
+            creditTransfer.NationalIdOrTaxId = payment.NationalIdOrTaxId;
+
             var aidRec = createAIDRecord();
             var billerRec = createBillerRecord();
             const string Reference1 = "02";
