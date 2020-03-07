@@ -33,5 +33,9 @@ namespace Saladpuk.PromptPay.Tests
         [InlineData(-50, "540550.00")]
         public void AddTransactionAmountWithNegativeValue(double amount, string expected)
             => sut.SetTransactionAmount(amount).ToString().Should().BeEquivalentTo(expected);
+
+        // TODO: Test cases
+        // The Payload Format Indicator (ID "00") shall be the first data object in the QR Code.
+        // The CRC (ID "63") shall be the last data object in the QR Code. (All other data objects under the root may be placed at any position.
     }
 }

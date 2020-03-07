@@ -17,5 +17,10 @@ namespace Saladpuk.PromptPay.Tests
             sut.Length.Should().BeEquivalentTo(expectedLength);
             sut.Value.Should().BeEquivalentTo(expectedValue);
         }
+
+        // TODO: Test cases
+        // Invalid Id.
+        // Invalid length.
+        // Invalid value's length & format.
     }
 }
