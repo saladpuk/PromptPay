@@ -46,44 +46,38 @@ namespace Saladpuk.PromptPay
 
         public QrBuilder SetStaticQR()
         {
-            const string Reusable = "12";
-            Add(QrIdentifier.PointOfInitiationMethod, Reusable);
-            return this;
+            const string ReusableCode = "12";
+            return Add(QrIdentifier.PointOfInitiationMethod, ReusableCode);
         }
 
         public QrBuilder SetDynamicQR()
         {
-            const string OneTimeOnly = "11";
-            Add(QrIdentifier.PointOfInitiationMethod, OneTimeOnly);
-            return this;
+            const string OneTimeOnlyCode = "11";
+            return Add(QrIdentifier.PointOfInitiationMethod, OneTimeOnlyCode);
         }
 
         public QrBuilder SetTransactionAmount(double amount)
         {
             var value = Math.Abs(amount).ToString("0.00");
-            Add(QrIdentifier.TransactionAmount, value);
-            return this;
+            return Add(QrIdentifier.TransactionAmount, value);
         }
 
         public QrBuilder SetCountryCode(string code)
         {
             var region = new System.Globalization.RegionInfo(code);
-            Add(QrIdentifier.CountryCode, region.TwoLetterISORegionName);
-            return this;
+            return Add(QrIdentifier.CountryCode, region.TwoLetterISORegionName);
         }
 
         public QrBuilder SetCurrencyCode(CurrencyCode code)
         {
             var value = ((int)code).ToString();
-            Add(QrIdentifier.TransactionCurrency, value);
-            return this;
+            return Add(QrIdentifier.TransactionCurrency, value);
         }
 
         public QrBuilder SetCyclicRedundancyCheck(int digits = 4)
         {
             var value = digits.ToString("00");
-            Add(QrIdentifier.CRC, value);
-            return this;
+            return Add(QrIdentifier.CRC, value);
         }
 
         private void removeOldRecordIfExists(string id)
@@ -104,7 +98,16 @@ namespace Saladpuk.PromptPay
 
         public override string ToString()
         {
-            var qry = qrDataObjects.OrderBy(it => it.Id).Select(it => it.RawValue);
+            var crcId = ((int)QrIdentifier.CRC).ToString();
+            var crc = qrDataObjects
+                .Where(it => it.Id == crcId)
+                .LastOrDefault()
+                ?.RawValue ?? string.Empty;
+            var qry = qrDataObjects
+                .Where(it => it.Id != crcId)
+                .OrderBy(it => it.Id)
+                .Select(it => it.RawValue)
+                .Union(new[] { crc });
             return string.Join(string.Empty, qry);
         }
     }
