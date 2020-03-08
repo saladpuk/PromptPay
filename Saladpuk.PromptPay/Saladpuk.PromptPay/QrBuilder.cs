@@ -44,9 +44,9 @@ namespace Saladpuk.PromptPay
                 throw new ArgumentException("Invalid data");
             }
 
-            var id = rawData[0..2];
-            removeOldRecordIfExists(id);
-            qrDataObjects.Add(new QrDataObject(rawData));
+            var data = new QrDataObject(rawData);
+            removeOldRecordIfExists(data.Id);
+            qrDataObjects.Add(data);
             return this;
         }
 
@@ -110,7 +110,7 @@ namespace Saladpuk.PromptPay
                 if (!mobileNo.StartsWith(Prefix))
                 {
                     // HACK: Stupid change prefix (refactor this later)
-                    mobileNo = $"{Prefix}{mobileNo.Substring(1, mobileNo.Length - 1)}";
+                    mobileNo = $"{Prefix}{mobileNo.Substring(1)}";
                 }
                 return formatRecord(ppay.MobileId, mobileNo);
             }
@@ -129,7 +129,7 @@ namespace Saladpuk.PromptPay
 
             string getValue()
             {
-                payment.Suffix ??= "00";
+                payment.Suffix = payment.Suffix ?? "00";
                 var aidRec = formatRecord(ppay.AID, payment.DomesticMerchant ? ppay.DomesticMerchant : ppay.CrossBorderMerchant);
                 var billerRec = string.IsNullOrWhiteSpace(payment.NationalIdOrTaxId) ? string.Empty : formatRecord(ppay.BillderId, $"{payment.NationalIdOrTaxId}{payment.Suffix}");
                 var ref1Rec = string.IsNullOrWhiteSpace(payment.Reference1) ? string.Empty : formatRecord(ppay.Reference1, payment.Reference1);
