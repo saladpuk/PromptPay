@@ -2,7 +2,7 @@
 ตัวช่วยในการ `อ่าน` และ `สร้าง` QR Prompt Pay ตามมาตรฐานของธนาคารแห่งประเทศไทย **BOT** (Bank of Thailand) โดยอ้างอิงจากเอกสารสำคัญ 3 ตัวด้านล่างนี้
 1. [Thai QR Code - Payment Standard](https://www.bot.or.th/Thai/PaymentSystems/StandardPS/Documents/ThaiQRCode_Payment_Standard.pdf)
 1. [ENVCo Consumer Presented Mode](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Consumer-Presented-QR-Specification-v1-1.pdf)
-1. [EMVCo Merchant-Presented Mode](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Merchant-Presented-QR-Specification-v1-1.pdf)
+1. [EMVCo Merchant Presented Mode](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Merchant-Presented-QR-Specification-v1-1.pdf)
 
 > ใครอยากเอาไปปู้ยี้ปู้ยำอะไรก็ตามสบาย ถ้าทำแล้วดีหรือเจอจุดผิดก็ฝาก `pull-request` เข้ามาด้วยจะเป็นประคุณมาก
 
@@ -22,7 +22,14 @@ QrBuilder builder = PPay.StaticQR;
 QrBuilder builder = PPay.DynamicQR;
 ```
 
-## สร้าง QR โอนเงินสำหรับบุคคลทั่วไป (Credit Transfer - Tag 29)
+ตัวโค้ดที่เขียนไว้ได้เพิ่มความสามารถในการ **ถอดความหมาย** ของ `EMVCo` และ `PromptPay` เอาไว้ด้วย โดยสามารถเรียกใช้งานตามด้านล่าง
+```csharp
+// ตัวอ่าน QR ตามมาตรฐาน EMVCo และ PromptPay
+QrReader reader = PPay.Reader;
+```
+
+# การสร้าง QR
+## 1.สร้าง QR โอนเงินสำหรับบุคคลทั่วไป (Credit Transfer - Tag 29)
 เป็นการโอนเงินระหว่างประชาชนทั่วไปไม่เกี่ยวกับธุรกิจหรือบริษัทใดๆ โดยการสร้าง QR ประเภทนี้ จะต้องเรียกใช้ผ่านเมธอด `GetCreditTransferQR()` ตามโค้ดด้านล่างนี้
 ```csharp
 // สร้าง QR โอนเงินสำหรับบุคคลทั่วไป
@@ -84,7 +91,7 @@ var qr = PPay.StaticQR.MerchantPresentedQR().GetCreditTransferQR();
 var qr = PPay.StaticQR.CustomerPresentedQR().GetCreditTransferQR();
 ```
 
-## สร้าง QR สำหรับธุรกิจ (Bill Payment - Tag 30)
+## 2.สร้าง QR สำหรับธุรกิจ (Bill Payment - Tag 30)
 เป็นการสร้าง QR สำหรับเรียกเก็บเงินจาก ร้านค้า/บริษัท โดยการสร้าง QR ประเภทนี้ จะต้องเรียกใช้ผ่านเมธอด `GetBillPaymentQR()` ตามโค้ดด้านล่างนี้
 ```csharp
 // สร้าง QR สำหรับธุรกิจ
@@ -143,9 +150,99 @@ var qr = PPay.StaticQR.DomesticMerchant().GetBillPaymentQR();
 var qr = PPay.StaticQR.CrossBorderMerchant().GetBillPaymentQR();
 ```
 
+# ตัวถอดความหมาย QR
+ในกรณีที่เราได้รับ QR code ที่เป็นข้อความยาวๆเข้ามา แล้วเราต้องการรู้ความหมายของมัน เราสามารถเรียกใช้งานตัว QR Reader ได้ด้วยคำสั่งด้านล่างนี้ (คำสั่งนี้รอบรับมาตรฐาน `EMVCo` และ `PromptPay`)
+```csharp
+// QR โอนเงินพร้อมเพย์ไปยังเบอร์โทร 0914185401 จำนวนเงิน 50 บาท
+var qr = "00020101021229370016A000000677010111011300669141854015303764540550.005802TH630401F8";
+var model = PPay.Reader.Read(qr);
+Console.WriteLine(JsonSerializer.Serialize(model));
+```
+
+**ผลลัพท์**
+```
+{
+    "Segments": [
+        {
+            "RawValue": "000201",
+            "Id": "00",
+            "LengthCode": "02",
+            "Value": "01"
+        },
+        {
+            "RawValue": "010212",
+            "Id": "01",
+            "LengthCode": "02",
+            "Value": "12"
+        },
+        {
+            "RawValue": "29370016A00000067701011101130066914185401",
+            "Id": "29",
+            "LengthCode": "37",
+            "Value": "0016A00000067701011101130066914185401"
+        },
+        {
+            "RawValue": "5303764",
+            "Id": "53",
+            "LengthCode": "03",
+            "Value": "764"
+        },
+        {
+            "RawValue": "540550.00",
+            "Id": "54",
+            "LengthCode": "05",
+            "Value": "50.00"
+        },
+        {
+            "RawValue": "5802TH",
+            "Id": "58",
+            "LengthCode": "02",
+            "Value": "TH"
+        },
+        {
+            "RawValue": "630401F8",
+            "Id": "63",
+            "LengthCode": "04",
+            "Value": "01F8"
+        }
+    ],
+    "PayloadFormatIndicator": "01",
+    "PointOfInitiationMethod": "12",
+    "MerchantAccountInformation": "0016A00000067701011101130066914185401",
+    "MerchantCategoryCode": "undefine",
+    "TransactionCurrency": "764",
+    "TransactionAmount": "50.00",
+    "TipOrConvenienceIndicator": "undefine",
+    "ValueOfConvenienceFeeFixed": "undefine",
+    "ValueOfConvenienceFeePercentage": "undefine",
+    "CountryCode": "TH",
+    "MerchantName": "undefine",
+    "MerchantCity": "undefine",
+    "PostalCode": "undefine",
+    "AdditionalData": "undefine",
+    "CRC": "01F8",
+    "MerchantInformationLanguageTemplate": "undefine",
+    "RFU": "undefine",
+    "UnreservedTemplates": "undefine",
+    "Reusable": true,
+    "Currency": "THB",
+    "CreditTransfer": {
+        "MobileNumber": "66914185401",
+        "NationalIdOrTaxId": null,
+        "EWalletId": null,
+        "BankAccount": null,
+        "OTA": "",
+        "MerchantPresentedQR": true
+    },
+    "BillPayment": null
+}
+```
+
+
 ## Progress
 |Feature|สถานะ|หมายเหตุ|
 |--|--|--|
-|สร้าง Bill Payment|ทำงานได้|ไม่มี Test cases cover|
-|สร้าง Transfer with PromptPayID|ทำงานได้|ไม่มี Test cases cover + ตัดเบอร์โทรกากๆไปก่อน|
-|อ่าน QR text แปลงเป็น model|ยังไม่ได้ทำ||
+|สร้าง Bill Payment|ใช้งานได้|เทสเคสยังไม่ครอบคลุมพอ|
+|สร้าง Transfer with PromptPay ID|ใช้งานได้|เทสเคสยังไม่ครอบคลุมพอ + ตัดเบอร์โทรกากๆไปก่อน|
+|ถอดความหมาย QR|ใช้งานได้|เทสเคสยังไม่ครอบคลุมพอ|
+|Validators|ยังไม่ได้ทำ||
