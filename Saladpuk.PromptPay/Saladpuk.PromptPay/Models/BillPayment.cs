@@ -8,8 +8,9 @@
         public string Reference2 { get; set; }
         public bool DomesticMerchant { get; set; }
 
-        public BillPayment()
+        public BillPayment(bool isDomestic = true)
         {
+            DomesticMerchant = isDomestic;
         }
 
         public BillPayment(string nationalOrTaxId, string suffix, string ref1 = "", string ref2 = "", bool isDomestic = true)
