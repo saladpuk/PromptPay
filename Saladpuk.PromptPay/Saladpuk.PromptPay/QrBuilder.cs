@@ -180,10 +180,18 @@ namespace Saladpuk.PromptPay
 
             var aidRec = createAIDRecord();
             var billerRec = createBillerRecord();
-            const string Reference1 = "02";
-            var ref1Rec = formatRecord(Reference1, payment.Reference1);
-            const string Reference2 = "03";
-            var ref2Rec = formatRecord(Reference2, payment.Reference2);
+            var ref1Rec = string.Empty;
+            if (!string.IsNullOrWhiteSpace(payment.Reference1))
+            {
+                const string Reference1 = "02";
+                ref1Rec = formatRecord(Reference1, payment.Reference1);
+            }
+            var ref2Rec = string.Empty;
+            if (!string.IsNullOrWhiteSpace(payment.Reference2))
+            {
+                const string Reference2 = "03";
+                ref2Rec = formatRecord(Reference2, payment.Reference2);
+            }
 
             var value = $"{aidRec}{billerRec}{ref1Rec}{ref2Rec}";
             var digits = value.Length.ToString("00");
@@ -203,6 +211,13 @@ namespace Saladpuk.PromptPay
             }
             string createBillerRecord()
             {
+                if (string.IsNullOrWhiteSpace(payment.NationalIdOrTaxId))
+                {
+                    return string.Empty;
+                }
+
+                payment.Suffix ??= "00";
+
                 const string BillderId = "01";
                 return formatRecord(BillderId, $"{payment.NationalIdOrTaxId}{payment.Suffix}");
             }
