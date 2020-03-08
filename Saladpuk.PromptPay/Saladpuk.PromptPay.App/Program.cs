@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using Saladpuk.PromptPay.Facades;
 
 namespace Saladpuk.PromptPay.App
@@ -7,6 +8,7 @@ namespace Saladpuk.PromptPay.App
     {
         static void Main(string[] args)
         {
+            // QR Creation
             var billPaymentQR = PPay.StaticQR
                 .TaxId("001122334455667")
                 .BillerSuffix("02")
@@ -21,6 +23,13 @@ namespace Saladpuk.PromptPay.App
                 .Amount(50)
                 .GetCreditTransferQR();
             Console.WriteLine($"Credit Transfer: {creditTransferQR}");
+
+            // QR Reader
+            var staticMobileTransferQrCode = "00020101021229370016A000000677010111011300669141854015303764540550.005802TH630401F8";
+            Console.WriteLine($"Are equal: {creditTransferQR == staticMobileTransferQrCode}");
+            var model = PPay.Reader.Read(staticMobileTransferQrCode);
+            var content = JsonSerializer.Serialize(model);
+            Console.WriteLine(content);
         }
     }
 }
