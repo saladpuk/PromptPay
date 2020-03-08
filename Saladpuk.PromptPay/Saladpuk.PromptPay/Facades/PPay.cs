@@ -8,6 +8,9 @@
         public static QrBuilder DynamicQR
             => initializeQrBuilder().SetDynamicQR();
 
+        public static QrReader Reader
+            => new QrReader();
+
         private static QrBuilder initializeQrBuilder()
             => new QrBuilder()
                 .DomesticMerchant()
