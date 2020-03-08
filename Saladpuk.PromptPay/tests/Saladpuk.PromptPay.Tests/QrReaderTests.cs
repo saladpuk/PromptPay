@@ -1,9 +1,5 @@
-﻿using FluentAssertions;
-using Saladpuk.PromptPay.Facades;
+﻿using Saladpuk.PromptPay.Facades;
 using Saladpuk.PromptPay.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Saladpuk.PromptPay.Tests
@@ -17,7 +13,9 @@ namespace Saladpuk.PromptPay.Tests
         {
             var qrCode = PPay.StaticQR.GetCreditTransferQR();
             var actual = sut.ConvertToQrInfo(qrCode);
-            var expected = new QrInfo().InitializeDefault();
+            var expected = new QrInfo()
+                .InitializeDefault()
+                .SetPlanCreditTransfer();
             actual.ValidateWith(expected);
         }
 
@@ -26,7 +24,9 @@ namespace Saladpuk.PromptPay.Tests
         {
             var qrCode = PPay.DynamicQR.GetCreditTransferQR();
             var actual = sut.ConvertToQrInfo(qrCode);
-            var expected = new QrInfo().InitializeDefault(staticQr: false);
+            var expected = new QrInfo()
+                .InitializeDefault(staticQr: false)
+                .SetPlanCreditTransfer();
             actual.ValidateWith(expected);
         }
 
@@ -35,7 +35,9 @@ namespace Saladpuk.PromptPay.Tests
         {
             var qrCode = PPay.StaticQR.GetBillPaymentQR();
             var actual = sut.ConvertToQrInfo(qrCode);
-            var expected = new QrInfo().InitializeDefault();
+            var expected = new QrInfo()
+                .InitializeDefault()
+                .SetPlanBillPayment();
             actual.ValidateWith(expected);
         }
 
@@ -44,7 +46,9 @@ namespace Saladpuk.PromptPay.Tests
         {
             var qrCode = PPay.DynamicQR.GetBillPaymentQR();
             var actual = sut.ConvertToQrInfo(qrCode);
-            var expected = new QrInfo().InitializeDefault(staticQr: false);
+            var expected = new QrInfo()
+                .InitializeDefault(staticQr: false)
+                .SetPlanBillPayment();
             actual.ValidateWith(expected);
         }
     }

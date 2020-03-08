@@ -14,7 +14,7 @@ namespace Saladpuk.PromptPay.Tests
             var sut = new QrDataObject(rawValue);
             sut.RawValue.Should().BeEquivalentTo(rawValue);
             sut.Id.Should().BeEquivalentTo(expectedId);
-            sut.Length.Should().BeEquivalentTo(expectedLength);
+            sut.LengthCode.Should().BeEquivalentTo(expectedLength);
             sut.Value.Should().BeEquivalentTo(expectedValue);
         }
 
