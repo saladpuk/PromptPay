@@ -7,7 +7,7 @@
         public string EWalletId { get; set; }
         public string BankAccount { get; set; }
         /// <summary>
-        /// mandatory if Merchant-Presented QR
+        /// Mandatory if Merchant-Presented QR
         /// </summary>
         public string OTA { get; set; }
         public bool MerchantPresentedQR { get; set; }
