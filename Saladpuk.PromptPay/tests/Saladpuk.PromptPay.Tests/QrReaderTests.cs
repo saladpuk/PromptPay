@@ -12,7 +12,7 @@ namespace Saladpuk.PromptPay.Tests
         public void DefaultStaticCreditTransferQRMustBeReadable()
         {
             var qrCode = PPay.StaticQR.GetCreditTransferQR();
-            var actual = sut.ConvertToQrInfo(qrCode);
+            var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault()
                 .SetPlanCreditTransfer();
@@ -23,7 +23,7 @@ namespace Saladpuk.PromptPay.Tests
         public void DefaultDynamicCreditTransferQRMustBeReadable()
         {
             var qrCode = PPay.DynamicQR.GetCreditTransferQR();
-            var actual = sut.ConvertToQrInfo(qrCode);
+            var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault(staticQr: false)
                 .SetPlanCreditTransfer();
@@ -34,7 +34,7 @@ namespace Saladpuk.PromptPay.Tests
         public void DefaultStaticBillPaymentQRMustBeReadable()
         {
             var qrCode = PPay.StaticQR.GetBillPaymentQR();
-            var actual = sut.ConvertToQrInfo(qrCode);
+            var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault()
                 .SetPlanBillPayment();
@@ -45,7 +45,7 @@ namespace Saladpuk.PromptPay.Tests
         public void DefaultDynamicBillPaymentQRMustBeReadable()
         {
             var qrCode = PPay.DynamicQR.GetBillPaymentQR();
-            var actual = sut.ConvertToQrInfo(qrCode);
+            var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault(staticQr: false)
                 .SetPlanBillPayment();

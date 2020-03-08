@@ -31,6 +31,9 @@ namespace Saladpuk.PromptPay.Models
         public bool Reusable => (PointOfInitiationMethod ?? string.Empty) == emv.Static;
         public string Currency => Enum.TryParse(TransactionCurrency, out CurrencyCode currencyCode) ? currencyCode.ToString() : "undefine";
 
+        public CreditTransfer CreditTransfer { get; set; }
+        public BillPayment BillPayment { get; set; }
+
         public QrInfo()
         {
             Segments = new List<QrDataObject>();
@@ -42,6 +45,6 @@ namespace Saladpuk.PromptPay.Models
         }
 
         private string getSegment(QrIdentifier identifier)
-            => Segments?.FirstOrDefault(it => it.Identifier == identifier)?.Value ?? "undefine";
+            => Segments?.LastOrDefault(it => it.Identifier == identifier)?.Value ?? "undefine";
     }
 }
