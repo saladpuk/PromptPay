@@ -112,12 +112,12 @@ namespace Saladpuk.PromptPay
                 yield break;
             }
 
-            var tempValue = merchant.Value;
-            while (!string.IsNullOrWhiteSpace(tempValue))
+            var nextValue = merchant.Value;
+            while (!string.IsNullOrWhiteSpace(nextValue))
             {
-                var (a, other) = extractSegments(new QrDataObject(tempValue));
-                tempValue = other;
-                yield return a;
+                var (segment, next) = extractSegments(new QrDataObject(nextValue));
+                nextValue = next;
+                yield return segment;
             }
         }
     }

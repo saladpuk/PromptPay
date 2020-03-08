@@ -20,12 +20,14 @@ namespace Saladpuk.PromptPay.Tests
         public static QrInfo SetPlanCreditTransfer(this QrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("29200016A000000677010111"));
+            qr.CreditTransfer = new CreditTransfer(true);
             return qr;
         }
 
         public static QrInfo SetPlanBillPayment(this QrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("30200016A000000677010112"));
+            qr.BillPayment = new BillPayment();
             return qr;
         }
 
