@@ -1,27 +1,66 @@
 ﻿using System;
 using System.Linq;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Saladpuk.PromptPay.Models
 {
     public class QrDataObject
     {
+        private string id;
+        private string lengthCode;
+        private string value;
+
         public string RawValue { get; }
 
         /// <summary>
         /// The ID is coded as a two-digit numeric value, with a value ranging from "00" to "99".
         /// </summary>
-        public string Id => RawValue[0..2];
+        public string Id
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    const int IdIndex = 0;
+                    const int ContentLength = 2;
+                    id = RawValue.Substring(IdIndex, ContentLength);
+                }
+                return id;
+            }
+        }
 
         /// <summary>
         /// The length is coded as a two-digit numeric value, with a value ranging from "01" to "99".
         /// </summary>
-        public string LengthCode => RawValue[2..4];
+        public string LengthCode
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(lengthCode))
+                {
+                    const int LengthIndex = 2;
+                    const int ContentLength = 2;
+                    lengthCode = RawValue.Substring(LengthIndex, ContentLength);
+                }
+                return lengthCode;
+            }
+        }
 
         /// <summary>
         /// The value field has a minimum length of one character and maximum length of 99 characters.
         /// </summary>
-        public string Value => RawValue[4..^0];
+        public string Value
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    const int ValueIndex = 4;
+                    value = RawValue.Substring(ValueIndex);
+                }
+                return value;
+            }
+        }
 
         [JsonIgnore]
         public int Length

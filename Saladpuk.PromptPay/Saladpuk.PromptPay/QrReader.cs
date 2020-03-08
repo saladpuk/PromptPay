@@ -31,9 +31,9 @@ namespace Saladpuk.PromptPay
         }
         private (QrDataObject, string) extractSegments(QrDataObject data)
         {
-            var currentValue = $"{data.Id}{data.LengthCode}{data.Value[0..data.Length]}";
+            var currentValue = $"{data.Id}{data.LengthCode}{data.Value.Substring(0, data.Length)}";
             var firstSegment = new QrDataObject(currentValue);
-            var other = data.RawValue[currentValue.Length..^0];
+            var other = data.RawValue.Substring(currentValue.Length);
             return (firstSegment, other);
         }
 
@@ -54,8 +54,9 @@ namespace Saladpuk.PromptPay
                         result.DomesticMerchant = item.Value == ppay.DomesticMerchant;
                         break;
                     case ppay.BillderId:
-                        result.NationalIdOrTaxId = item.Value[0..^2];
-                        result.Suffix = item.Value[^2..^0];
+                        const int SuffixLength = 2;
+                        result.NationalIdOrTaxId = item.Value.Substring(0, item.Value.Length - SuffixLength);
+                        result.Suffix = item.Value.Substring(item.Value.Length - SuffixLength);
                         break;
                     case ppay.Reference1:
                         result.Reference1 = item.Value;
@@ -85,7 +86,8 @@ namespace Saladpuk.PromptPay
                         result.MerchantPresentedQR = item.Value == ppay.MerchantPresented;
                         break;
                     case ppay.MobileId:
-                        result.MobileNumber = item.Value[2..^0];
+                        const int SkipTagId = 2;
+                        result.MobileNumber = item.Value.Substring(SkipTagId);
                         break;
                     case ppay.NationalOrTaxId:
                         result.NationalIdOrTaxId = item.Value;
