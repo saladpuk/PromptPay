@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Saladpuk.PromptPay</RootNamespace>
+    <Authors>Saladpuk</Authors>
+    <PackageProjectUrl>https://github.com/saladpuk/PromptPay</PackageProjectUrl>
+    <PackageIcon>promptpay.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/saladpuk/PromptPay</RepositoryUrl>
+    <PackageTags>promptpay</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +18,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Saladpuk.Contracts\Saladpuk.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\promptpay.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
