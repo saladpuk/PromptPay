@@ -4,7 +4,7 @@ using Saladpuk.Contracts.EMVCo;
 using Saladpuk.Contracts.PromptPay.Models;
 using Saladpuk.PromptPay.Models;
 using System.Linq;
-using emv = Saladpuk.PromptPay.EMVCoValues;
+using emv = Saladpuk.Contracts.EMVCo.EMVCoValues;
 
 namespace Saladpuk.PromptPay.Tests
 {

@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using emv = Saladpuk.PromptPay.EMVCoValues;
-using ppay = Saladpuk.PromptPay.PromptPayValues;
+using emv = Saladpuk.Contracts.EMVCo.EMVCoValues;
+using ppay = Saladpuk.Contracts.PromptPay.PromptPayValues;
 
 namespace Saladpuk.PromptPay
 {

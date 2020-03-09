@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Saladpuk.PromptPay.Facades;
 using Xunit;
-using ppay = Saladpuk.PromptPay.PromptPayValues;
+using ppay = Saladpuk.Contracts.PromptPay.PromptPayValues;
 
 namespace Saladpuk.PromptPay.Tests
 {

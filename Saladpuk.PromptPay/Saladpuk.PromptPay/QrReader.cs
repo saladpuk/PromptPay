@@ -3,7 +3,7 @@ using Saladpuk.Contracts.PromptPay.Models;
 using Saladpuk.PromptPay.Models;
 using System.Collections.Generic;
 using System.Linq;
-using ppay = Saladpuk.PromptPay.PromptPayValues;
+using ppay = Saladpuk.Contracts.PromptPay.PromptPayValues;
 
 namespace Saladpuk.PromptPay
 {
