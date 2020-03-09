@@ -1,7 +1,10 @@
 ﻿using FluentAssertions;
+using Saladpuk.Contracts;
+using Saladpuk.Contracts.EMVCo;
+using Saladpuk.Contracts.PromptPay.Models;
 using Saladpuk.PromptPay.Models;
 using System.Linq;
-using emv = Saladpuk.PromptPay.EMVCoValues;
+using emv = Saladpuk.Contracts.EMVCo.EMVCoValues;
 
 namespace Saladpuk.PromptPay.Tests
 {
@@ -12,26 +15,26 @@ namespace Saladpuk.PromptPay.Tests
             var PointOfInitiationMethod = staticQr ? emv.Static : emv.Dynamic;
             qr.Segments.Add(new QrDataObject("000201"));
             qr.Segments.Add(new QrDataObject($"0102{PointOfInitiationMethod}"));
-            qr.Segments.Add(new QrDataObject($"5303{currency.GetCode()}"));
+            qr.Segments.Add(new QrDataObject($"5303{((int)currency).ToString("000")}"));
             qr.Segments.Add(new QrDataObject($"5802{country}"));
             return qr;
         }
 
-        public static QrInfo SetPlanCreditTransfer(this QrInfo qr)
+        public static IQrInfo SetPlainCreditTransfer(this QrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("29200016A000000677010111"));
-            qr.CreditTransfer = new CreditTransfer(true);
+            qr.CreditTransfer = new CreditTransfer { MerchantPresentedQR = true };
             return qr;
         }
 
-        public static QrInfo SetPlanBillPayment(this QrInfo qr)
+        public static IQrInfo SetPlainBillPayment(this QrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("30200016A000000677010112"));
             qr.BillPayment = new BillPayment();
             return qr;
         }
 
-        public static void ValidateWith(this QrInfo qr, QrInfo expected, bool skipChecksum = true)
+        public static void ValidateWith(this IQrInfo qr, IQrInfo expected, bool skipChecksum = true)
         {
             if (skipChecksum)
             {

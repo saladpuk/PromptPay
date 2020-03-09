@@ -1,41 +1,47 @@
-﻿using Saladpuk.PromptPay.Models;
+﻿using Saladpuk.Contracts;
+using Saladpuk.Contracts.EMVCo;
+using Saladpuk.Contracts.PromptPay;
+using Saladpuk.Contracts.PromptPay.Models;
+using Saladpuk.PromptPay.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using emv = Saladpuk.PromptPay.EMVCoValues;
-using ppay = Saladpuk.PromptPay.PromptPayValues;
+using emv = Saladpuk.Contracts.EMVCo.EMVCoValues;
+using ppay = Saladpuk.Contracts.PromptPay.PromptPayValues;
 
 namespace Saladpuk.PromptPay
 {
-    public class QrBuilder
+    public class PromptPayQrBuilder : IPromptPayBuilder
     {
-        internal BillPayment billPayment;
-        internal CreditTransfer creditTransfer;
-        private readonly List<QrDataObject> qrDataObjects;
+        private BillPayment billPayment;
+        private CreditTransfer creditTransfer;
+        private readonly List<IQrDataObject> qrDataObjects;
 
-        public QrBuilder()
+        public PromptPayQrBuilder()
         {
             billPayment = new BillPayment();
             creditTransfer = new CreditTransfer();
-            qrDataObjects = new List<QrDataObject>();
+            qrDataObjects = new List<IQrDataObject>();
         }
 
-        public QrBuilder Add(QrIdentifier identifier, string data)
+        #region IEMVCo
+
+        public IPromptPayBuilder Add(QrIdentifier identifier, string data)
         {
             if (string.IsNullOrWhiteSpace(data))
             {
                 throw new ArgumentException("Invalid data");
             }
 
-            var id = identifier.GetCode();
-            var digits = (data ?? string.Empty).GetLength();
+            var id = getIdCode(identifier);
+            var digits = getLengthDigits(data ?? string.Empty);
             removeOldRecordIfExists(id);
             qrDataObjects.Add(new QrDataObject($"{id}{digits}{data}"));
             return this;
         }
 
-        public QrBuilder Add(string rawData)
+        public IPromptPayBuilder Add(string rawData)
         {
             var isArgumentValid = !string.IsNullOrWhiteSpace(rawData)
                 && rawData.Length >= emv.MinContentLength;
@@ -50,43 +56,50 @@ namespace Saladpuk.PromptPay
             return this;
         }
 
-        public QrBuilder SetStaticQR()
+        public IPromptPayBuilder SetStaticQR()
             => Add(QrIdentifier.PointOfInitiationMethod, emv.Static);
 
-        public QrBuilder SetDynamicQR()
+        public IPromptPayBuilder SetDynamicQR()
             => Add(QrIdentifier.PointOfInitiationMethod, emv.Dynamic);
 
-        public QrBuilder SetTransactionAmount(double amount)
-            => Add(QrIdentifier.TransactionAmount, amount.GetPositiveAmount());
+        public IPromptPayBuilder SetTransactionAmount(double amount)
+            => Add(QrIdentifier.TransactionAmount, Math.Abs(amount).ToString("0.00"));
 
-        public QrBuilder SetCountryCode(string code)
+        public IPromptPayBuilder SetCountryCode(string code)
             => Add(QrIdentifier.CountryCode, new RegionInfo(code).TwoLetterISORegionName);
 
-        public QrBuilder SetCurrencyCode(CurrencyCode code)
-            => Add(QrIdentifier.TransactionCurrency, code.GetCode());
+        public IPromptPayBuilder SetCurrencyCode(CurrencyCode code)
+            => Add(QrIdentifier.TransactionCurrency, ((int)code).ToString("000"));
 
-        public QrBuilder SetPayloadFormatIndicator(string version = "01")
+        public IPromptPayBuilder SetPayloadFormatIndicator(string version = "01")
             => Add(QrIdentifier.PayloadFormatIndicator, version);
 
-        public QrBuilder SetCyclicRedundancyCheck(ICyclicRedundancyCheck crc)
+        public IPromptPayBuilder SetCyclicRedundancyCheck(ICyclicRedundancyCheck crc)
         {
-            var id = QrIdentifier.CRC.GetCode();
-            var currentCode = $"{ToString()}{id}{emv.CRCDigits.GetCode()}";
+            var id = getIdCode(QrIdentifier.CRC);
+            var currentCode = $"{ToString()}{id}{emv.CRCDigits.ToString("00")}";
             var computedValue = crc.ComputeChecksum(currentCode);
             Add(QrIdentifier.CRC, computedValue);
             return this;
         }
 
-        public QrBuilder SetCreditTransfer(CreditTransfer transfer)
+        #endregion IEMVCo
+
+        #region Credit transfer
+
+        public string GetCreditTransferQR()
+            => GetCreditTransferQR(creditTransfer);
+
+        public string GetCreditTransferQR(CreditTransfer transfer)
         {
             creditTransfer = transfer;
             billPayment.NationalIdOrTaxId = creditTransfer.NationalIdOrTaxId;
 
             var value = getValue();
-            var digits = value.GetLength();
+            var digits = getLengthDigits(value);
             removeMerchantRecordsIfExists();
             Add($"{ppay.CreditTransferTagId}{digits}{value}");
-            return this;
+            return SetCyclicRedundancyCheck(new CRC16()).ToString();
 
             string getValue()
             {
@@ -116,16 +129,59 @@ namespace Saladpuk.PromptPay
             }
         }
 
-        public QrBuilder SetBillPayment(BillPayment payment)
+        public IPromptPayBuilder MobileNumber(string value)
+        {
+            creditTransfer.MobileNumber = value;
+            return this;
+        }
+
+        public IPromptPayBuilder EWallet(string value)
+        {
+            creditTransfer.EWalletId = value;
+            return this;
+        }
+
+        public IPromptPayBuilder BankAccount(string value)
+        {
+            creditTransfer.BankAccount = value;
+            return this;
+        }
+
+        public IPromptPayBuilder OTA(string value)
+        {
+            creditTransfer.OTA = value;
+            return this;
+        }
+
+        public IPromptPayBuilder MerchantPresentedQR()
+        {
+            creditTransfer.MerchantPresentedQR = true;
+            return this;
+        }
+
+        public IPromptPayBuilder CustomerPresentedQR()
+        {
+            creditTransfer.MerchantPresentedQR = false;
+            return this;
+        }
+
+        #endregion Credit transfer
+
+        #region Billder
+
+        public string GetBillPaymentQR()
+            => GetBillPaymentQR(billPayment);
+
+        public string GetBillPaymentQR(BillPayment payment)
         {
             billPayment = payment;
             creditTransfer.NationalIdOrTaxId = payment.NationalIdOrTaxId;
 
             var value = getValue();
-            var digits = value.GetLength();
+            var digits = getLengthDigits(value);
             removeMerchantRecordsIfExists();
             Add($"{ppay.BillPaymentTagId}{digits}{value}");
-            return this;
+            return SetCyclicRedundancyCheck(new CRC16()).ToString();
 
             string getValue()
             {
@@ -138,6 +194,55 @@ namespace Saladpuk.PromptPay
             }
         }
 
+        public IPromptPayBuilder BillerSuffix(string value)
+        {
+            billPayment.Suffix = value;
+            return this;
+        }
+
+        public IPromptPayBuilder BillRef1(string value)
+        {
+            billPayment.Reference1 = value;
+            return this;
+        }
+
+        public IPromptPayBuilder BillRef2(string value)
+        {
+            billPayment.Reference2 = value;
+            return this;
+        }
+
+        public IPromptPayBuilder DomesticMerchant()
+        {
+            billPayment.DomesticMerchant = true;
+            return this;
+        }
+
+        public IPromptPayBuilder CrossBorderMerchant()
+        {
+            billPayment.DomesticMerchant = false;
+            return this;
+        }
+
+        #endregion Billder
+
+        public IPromptPayBuilder NationalId(string value)
+        {
+            creditTransfer.NationalIdOrTaxId = value;
+            billPayment.NationalIdOrTaxId = value;
+            return this;
+        }
+
+        public IPromptPayBuilder TaxId(string value)
+        {
+            creditTransfer.NationalIdOrTaxId = value;
+            billPayment.NationalIdOrTaxId = value;
+            return this;
+        }
+
+        public IPromptPayBuilder Amount(double amount)
+            => SetTransactionAmount(amount);
+
         private void removeMerchantRecordsIfExists()
         {
             var merchantIdentifierRange = Enumerable.Range(2, 50).Select(it => it.ToString());
@@ -149,7 +254,7 @@ namespace Saladpuk.PromptPay
         }
 
         private string formatRecord(string id, string value)
-            => $"{id}{value.GetLength()}{value}";
+            => $"{id}{getLengthDigits(value)}{value}";
 
         private void removeOldRecordIfExists(string id)
         {
@@ -160,9 +265,15 @@ namespace Saladpuk.PromptPay
             }
         }
 
+        private string getLengthDigits(string value)
+            => value.Length.ToString("00");
+
+        private string getIdCode(QrIdentifier identifier)
+            => ((int)identifier).ToString("00");
+
         public override string ToString()
         {
-            var crcId = QrIdentifier.CRC.GetCode();
+            var crcId = getIdCode(QrIdentifier.CRC);
             var crc = qrDataObjects
                 .Where(it => it.Id == crcId)
                 .LastOrDefault()

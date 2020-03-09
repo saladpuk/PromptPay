@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Saladpuk.Contracts;
+using Saladpuk.Contracts.EMVCo;
+using Saladpuk.Contracts.PromptPay.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using emv = Saladpuk.PromptPay.EMVCoValues;
+using emv = Saladpuk.Contracts.EMVCo.EMVCoValues;
 
 namespace Saladpuk.PromptPay.Models
 {
-    public class QrInfo
+    public class QrInfo : IQrInfo
     {
-        public List<QrDataObject> Segments { get; set; }
+        public IList<IQrDataObject> Segments { get; set; }
 
         public string PayloadFormatIndicator => getSegment(QrIdentifier.PayloadFormatIndicator);
         public string PointOfInitiationMethod => getSegment(QrIdentifier.PointOfInitiationMethod);
@@ -34,17 +37,12 @@ namespace Saladpuk.PromptPay.Models
         public CreditTransfer CreditTransfer { get; set; }
         public BillPayment BillPayment { get; set; }
 
-        public QrInfo()
+        public QrInfo(List<IQrDataObject> segments = null)
         {
-            Segments = new List<QrDataObject>();
-        }
-
-        public QrInfo(List<QrDataObject> segments)
-        {
-            Segments = segments;
+            Segments = segments ?? new List<IQrDataObject>();
         }
 
         private string getSegment(QrIdentifier identifier)
-            => Segments?.LastOrDefault(it => it.Identifier == identifier)?.Value ?? "undefine";
+            => Segments?.LastOrDefault(it => it.Identifier == identifier)?.Value ?? null;
     }
 }

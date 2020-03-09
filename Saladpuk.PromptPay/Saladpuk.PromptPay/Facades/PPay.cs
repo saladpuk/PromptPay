@@ -1,18 +1,21 @@
-﻿namespace Saladpuk.PromptPay.Facades
+﻿using Saladpuk.Contracts;
+using Saladpuk.Contracts.PromptPay;
+
+namespace Saladpuk.PromptPay.Facades
 {
     public class PPay
     {
-        public static QrBuilder StaticQR
+        public static IPromptPayBuilder StaticQR
             => initializeQrBuilder().SetStaticQR();
 
-        public static QrBuilder DynamicQR
+        public static IPromptPayBuilder DynamicQR
             => initializeQrBuilder().SetDynamicQR();
 
-        public static QrReader Reader
-            => new QrReader();
+        public static IQrReader Reader
+            => new PromptPayQrReader();
 
-        private static QrBuilder initializeQrBuilder()
-            => new QrBuilder()
+        private static IPromptPayBuilder initializeQrBuilder()
+            => new PromptPayQrBuilder()
                 .DomesticMerchant()
                 .MerchantPresentedQR()
                 .SetPayloadFormatIndicator()

@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
+using Saladpuk.Contracts.EMVCo;
 using Xunit;
 
 namespace Saladpuk.PromptPay.Tests
 {
     public class QrBuilderTests
     {
-        private QrBuilder sut = new QrBuilder();
+        private PromptPayQrBuilder sut = new PromptPayQrBuilder();
 
         [Fact]
         public void DefaultQrBuilderMustBeEmpty()

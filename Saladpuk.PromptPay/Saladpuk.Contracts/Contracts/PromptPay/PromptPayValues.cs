@@ -1,4 +1,4 @@
-﻿namespace Saladpuk.PromptPay
+﻿namespace Saladpuk.Contracts.PromptPay
 {
     public class PromptPayValues
     {

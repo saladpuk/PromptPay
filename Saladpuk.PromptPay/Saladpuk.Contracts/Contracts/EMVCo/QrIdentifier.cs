@@ -1,11 +1,7 @@
-﻿namespace Saladpuk.PromptPay
+﻿namespace Saladpuk.Contracts.EMVCo
 {
     public enum QrIdentifier
     {
-        /// <summary>
-        /// This value isn't from EMVCo standard.
-        /// </summary>
-        Unknow = -1,
         /// <summary>
         /// Version of the QR Code template.
         /// </summary>

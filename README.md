@@ -28,16 +28,16 @@ QR ตามมาตรฐานของ EMVCo ได้แบ่งไว้ 
 สำหรับโค้ดในการสร้าง QR แต่ละรูปแบบก็ตามด้านล่างนี่แหละ
 ```csharp
 // Static QR
-QrBuilder builder = PPay.StaticQR;
+IQrBuilder builder = PPay.StaticQR;
 
 // Dynamic QR
-QrBuilder builder = PPay.DynamicQR;
+IQrBuilder builder = PPay.DynamicQR;
 ```
 
 ตัวโค้ดที่เขียนไว้ได้เพิ่มความสามารถในการ **ถอดความหมาย** ของ `EMVCo` และ `PromptPay` เอาไว้ด้วย โดยสามารถเรียกใช้งานตามด้านล่าง
 ```csharp
 // ตัวอ่าน QR ตามมาตรฐาน EMVCo และ PromptPay
-QrReader reader = PPay.Reader;
+IQrReader reader = PPay.Reader;
 ```
 
 # การสร้าง QR
@@ -45,7 +45,7 @@ QrReader reader = PPay.Reader;
 เป็นการโอนเงินระหว่างประชาชนทั่วไปไม่เกี่ยวกับธุรกิจหรือบริษัทใดๆ โดยการสร้าง QR ประเภทนี้ จะต้องเรียกใช้ผ่านเมธอด `GetCreditTransferQR()` ตามโค้ดด้านล่างนี้
 ```csharp
 // สร้าง QR โอนเงินสำหรับบุคคลทั่วไป
-var qr = PPay.StaticQR.GetCreditTransferQR();
+string qr = PPay.StaticQR.GetCreditTransferQR();
 ```
 
 ### การระบุผู้รับเงิน
@@ -54,60 +54,60 @@ var qr = PPay.StaticQR.GetCreditTransferQR();
 1. ระบุผู้รับเงินด้วย `เบอร์มือถือ`
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ เบอร์มือถือ 091-418-5401 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-var qr = PPay.StaticQR.MobileNumber("0914185401").GetCreditTransferQR();
+string qr = PPay.StaticQR.MobileNumber("0914185401").GetCreditTransferQR();
 ```
 
 2. ระบุผู้รับเงินด้วย `เลขประจำตัวประชาชน`
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ เลขประจำตัวประชาชน 0-0000-00000-00-0 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-var qr = PPay.StaticQR.NationalId("0000000000000").GetCreditTransferQR();
+string qr = PPay.StaticQR.NationalId("0000000000000").GetCreditTransferQR();
 ```
 
 3. ระบุผู้รับเงินด้วย `เลขบัญชีธนาคาร`
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ เลขบัญชีธนาคาร 0000000000 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-var qr = PPay.StaticQR.BankAccount("000000000000000").GetCreditTransferQR();
+string qr = PPay.StaticQR.BankAccount("000000000000000").GetCreditTransferQR();
 ```
 
 4. ระบุผู้รับเงินด้วย `e-wallet`
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ e-Wallet Id 000000000000000 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-var qr = PPay.StaticQR.EWallet("000000000000000").GetCreditTransferQR();
+string qr = PPay.StaticQR.EWallet("000000000000000").GetCreditTransferQR();
 ```
 
 ### การกำหนดจำนวนเงินที่ต้องจ่าย
 เราสามารถสร้าง QR ที่มีการกำหนดเงินที่ต้องจ่ายเป็นค่าตายตัวได้เลย โดยการเรียกใช้เมธอด `Amount()` ตามโค้ดตัวอย่างด้านล่าง
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ เบอร์มือถือ 091-418-5401 จำนวน 50 บาท
-var qr = PPay.StaticQR.MobileNumber("0914185401").Amount(50).GetCreditTransferQR();
+string qr = PPay.StaticQR.MobileNumber("0914185401").Amount(50).GetCreditTransferQR();
 
 // โอนเงินพร้อมเพย์ไปที่ เลขประจำตัวประชาชน 0-0000-00000-00-0 จำนวน 50 บาท
-var qr = PPay.StaticQR.NationalId("0000000000000").Amount(50).GetCreditTransferQR();
+string qr = PPay.StaticQR.NationalId("0000000000000").Amount(50).GetCreditTransferQR();
 
 
 // โอนเงินพร้อมเพย์ไปที่ เลขบัญชีธนาคาร 0000000000 จำนวน 50 บาท
-var qr = PPay.StaticQR.BankAccount("000000000000000").Amount(50).GetCreditTransferQR();
+string qr = PPay.StaticQR.BankAccount("000000000000000").Amount(50).GetCreditTransferQR();
 
 // โอนเงินพร้อมเพย์ไปที่ e-Wallet Id 000000000000000 จำนวน 50 บาท
-var qr = PPay.StaticQR.EWallet("000000000000000").Amount(50).GetCreditTransferQR();
+string qr = PPay.StaticQR.EWallet("000000000000000").Amount(50).GetCreditTransferQR();
 ```
 
 ### เพิ่มเติม
 กรณีที่เป็น QR ประเภท Merchant Presented QR สามารถกำหนดโดยเรียกใช้เมธอด `MerchantPresentedQR()`
 ```csharp
-var qr = PPay.StaticQR.MerchantPresentedQR().GetCreditTransferQR();
+string qr = PPay.StaticQR.MerchantPresentedQR().GetCreditTransferQR();
 ```
 
 กรณีที่เป็น QR ประเภท Customer Presented QR สามารถกำหนดโดยเรียกใช้เมธอด `CustomerPresentedQR()`
 ```csharp
-var qr = PPay.StaticQR.CustomerPresentedQR().GetCreditTransferQR();
+string qr = PPay.StaticQR.CustomerPresentedQR().GetCreditTransferQR();
 ```
 
 ## 2.สร้าง QR สำหรับธุรกิจ (Bill Payment - Tag 30)
 เป็นการสร้าง QR สำหรับเรียกเก็บเงินจาก ร้านค้า/บริษัท โดยการสร้าง QR ประเภทนี้ จะต้องเรียกใช้ผ่านเมธอด `GetBillPaymentQR()` ตามโค้ดด้านล่างนี้
 ```csharp
 // สร้าง QR สำหรับธุรกิจ
-var qr = PPay.StaticQR.GetBillPaymentQR();
+string qr = PPay.StaticQR.GetBillPaymentQR();
 ```
 
 ### การระบุผู้รับเงิน
@@ -117,7 +117,7 @@ var qr = PPay.StaticQR.GetBillPaymentQR();
 ```csharp
 // จ่ายเงินพร้อมเพย์ไปที่ รหัสประชาชน 0-0000-00000-00-0 รหัสร้านสาขา 99 (2 หลัก)
 // รหัสอ้างอิง 1: 1234, รหัสอ้างอิง 2: 5678
-var qr = PPay.StaticQR
+string qr = PPay.StaticQR
     .NationalId("0000000000000")
     .BillerSuffix("99")
     .BillRef1("1234")
@@ -129,7 +129,7 @@ var qr = PPay.StaticQR
 ```csharp
 // จ่ายเงินพร้อมเพย์ไปที่ เลขประจำตัวผู้เสียภาษี 0-0000-00000-00-0 รหัสร้านสาขา 99 (2 หลัก)
 // รหัสอ้างอิง 1: 1234, รหัสอ้างอิง 2: 5678 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-var qr = PPay.StaticQR
+string qr = PPay.StaticQR
     .TaxId("000000000000099")
     .BillerSuffix("99")
     .BillRef1("1234")
@@ -142,7 +142,7 @@ var qr = PPay.StaticQR
 ```csharp
 // จ่ายเงินพร้อมเพย์ไปที่ เลขประจำตัวผู้เสียภาษี 0-0000-00000-00-0 รหัสร้านสาขา 99 (2 หลัก)
 // รหัสอ้างอิง 1: 1234, รหัสอ้างอิง 2: 5678 จำนวน 50 บาท
-var qr = PPay.StaticQR
+string qr = PPay.StaticQR
     .TaxId("000000000000099")
     .BillerSuffix("99")
     .BillRef1("1234")
@@ -154,20 +154,20 @@ var qr = PPay.StaticQR
 ### เพิ่มเติม
 กรณีที่เป็น QR ประเภทใช้ Domestic Merchant สามารถกำหนดโดยเรียกใช้เมธอด `DomesticMerchant()`
 ```csharp
-var qr = PPay.StaticQR.DomesticMerchant().GetBillPaymentQR();
+string qr = PPay.StaticQR.DomesticMerchant().GetBillPaymentQR();
 ```
 
 กรณีที่เป็น QR ประเภทใช้ Cross-Border Merchant สามารถกำหนดโดยเรียกใช้เมธอด `CrossBorderMerchant()`
 ```csharp
-var qr = PPay.StaticQR.CrossBorderMerchant().GetBillPaymentQR();
+string qr = PPay.StaticQR.CrossBorderMerchant().GetBillPaymentQR();
 ```
 
 # ตัวถอดความหมาย QR
 ในกรณีที่เราได้รับ QR code ที่เป็นข้อความยาวๆเข้ามา แล้วเราต้องการรู้ความหมายของมัน เราสามารถเรียกใช้งานตัว QR Reader ได้ด้วยคำสั่งด้านล่างนี้ (คำสั่งนี้รอบรับมาตรฐาน `EMVCo` และ `PromptPay`)
 ```csharp
 // QR โอนเงินพร้อมเพย์ไปยังเบอร์โทร 0914185401 จำนวนเงิน 50 บาท
-var qr = "00020101021229370016A000000677010111011300669141854015303764540550.005802TH630401F8";
-var model = PPay.Reader.Read(qr);
+string qr = "00020101021229370016A000000677010111011300669141854015303764540550.005802TH630401F8";
+IQrInfo model = PPay.Reader.Read(qr);
 ```
 
 **ผลลัพท์**
@@ -178,64 +178,64 @@ var model = PPay.Reader.Read(qr);
         {
             "RawValue": "000201",
             "Id": "00",
-            "LengthCode": "02",
+            "Length": "02",
             "Value": "01"
         },
         {
             "RawValue": "010212",
             "Id": "01",
-            "LengthCode": "02",
+            "Length": "02",
             "Value": "12"
         },
         {
             "RawValue": "29370016A00000067701011101130066914185401",
             "Id": "29",
-            "LengthCode": "37",
+            "Length": "37",
             "Value": "0016A00000067701011101130066914185401"
         },
         {
             "RawValue": "5303764",
             "Id": "53",
-            "LengthCode": "03",
+            "Length": "03",
             "Value": "764"
         },
         {
             "RawValue": "540550.00",
             "Id": "54",
-            "LengthCode": "05",
+            "Length": "05",
             "Value": "50.00"
         },
         {
             "RawValue": "5802TH",
             "Id": "58",
-            "LengthCode": "02",
+            "Length": "02",
             "Value": "TH"
         },
         {
             "RawValue": "630401F8",
             "Id": "63",
-            "LengthCode": "04",
+            "Length": "04",
             "Value": "01F8"
         }
     ],
     "PayloadFormatIndicator": "01",
     "PointOfInitiationMethod": "12",
     "MerchantAccountInformation": "0016A00000067701011101130066914185401",
-    "MerchantCategoryCode": "undefine",
+    "MerchantCategoryCode": null,
     "TransactionCurrency": "764",
     "TransactionAmount": "50.00",
-    "TipOrConvenienceIndicator": "undefine",
-    "ValueOfConvenienceFeeFixed": "undefine",
-    "ValueOfConvenienceFeePercentage": "undefine",
+    "TipOrConvenienceIndicator": null,
+    "ValueOfConvenienceFeeFixed": null,
+    "ValueOfConvenienceFeePercentage": null,
     "CountryCode": "TH",
-    "MerchantName": "undefine",
-    "MerchantCity": "undefine",
-    "PostalCode": "undefine",
-    "AdditionalData": "undefine",
+    "MerchantName": null,
+    "MerchantCity": null,
+    "PostalCode": null,
+    "AdditionalData": null,
     "CRC": "01F8",
-    "MerchantInformationLanguageTemplate": "undefine",
-    "RFU": "undefine",
-    "UnreservedTemplates": "undefine",
+    "MerchantInformationLanguageTemplate": null,
+    "RFU": null,
+    "UnreservedTemplates": null,
     "Reusable": true,
     "Currency": "THB",
     "CreditTransfer": {
@@ -243,7 +243,7 @@ var model = PPay.Reader.Read(qr);
         "NationalIdOrTaxId": null,
         "EWalletId": null,
         "BankAccount": null,
-        "OTA": "",
+        "OTA": null,
         "MerchantPresentedQR": true
     },
     "BillPayment": null

@@ -6,7 +6,7 @@ namespace Saladpuk.PromptPay.Tests
 {
     public class QrReaderTests
     {
-        private QrReader sut = new QrReader();
+        private PromptPayQrReader sut = new PromptPayQrReader();
 
         [Fact]
         public void DefaultStaticCreditTransferQRMustBeReadable()
@@ -15,7 +15,7 @@ namespace Saladpuk.PromptPay.Tests
             var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault()
-                .SetPlanCreditTransfer();
+                .SetPlainCreditTransfer();
             actual.ValidateWith(expected);
         }
 
@@ -26,7 +26,7 @@ namespace Saladpuk.PromptPay.Tests
             var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault(staticQr: false)
-                .SetPlanCreditTransfer();
+                .SetPlainCreditTransfer();
             actual.ValidateWith(expected);
         }
 
@@ -37,7 +37,7 @@ namespace Saladpuk.PromptPay.Tests
             var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault()
-                .SetPlanBillPayment();
+                .SetPlainBillPayment();
             actual.ValidateWith(expected);
         }
 
@@ -48,7 +48,7 @@ namespace Saladpuk.PromptPay.Tests
             var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault(staticQr: false)
-                .SetPlanBillPayment();
+                .SetPlainBillPayment();
             actual.ValidateWith(expected);
         }
     }

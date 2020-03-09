@@ -1,4 +1,4 @@
-﻿namespace Saladpuk.PromptPay
+﻿namespace Saladpuk.Contracts
 {
     /// <summary>
     /// Checksum calculated over all the data objects included in the QR Code.
