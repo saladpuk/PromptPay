@@ -15,7 +15,7 @@ namespace Saladpuk.PromptPay.Tests
             var PointOfInitiationMethod = staticQr ? emv.Static : emv.Dynamic;
             qr.Segments.Add(new QrDataObject("000201"));
             qr.Segments.Add(new QrDataObject($"0102{PointOfInitiationMethod}"));
-            qr.Segments.Add(new QrDataObject($"5303{currency.GetCode()}"));
+            qr.Segments.Add(new QrDataObject($"5303{((int)currency).ToString("000")}"));
             qr.Segments.Add(new QrDataObject($"5802{country}"));
             return qr;
         }

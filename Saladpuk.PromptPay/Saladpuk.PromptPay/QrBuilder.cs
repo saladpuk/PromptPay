@@ -34,8 +34,8 @@ namespace Saladpuk.PromptPay
                 throw new ArgumentException("Invalid data");
             }
 
-            var id = identifier.GetCode();
-            var digits = (data ?? string.Empty).GetLength();
+            var id = getIdCode(identifier);
+            var digits = getLengthDigits(data ?? string.Empty);
             removeOldRecordIfExists(id);
             qrDataObjects.Add(new QrDataObject($"{id}{digits}{data}"));
             return this;
@@ -63,21 +63,21 @@ namespace Saladpuk.PromptPay
             => Add(QrIdentifier.PointOfInitiationMethod, emv.Dynamic);
 
         public IPromptPayBuilder SetTransactionAmount(double amount)
-            => Add(QrIdentifier.TransactionAmount, amount.GetPositiveAmount());
+            => Add(QrIdentifier.TransactionAmount, Math.Abs(amount).ToString("0.00"));
 
         public IPromptPayBuilder SetCountryCode(string code)
             => Add(QrIdentifier.CountryCode, new RegionInfo(code).TwoLetterISORegionName);
 
         public IPromptPayBuilder SetCurrencyCode(CurrencyCode code)
-            => Add(QrIdentifier.TransactionCurrency, code.GetCode());
+            => Add(QrIdentifier.TransactionCurrency, ((int)code).ToString("000"));
 
         public IPromptPayBuilder SetPayloadFormatIndicator(string version = "01")
             => Add(QrIdentifier.PayloadFormatIndicator, version);
 
         public IPromptPayBuilder SetCyclicRedundancyCheck(ICyclicRedundancyCheck crc)
         {
-            var id = QrIdentifier.CRC.GetCode();
-            var currentCode = $"{ToString()}{id}{emv.CRCDigits.GetCode()}";
+            var id = getIdCode(QrIdentifier.CRC);
+            var currentCode = $"{ToString()}{id}{emv.CRCDigits.ToString("00")}";
             var computedValue = crc.ComputeChecksum(currentCode);
             Add(QrIdentifier.CRC, computedValue);
             return this;
@@ -96,7 +96,7 @@ namespace Saladpuk.PromptPay
             billPayment.NationalIdOrTaxId = creditTransfer.NationalIdOrTaxId;
 
             var value = getValue();
-            var digits = value.GetLength();
+            var digits = getLengthDigits(value);
             removeMerchantRecordsIfExists();
             Add($"{ppay.CreditTransferTagId}{digits}{value}");
             return SetCyclicRedundancyCheck(new SimpleCRC16()).ToString();
@@ -178,7 +178,7 @@ namespace Saladpuk.PromptPay
             creditTransfer.NationalIdOrTaxId = payment.NationalIdOrTaxId;
 
             var value = getValue();
-            var digits = value.GetLength();
+            var digits = getLengthDigits(value);
             removeMerchantRecordsIfExists();
             Add($"{ppay.BillPaymentTagId}{digits}{value}");
             return SetCyclicRedundancyCheck(new SimpleCRC16()).ToString();
@@ -254,7 +254,7 @@ namespace Saladpuk.PromptPay
         }
 
         private string formatRecord(string id, string value)
-            => $"{id}{value.GetLength()}{value}";
+            => $"{id}{getLengthDigits(value)}{value}";
 
         private void removeOldRecordIfExists(string id)
         {
@@ -265,9 +265,15 @@ namespace Saladpuk.PromptPay
             }
         }
 
+        private string getLengthDigits(string value)
+            => value.Length.ToString("00");
+
+        private string getIdCode(QrIdentifier identifier)
+            => ((int)identifier).ToString("00");
+
         public override string ToString()
         {
-            var crcId = QrIdentifier.CRC.GetCode();
+            var crcId = getIdCode(QrIdentifier.CRC);
             var crc = qrDataObjects
                 .Where(it => it.Id == crcId)
                 .LastOrDefault()
