@@ -3,11 +3,11 @@ using System.Text;
 
 namespace Saladpuk.PromptPay
 {
-    public class SimpleCRC16 : ICyclicRedundancyCheck
+    public class CRC16 : ICyclicRedundancyCheck
     {
         private readonly ushort[] table = new ushort[256];
 
-        public SimpleCRC16()
+        public CRC16()
         {
             const ushort polynomial = 0x1021;
             ushort temp, a;

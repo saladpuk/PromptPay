@@ -1,17 +1,19 @@
-﻿using Saladpuk.Contracts.EMVCo;
+﻿using Saladpuk.Contracts;
+using Saladpuk.Contracts.EMVCo;
 using Saladpuk.Contracts.PromptPay.Models;
 using Saladpuk.PromptPay.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ppay = Saladpuk.Contracts.PromptPay.PromptPayValues;
 
 namespace Saladpuk.PromptPay
 {
-    public class QrReader
+    public class PromptPayQrReader : IQrReader
     {
-        private List<QrDataObject> segments = new List<QrDataObject>();
+        private List<IQrDataObject> segments = new List<IQrDataObject>();
 
-        public QrInfo Read(string qrCode)
+        public IQrInfo Read(string qrCode)
         {
             extractText(qrCode);
             return new QrInfo(segments)
@@ -31,9 +33,13 @@ namespace Saladpuk.PromptPay
                 extractText(other);
             }
         }
-        private (QrDataObject, string) extractSegments(QrDataObject data)
+        private (IQrDataObject, string) extractSegments(IQrDataObject data)
         {
-            var currentValue = $"{data.Id}{data.LengthCode}{data.Value.Substring(0, data.Length)}";
+            if (!int.TryParse(data.Length, out int length))
+            {
+                throw new ArgumentException("LengthCode isn't valid.");
+            }
+            var currentValue = $"{data.Id}{data.Length}{data.Value.Substring(0, length)}";
             var firstSegment = new QrDataObject(currentValue);
             var other = data.RawValue.Substring(currentValue.Length);
             return (firstSegment, other);
@@ -105,7 +111,7 @@ namespace Saladpuk.PromptPay
             }
             return result;
         }
-        private IEnumerable<QrDataObject> extractSegment(string specificTagId)
+        private IEnumerable<IQrDataObject> extractSegment(string specificTagId)
         {
             var merchant = segments.LastOrDefault(it => it.Identifier == QrIdentifier.MerchantAccountInformation);
             var shouldSkip = merchant == null || merchant.Id != specificTagId;

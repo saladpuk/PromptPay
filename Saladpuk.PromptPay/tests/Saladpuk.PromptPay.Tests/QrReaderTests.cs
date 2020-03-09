@@ -6,7 +6,7 @@ namespace Saladpuk.PromptPay.Tests
 {
     public class QrReaderTests
     {
-        private QrReader sut = new QrReader();
+        private PromptPayQrReader sut = new PromptPayQrReader();
 
         [Fact]
         public void DefaultStaticCreditTransferQRMustBeReadable()

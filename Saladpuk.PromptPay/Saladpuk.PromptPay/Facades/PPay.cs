@@ -11,11 +11,11 @@ namespace Saladpuk.PromptPay.Facades
         public static IPromptPayBuilder DynamicQR
             => initializeQrBuilder().SetDynamicQR();
 
-        public static QrReader Reader
-            => new QrReader();
+        public static IQrReader Reader
+            => new PromptPayQrReader();
 
         private static IPromptPayBuilder initializeQrBuilder()
-            => new QrBuilder()
+            => new PromptPayQrBuilder()
                 .DomesticMerchant()
                 .MerchantPresentedQR()
                 .SetPayloadFormatIndicator()

@@ -12,17 +12,17 @@ using ppay = Saladpuk.Contracts.PromptPay.PromptPayValues;
 
 namespace Saladpuk.PromptPay
 {
-    public class QrBuilder : IPromptPayBuilder
+    public class PromptPayQrBuilder : IPromptPayBuilder
     {
-        internal BillPayment billPayment;
-        internal CreditTransfer creditTransfer;
-        private readonly List<QrDataObject> qrDataObjects;
+        private BillPayment billPayment;
+        private CreditTransfer creditTransfer;
+        private readonly List<IQrDataObject> qrDataObjects;
 
-        public QrBuilder()
+        public PromptPayQrBuilder()
         {
             billPayment = new BillPayment();
             creditTransfer = new CreditTransfer();
-            qrDataObjects = new List<QrDataObject>();
+            qrDataObjects = new List<IQrDataObject>();
         }
 
         #region IEMVCo
@@ -99,7 +99,7 @@ namespace Saladpuk.PromptPay
             var digits = getLengthDigits(value);
             removeMerchantRecordsIfExists();
             Add($"{ppay.CreditTransferTagId}{digits}{value}");
-            return SetCyclicRedundancyCheck(new SimpleCRC16()).ToString();
+            return SetCyclicRedundancyCheck(new CRC16()).ToString();
 
             string getValue()
             {
@@ -181,7 +181,7 @@ namespace Saladpuk.PromptPay
             var digits = getLengthDigits(value);
             removeMerchantRecordsIfExists();
             Add($"{ppay.BillPaymentTagId}{digits}{value}");
-            return SetCyclicRedundancyCheck(new SimpleCRC16()).ToString();
+            return SetCyclicRedundancyCheck(new CRC16()).ToString();
 
             string getValue()
             {

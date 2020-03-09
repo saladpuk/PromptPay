@@ -20,21 +20,21 @@ namespace Saladpuk.PromptPay.Tests
             return qr;
         }
 
-        public static QrInfo SetPlainCreditTransfer(this QrInfo qr)
+        public static IQrInfo SetPlainCreditTransfer(this QrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("29200016A000000677010111"));
             qr.CreditTransfer = new CreditTransfer { MerchantPresentedQR = true };
             return qr;
         }
 
-        public static QrInfo SetPlainBillPayment(this QrInfo qr)
+        public static IQrInfo SetPlainBillPayment(this QrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("30200016A000000677010112"));
             qr.BillPayment = new BillPayment();
             return qr;
         }
 
-        public static void ValidateWith(this QrInfo qr, QrInfo expected, bool skipChecksum = true)
+        public static void ValidateWith(this IQrInfo qr, IQrInfo expected, bool skipChecksum = true)
         {
             if (skipChecksum)
             {

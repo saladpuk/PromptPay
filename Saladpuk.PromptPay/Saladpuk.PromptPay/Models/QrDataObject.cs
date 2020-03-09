@@ -1,80 +1,18 @@
-﻿using System;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Saladpuk.Contracts;
 using Saladpuk.Contracts.EMVCo;
+using System;
+using System.Linq;
+using emv = Saladpuk.Contracts.EMVCo.EMVCoValues;
 
 namespace Saladpuk.PromptPay.Models
 {
-    public class QrDataObject
+    public class QrDataObject : IQrDataObject
     {
-        private string id;
-        private string lengthCode;
-        private string value;
-
         public string RawValue { get; }
-
-        /// <summary>
-        /// The ID is coded as a two-digit numeric value, with a value ranging from "00" to "99".
-        /// </summary>
-        public string Id
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(id))
-                {
-                    const int IdIndex = 0;
-                    const int ContentLength = 2;
-                    id = RawValue.Substring(IdIndex, ContentLength);
-                }
-                return id;
-            }
-        }
-
-        /// <summary>
-        /// The length is coded as a two-digit numeric value, with a value ranging from "01" to "99".
-        /// </summary>
-        public string LengthCode
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(lengthCode))
-                {
-                    const int LengthIndex = 2;
-                    const int ContentLength = 2;
-                    lengthCode = RawValue.Substring(LengthIndex, ContentLength);
-                }
-                return lengthCode;
-            }
-        }
-
-        /// <summary>
-        /// The value field has a minimum length of one character and maximum length of 99 characters.
-        /// </summary>
-        public string Value
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    const int ValueIndex = 4;
-                    value = RawValue.Substring(ValueIndex);
-                }
-                return value;
-            }
-        }
-
-        [JsonIgnore]
-        public int Length
-        {
-            get
-            {
-                if (!int.TryParse(LengthCode, out int length))
-                {
-                    throw new ArgumentException("QR identifier code isn't valid.");
-                }
-                return length;
-            }
-        }
+        public string Id { get; }
+        public string Length { get; }
+        public string Value { get; }
 
         [JsonIgnore]
         public QrIdentifier Identifier
@@ -83,7 +21,7 @@ namespace Saladpuk.PromptPay.Models
             {
                 if (!Enum.TryParse(Id, out QrIdentifier identifier))
                 {
-                    return QrIdentifier.Unknow;
+                    throw new ArgumentOutOfRangeException("QR identifier code isn't valid.");
                 }
 
                 var merchantIdentifierRange = Enumerable.Range(2, 50);
@@ -93,6 +31,37 @@ namespace Saladpuk.PromptPay.Models
         }
 
         public QrDataObject(string rawValue)
-            => RawValue = rawValue;
+        {
+            var isArgumentValid = !string.IsNullOrWhiteSpace(rawValue)
+                && rawValue.Length >= emv.MinContentLength;
+            if (!isArgumentValid)
+            {
+                throw new ArgumentException("Content must has a minimum length of 5 characters.");
+            }
+
+            RawValue = rawValue;
+            Id = getIdSegment();
+            Length = getLength();
+            Value = getValue();
+
+            string getIdSegment()
+            {
+                const int IdIndex = 0;
+                const int ContentLength = 2;
+                return RawValue.Substring(IdIndex, ContentLength);
+            }
+            string getLength()
+            {
+                const int LengthIndex = 2;
+                const int ContentLength = 2;
+                return RawValue.Substring(LengthIndex, ContentLength);
+            }
+            string getValue()
+            {
+                const int ValueIndex = 4;
+                return RawValue.Substring(ValueIndex);
+            }
+        }
+
     }
 }
