@@ -1,4 +1,7 @@
 ﻿using FluentAssertions;
+using Saladpuk.Contracts;
+using Saladpuk.Contracts.EMVCo;
+using Saladpuk.Contracts.PromptPay.Models;
 using Saladpuk.PromptPay.Models;
 using System.Linq;
 using emv = Saladpuk.PromptPay.EMVCoValues;
@@ -17,14 +20,14 @@ namespace Saladpuk.PromptPay.Tests
             return qr;
         }
 
-        public static QrInfo SetPlanCreditTransfer(this QrInfo qr)
+        public static QrInfo SetPlainCreditTransfer(this QrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("29200016A000000677010111"));
-            qr.CreditTransfer = new CreditTransfer(true);
+            qr.CreditTransfer = new CreditTransfer { MerchantPresentedQR = true };
             return qr;
         }
 
-        public static QrInfo SetPlanBillPayment(this QrInfo qr)
+        public static QrInfo SetPlainBillPayment(this QrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("30200016A000000677010112"));
             qr.BillPayment = new BillPayment();

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Saladpuk.Contracts;
+using System.Text;
 
 namespace Saladpuk.PromptPay
 {

@@ -1,4 +1,6 @@
-﻿namespace Saladpuk.PromptPay.Facades
+﻿using Saladpuk.Contracts;
+
+namespace Saladpuk.PromptPay.Facades
 {
     public class PPay
     {

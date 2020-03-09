@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Saladpuk.Contracts;
+using Saladpuk.Contracts.EMVCo;
+using System;
 
 namespace Saladpuk.PromptPay
 {

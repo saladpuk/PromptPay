@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Newtonsoft.Json;
+using Saladpuk.Contracts.EMVCo;
 
 namespace Saladpuk.PromptPay.Models
 {

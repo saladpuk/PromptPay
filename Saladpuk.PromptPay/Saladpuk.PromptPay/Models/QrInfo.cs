@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Saladpuk.Contracts;
+using Saladpuk.Contracts.EMVCo;
+using Saladpuk.Contracts.PromptPay.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using emv = Saladpuk.PromptPay.EMVCoValues;
@@ -34,14 +37,9 @@ namespace Saladpuk.PromptPay.Models
         public CreditTransfer CreditTransfer { get; set; }
         public BillPayment BillPayment { get; set; }
 
-        public QrInfo()
+        public QrInfo(List<QrDataObject> segments = null)
         {
-            Segments = new List<QrDataObject>();
-        }
-
-        public QrInfo(List<QrDataObject> segments)
-        {
-            Segments = segments;
+            Segments = segments ?? new List<QrDataObject>();
         }
 
         private string getSegment(QrIdentifier identifier)

@@ -1,4 +1,6 @@
-﻿namespace Saladpuk.PromptPay
+﻿using Saladpuk.Contracts;
+
+namespace Saladpuk.PromptPay
 {
     public static class QrBuilderExtensions
     {

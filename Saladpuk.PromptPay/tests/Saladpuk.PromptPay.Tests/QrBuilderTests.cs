@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Saladpuk.Contracts.EMVCo;
 using Xunit;
 
 namespace Saladpuk.PromptPay.Tests
