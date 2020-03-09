@@ -54,6 +54,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Saladpuk.Contracts\Saladpuk.Contracts.csproj">
+      <Project>{04941b9b-2ab0-434a-8400-b0212191ee4f}</Project>
+      <Name>Saladpuk.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Saladpuk.PromptPay\Saladpuk.PromptPay.csproj">
       <Project>{AA0F2F1C-0883-4F87-9CCF-1AFBE0B8ED6E}</Project>
       <Name>Saladpuk.PromptPay</Name>

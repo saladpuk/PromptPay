@@ -12,7 +12,7 @@ using ppay = Saladpuk.PromptPay.PromptPayValues;
 
 namespace Saladpuk.PromptPay
 {
-    public class QrBuilder
+    public class QrBuilder : IPromptPayBuilder
     {
         internal BillPayment billPayment;
         internal CreditTransfer creditTransfer;
@@ -25,7 +25,9 @@ namespace Saladpuk.PromptPay
             qrDataObjects = new List<QrDataObject>();
         }
 
-        public QrBuilder Add(QrIdentifier identifier, string data)
+        #region IEMVCo
+
+        public IPromptPayBuilder Add(QrIdentifier identifier, string data)
         {
             if (string.IsNullOrWhiteSpace(data))
             {
@@ -39,7 +41,7 @@ namespace Saladpuk.PromptPay
             return this;
         }
 
-        public QrBuilder Add(string rawData)
+        public IPromptPayBuilder Add(string rawData)
         {
             var isArgumentValid = !string.IsNullOrWhiteSpace(rawData)
                 && rawData.Length >= emv.MinContentLength;
@@ -54,25 +56,25 @@ namespace Saladpuk.PromptPay
             return this;
         }
 
-        public QrBuilder SetStaticQR()
+        public IPromptPayBuilder SetStaticQR()
             => Add(QrIdentifier.PointOfInitiationMethod, emv.Static);
 
-        public QrBuilder SetDynamicQR()
+        public IPromptPayBuilder SetDynamicQR()
             => Add(QrIdentifier.PointOfInitiationMethod, emv.Dynamic);
 
-        public QrBuilder SetTransactionAmount(double amount)
+        public IPromptPayBuilder SetTransactionAmount(double amount)
             => Add(QrIdentifier.TransactionAmount, amount.GetPositiveAmount());
 
-        public QrBuilder SetCountryCode(string code)
+        public IPromptPayBuilder SetCountryCode(string code)
             => Add(QrIdentifier.CountryCode, new RegionInfo(code).TwoLetterISORegionName);
 
-        public QrBuilder SetCurrencyCode(CurrencyCode code)
+        public IPromptPayBuilder SetCurrencyCode(CurrencyCode code)
             => Add(QrIdentifier.TransactionCurrency, code.GetCode());
 
-        public QrBuilder SetPayloadFormatIndicator(string version = "01")
+        public IPromptPayBuilder SetPayloadFormatIndicator(string version = "01")
             => Add(QrIdentifier.PayloadFormatIndicator, version);
 
-        public QrBuilder SetCyclicRedundancyCheck(ICyclicRedundancyCheck crc)
+        public IPromptPayBuilder SetCyclicRedundancyCheck(ICyclicRedundancyCheck crc)
         {
             var id = QrIdentifier.CRC.GetCode();
             var currentCode = $"{ToString()}{id}{emv.CRCDigits.GetCode()}";
@@ -81,7 +83,14 @@ namespace Saladpuk.PromptPay
             return this;
         }
 
-        public QrBuilder SetCreditTransfer(CreditTransfer transfer)
+        #endregion IEMVCo
+
+        #region Credit transfer
+
+        public string GetCreditTransferQR()
+            => GetCreditTransferQR(creditTransfer);
+
+        public string GetCreditTransferQR(CreditTransfer transfer)
         {
             creditTransfer = transfer;
             billPayment.NationalIdOrTaxId = creditTransfer.NationalIdOrTaxId;
@@ -90,7 +99,7 @@ namespace Saladpuk.PromptPay
             var digits = value.GetLength();
             removeMerchantRecordsIfExists();
             Add($"{ppay.CreditTransferTagId}{digits}{value}");
-            return this;
+            return SetCyclicRedundancyCheck(new SimpleCRC16()).ToString();
 
             string getValue()
             {
@@ -120,7 +129,50 @@ namespace Saladpuk.PromptPay
             }
         }
 
-        public QrBuilder SetBillPayment(BillPayment payment)
+        public IPromptPayBuilder MobileNumber(string value)
+        {
+            creditTransfer.MobileNumber = value;
+            return this;
+        }
+
+        public IPromptPayBuilder EWallet(string value)
+        {
+            creditTransfer.EWalletId = value;
+            return this;
+        }
+
+        public IPromptPayBuilder BankAccount(string value)
+        {
+            creditTransfer.BankAccount = value;
+            return this;
+        }
+
+        public IPromptPayBuilder OTA(string value)
+        {
+            creditTransfer.OTA = value;
+            return this;
+        }
+
+        public IPromptPayBuilder MerchantPresentedQR()
+        {
+            creditTransfer.MerchantPresentedQR = true;
+            return this;
+        }
+
+        public IPromptPayBuilder CustomerPresentedQR()
+        {
+            creditTransfer.MerchantPresentedQR = false;
+            return this;
+        }
+
+        #endregion Credit transfer
+
+        #region Billder
+
+        public string GetBillPaymentQR()
+            => GetBillPaymentQR(billPayment);
+
+        public string GetBillPaymentQR(BillPayment payment)
         {
             billPayment = payment;
             creditTransfer.NationalIdOrTaxId = payment.NationalIdOrTaxId;
@@ -129,7 +181,7 @@ namespace Saladpuk.PromptPay
             var digits = value.GetLength();
             removeMerchantRecordsIfExists();
             Add($"{ppay.BillPaymentTagId}{digits}{value}");
-            return this;
+            return SetCyclicRedundancyCheck(new SimpleCRC16()).ToString();
 
             string getValue()
             {
@@ -141,6 +193,55 @@ namespace Saladpuk.PromptPay
                 return $"{aidRec}{billerRec}{ref1Rec}{ref2Rec}";
             }
         }
+
+        public IPromptPayBuilder BillerSuffix(string value)
+        {
+            billPayment.Suffix = value;
+            return this;
+        }
+
+        public IPromptPayBuilder BillRef1(string value)
+        {
+            billPayment.Reference1 = value;
+            return this;
+        }
+
+        public IPromptPayBuilder BillRef2(string value)
+        {
+            billPayment.Reference2 = value;
+            return this;
+        }
+
+        public IPromptPayBuilder DomesticMerchant()
+        {
+            billPayment.DomesticMerchant = true;
+            return this;
+        }
+
+        public IPromptPayBuilder CrossBorderMerchant()
+        {
+            billPayment.DomesticMerchant = false;
+            return this;
+        }
+
+        #endregion Billder
+
+        public IPromptPayBuilder NationalId(string value)
+        {
+            creditTransfer.NationalIdOrTaxId = value;
+            billPayment.NationalIdOrTaxId = value;
+            return this;
+        }
+
+        public IPromptPayBuilder TaxId(string value)
+        {
+            creditTransfer.NationalIdOrTaxId = value;
+            billPayment.NationalIdOrTaxId = value;
+            return this;
+        }
+
+        public IPromptPayBuilder Amount(double amount)
+            => SetTransactionAmount(amount);
 
         private void removeMerchantRecordsIfExists()
         {
