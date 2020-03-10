@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Saladpuk.Contracts;
+﻿using Saladpuk.Contracts;
 using Saladpuk.Contracts.EMVCo;
 using System;
 using System.Linq;
@@ -7,14 +6,36 @@ using emv = Saladpuk.Contracts.EMVCo.EMVCoCodeConventions;
 
 namespace Saladpuk.PromptPay.Models
 {
+    /// <summary>
+    /// ตัวเก็บข้อมูล QR Data Object
+    /// </summary>
     public class QrDataObject : IQrDataObject
     {
+        #region Properties
+
+        /// <summary>
+        /// ข้อมูลดิบ
+        /// </summary>
         public string RawValue { get; }
+
+        /// <summary>
+        /// รหัสประเภทข้อมูลที่อ่านจากข้อมูลดิบ
+        /// </summary>
         public string Id { get; }
+
+        /// <summary>
+        /// ความยาวของข้อมูลที่อ่านจากข้อมูลดิบ
+        /// </summary>
         public string Length { get; }
+
+        /// <summary>
+        /// ข้อมูลที่อ่านจากข้อมูลดิบ
+        /// </summary>
         public string Value { get; }
 
-        [JsonIgnore]
+        /// <summary>
+        /// รหัสประเภทข้อมูลตามมาตรฐาน
+        /// </summary>
         public QrIdentifier IdByConvention
         {
             get
@@ -41,6 +62,14 @@ namespace Saladpuk.PromptPay.Models
             }
         }
 
+        #endregion Properties
+
+        #region Constructors
+
+        /// <summary>
+        /// กำหนดค่าพื้นฐานของ QR Data Object
+        /// </summary>
+        /// <param name="rawValue">ข้อมูลดิบ</param>
         public QrDataObject(string rawValue)
         {
             var isArgumentValid = !string.IsNullOrWhiteSpace(rawValue)
@@ -74,5 +103,6 @@ namespace Saladpuk.PromptPay.Models
             }
         }
 
+        #endregion Constructors
     }
 }

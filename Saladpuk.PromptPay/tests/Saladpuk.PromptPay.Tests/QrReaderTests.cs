@@ -33,7 +33,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void DefaultStaticBillPaymentQRMustBeReadable()
         {
-            var qrCode = PPay.StaticQR.GetBillPaymentQrCode();
+            var qrCode = PPay.StaticQR.CreateBillPaymentQrCode();
             var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault()
@@ -44,7 +44,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void DefaultDynamicBillPaymentQRMustBeReadable()
         {
-            var qrCode = PPay.DynamicQR.GetBillPaymentQrCode();
+            var qrCode = PPay.DynamicQR.CreateBillPaymentQrCode();
             var actual = sut.Read(qrCode);
             var expected = new QrInfo()
                 .InitializeDefault(staticQr: false)

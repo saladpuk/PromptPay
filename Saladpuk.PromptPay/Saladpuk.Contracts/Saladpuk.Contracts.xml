@@ -1363,12 +1363,12 @@
             กำหนดให้เป็นรูปแบบลูกค้าเป็นผู้แสดง QR Code ให้ร้านค้าสแกน (Credit Transfer)
             </summary>
         </member>
-        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.GetBillPaymentQrCode">
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.CreateBillPaymentQrCode">
             <summary>
             สร้างรหัส QR ขอเรียกเก็บเงินสำหรับผู้ประกอบการ
             </summary>
         </member>
-        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.GetBillPaymentQrCode(Saladpuk.Contracts.PromptPay.Models.BillPayment)">
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.CreateBillPaymentQrCode(Saladpuk.Contracts.PromptPay.Models.BillPayment)">
             <summary>
             สร้างรหัส QR ขอเรียกเก็บเงินสำหรับผู้ประกอบการ
             </summary>
@@ -1451,9 +1451,9 @@
             รหัสอ้างอิง 2
             </summary>
         </member>
-        <member name="P:Saladpuk.Contracts.PromptPay.Models.BillPayment.DomesticMerchant">
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.BillPayment.CrossBorderMerchantQR">
             <summary>
-            เป็นการใช้ภายในประเทศหรือไม่ ?
+            เป็นการใช้ข้ามประเทศหรือไม่ ?
             </summary>
         </member>
         <member name="T:Saladpuk.Contracts.PromptPay.Models.CreditTransfer">
@@ -1498,9 +1498,9 @@
             ถ้าเป็น QR รูปแบบร้านค้าเป็นผู้แสดง QR ให้ลูกค้าสแกน ต้องกำหนดค่านี้ด้วย
             </summary>
         </member>
-        <member name="P:Saladpuk.Contracts.PromptPay.Models.CreditTransfer.MerchantPresentedQR">
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.CreditTransfer.CustomerPresentedQR">
             <summary>
-            เป็นรูปแบบร้านเป็นผู้แสดง QR ให้ลูกค้าสแกนหรือไม่?
+            เป็นรูปแบบลูกค้าเป็นผู้แสดง QR Code ให้ร้านค้าสแกนหรือไม่ ?
             </summary>
         </member>
         <member name="T:Saladpuk.Contracts.PromptPay.Models.SellerVat">

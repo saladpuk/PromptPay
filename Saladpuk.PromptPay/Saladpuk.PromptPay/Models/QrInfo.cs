@@ -8,10 +8,58 @@ using emv = Saladpuk.Contracts.EMVCo.EMVCoCodeConventions;
 
 namespace Saladpuk.PromptPay.Models
 {
+    /// <summary>
+    /// รายละเอียดของ QR
+    /// </summary>
     public class QrInfo : IQrInfo
     {
-        public IList<IQrDataObject> Segments { get; set; }
+        #region Properties
 
+        /// <summary>
+        /// QR นี้สามารถจ่ายเงินซ้ำได้หรือไม่ ?
+        /// </summary>
+        public bool Reusable => (PointOfInitiationMethod ?? string.Empty) == emv.Static;
+
+        /// <summary>
+        /// สกุลเงินที่ใช้จ่าย
+        /// </summary>
+        public string Currency => Enum.TryParse(TransactionCurrency, out CurrencyCode currencyCode) ? currencyCode.ToString() : null;
+
+        /// <summary>
+        /// ข้อมูลการโอนเงินผ่านบริการพร้อมเพย
+        /// </summary>
+        public CreditTransfer CreditTransfer { get; set; }
+
+        /// <summary>
+        /// ข้อมูลการขอเรียกเก็บเงินสำหรับผู้ประกอบการ
+        /// </summary>
+        public BillPayment BillPayment { get; set; }
+
+        #endregion Properties
+
+        #region Constructors
+
+        /// <summary>
+        /// กำหนดค่าเริ่มต้นให้กับรายละเอียดของ QR
+        /// </summary>
+        /// <param name="segments">ส่วนประกอบทั้งหมดของ QR code</param>
+        public QrInfo(List<IQrDataObject> segments = null)
+        {
+            Segments = segments ?? new List<IQrDataObject>();
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        
+        private string getSegment(QrIdentifier identifier)
+            => Segments?.LastOrDefault(it => it.IdByConvention == identifier)?.Value ?? null;
+
+        #endregion Methods
+
+        #region IQRInfo members
+
+        public IList<IQrDataObject> Segments { get; set; }
         public string PayloadFormatIndicator => getSegment(QrIdentifier.PayloadFormatIndicator);
         public string PointOfInitiationMethod => getSegment(QrIdentifier.PointOfInitiationMethod);
         public string MerchantAccountInformation => getSegment(QrIdentifier.MerchantAccountInformation);
@@ -29,20 +77,7 @@ namespace Saladpuk.PromptPay.Models
         public string CRC => getSegment(QrIdentifier.CRC);
         public string MerchantInformationLanguageTemplate => getSegment(QrIdentifier.MerchantInformationLanguageTemplate);
         public string RFU => getSegment(QrIdentifier.RFU);
-        public string UnreservedTemplates => getSegment(QrIdentifier.UnreservedTemplates);
 
-        public bool Reusable => (PointOfInitiationMethod ?? string.Empty) == emv.Static;
-        public string Currency => Enum.TryParse(TransactionCurrency, out CurrencyCode currencyCode) ? currencyCode.ToString() : null;
-
-        public CreditTransfer CreditTransfer { get; set; }
-        public BillPayment BillPayment { get; set; }
-
-        public QrInfo(List<IQrDataObject> segments = null)
-        {
-            Segments = segments ?? new List<IQrDataObject>();
-        }
-
-        private string getSegment(QrIdentifier identifier)
-            => Segments?.LastOrDefault(it => it.IdByConvention == identifier)?.Value ?? null;
+        #endregion IQRInfo members
     }
 }

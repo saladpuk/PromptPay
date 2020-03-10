@@ -12,18 +12,34 @@ using ppay = Saladpuk.Contracts.PromptPay.PromptPayCodeConventions;
 
 namespace Saladpuk.PromptPay
 {
+    /// <summary>
+    /// ตัวสร้าง QR PromptPay
+    /// </summary>
     public class PromptPayQrBuilder : IPromptPayBuilder
     {
+        #region Fields
+
         private BillPayment billPayment;
         private CreditTransfer creditTransfer;
         private readonly List<IQrDataObject> qrDataObjects;
 
+        #endregion Fields
+
+        #region Constructors
+
+        /// <summary>
+        /// กำหนดค่าเริ่มต้นให้กับ ตัวสร้าง QR PromptPay
+        /// </summary>
         public PromptPayQrBuilder()
         {
             billPayment = new BillPayment();
             creditTransfer = new CreditTransfer();
             qrDataObjects = new List<IQrDataObject>();
         }
+
+        #endregion Constructors
+
+        #region IPromptPayBuilder members
 
         #region IEMVCo
 
@@ -93,7 +109,6 @@ namespace Saladpuk.PromptPay
         public string CreateCreditTransferQrCode(CreditTransfer transfer)
         {
             creditTransfer = transfer;
-            //billPayment.BillerId = creditTransfer.NationalIdOrTaxId;
 
             var value = getValue();
             var digits = getLengthDigits(value);
@@ -103,7 +118,7 @@ namespace Saladpuk.PromptPay
 
             string getValue()
             {
-                var aidRec = formatRecord(ppay.AIDTag, transfer.MerchantPresentedQR ? ppay.MerchantPresented : ppay.CustomerPresented);
+                var aidRec = formatRecord(ppay.AIDTag, transfer.AID);
                 var mobileRec = createMobileRecord();
                 var receiverRec = string.IsNullOrWhiteSpace(transfer.NationalIdOrTaxId) ? string.Empty : formatRecord(ppay.NationalIdOrTaxIdTag, transfer.NationalIdOrTaxId);
                 var eWalletRec = string.IsNullOrWhiteSpace(transfer.EWalletId) ? string.Empty : formatRecord(ppay.EWalletTag, transfer.EWalletId);
@@ -155,13 +170,13 @@ namespace Saladpuk.PromptPay
 
         public IPromptPayBuilder MerchantPresentedQR()
         {
-            creditTransfer.MerchantPresentedQR = true;
+            creditTransfer.CustomerPresentedQR = false;
             return this;
         }
 
         public IPromptPayBuilder CustomerPresentedQR()
         {
-            creditTransfer.MerchantPresentedQR = false;
+            creditTransfer.CustomerPresentedQR = true;
             return this;
         }
 
@@ -169,10 +184,10 @@ namespace Saladpuk.PromptPay
 
         #region Billder
 
-        public string GetBillPaymentQrCode()
-            => GetBillPaymentQrCode(billPayment);
+        public string CreateBillPaymentQrCode()
+            => CreateBillPaymentQrCode(billPayment);
 
-        public string GetBillPaymentQrCode(BillPayment payment)
+        public string CreateBillPaymentQrCode(BillPayment payment)
         {
             billPayment = payment;
             var value = getValue();
@@ -213,13 +228,13 @@ namespace Saladpuk.PromptPay
 
         public IPromptPayBuilder DomesticMerchant()
         {
-            billPayment.DomesticMerchant = true;
+            billPayment.CrossBorderMerchantQR = false;
             return this;
         }
 
         public IPromptPayBuilder CrossBorderMerchant()
         {
-            billPayment.DomesticMerchant = false;
+            billPayment.CrossBorderMerchantQR = true;
             return this;
         }
 
@@ -241,6 +256,28 @@ namespace Saladpuk.PromptPay
 
         public IPromptPayBuilder Amount(double amount)
             => SetTransactionAmount(amount);
+
+        #endregion IPromptPayBuilder members
+
+        #region Methods
+
+        /// <summary>
+        /// เรียกดูโค้ดทั้งหมดโดยไม่ระบุประเภทการใช้งาน
+        /// </summary>
+        public override string ToString()
+        {
+            var crcId = getIdCode(QrIdentifier.CRC);
+            var crc = qrDataObjects
+                .Where(it => it.Id == crcId)
+                .LastOrDefault()
+                ?.RawValue ?? string.Empty;
+            var qry = qrDataObjects
+                .Where(it => it.Id != crcId)
+                .OrderBy(it => it.Id)
+                .Select(it => it.RawValue)
+                .Union(new[] { crc });
+            return string.Join(string.Empty, qry);
+        }
 
         private void removeMerchantRecordsIfExists()
         {
@@ -270,19 +307,6 @@ namespace Saladpuk.PromptPay
         private string getIdCode(QrIdentifier identifier)
             => ((int)identifier).ToString("00");
 
-        public override string ToString()
-        {
-            var crcId = getIdCode(QrIdentifier.CRC);
-            var crc = qrDataObjects
-                .Where(it => it.Id == crcId)
-                .LastOrDefault()
-                ?.RawValue ?? string.Empty;
-            var qry = qrDataObjects
-                .Where(it => it.Id != crcId)
-                .OrderBy(it => it.Id)
-                .Select(it => it.RawValue)
-                .Union(new[] { crc });
-            return string.Join(string.Empty, qry);
-        }
+        #endregion Methods
     }
 }

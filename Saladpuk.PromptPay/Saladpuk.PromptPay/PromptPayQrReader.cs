@@ -59,7 +59,7 @@ namespace Saladpuk.PromptPay
                 switch (item.Id)
                 {
                     case ppay.AIDTag:
-                        result.DomesticMerchant = item.Value == ppay.DomesticMerchant;
+                        result.CrossBorderMerchantQR = item.Value == ppay.DomesticMerchant;
                         break;
                     case ppay.BillderIdTag:
                         const int SuffixLength = 2;
@@ -91,7 +91,7 @@ namespace Saladpuk.PromptPay
                 switch (item.Id)
                 {
                     case ppay.AIDTag:
-                        result.MerchantPresentedQR = item.Value == ppay.MerchantPresented;
+                        result.CustomerPresentedQR = item.Value == ppay.CustomerPresented;
                         break;
                     case ppay.MobileTag:
                         const int SkipTagId = 2;

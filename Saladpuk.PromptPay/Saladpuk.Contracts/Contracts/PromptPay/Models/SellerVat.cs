@@ -9,6 +9,7 @@
         /// รหัสอ้างอิงตามระบบ ITMX
         /// </summary>
         public string SellerTaxBranchId { get; set; }
+
         /// <summary>
         /// ภาษีที่เรียกเก็บในรูปแบบเปอร์เซ็นต์ (ต้องระบุทศนิยม 2 ตำแหน่งเสมอ)
         /// </summary>
@@ -17,6 +18,7 @@
         /// กรณีที่ไม่มีทศนิยมถือว่าไม่ถูกรูปแบบ เช่น "10"
         /// </remarks>
         public string VATRate { get; set; }
+
         /// <summary>
         /// มูลค่าภาษีที่แสดงอยู่บนใบเรียกเก็บ
         /// </summary>

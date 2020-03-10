@@ -23,7 +23,7 @@ namespace Saladpuk.PromptPay.Tests
         public static IQrInfo SetPlainCreditTransfer(this QrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("29200016A000000677010111"));
-            qr.CreditTransfer = new CreditTransfer { MerchantPresentedQR = true };
+            qr.CreditTransfer = new CreditTransfer();
             return qr;
         }
 

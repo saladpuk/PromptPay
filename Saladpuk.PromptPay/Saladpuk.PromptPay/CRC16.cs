@@ -3,10 +3,22 @@ using System.Text;
 
 namespace Saladpuk.PromptPay
 {
+    /// <summary>
+    /// ตัวตรวจสอบความถูกต้องของข้อมูล
+    /// </summary>
     public class CRC16 : ICyclicRedundancyCheck
     {
+        #region Fields
+        
         private readonly ushort[] table = new ushort[256];
 
+        #endregion Fields
+
+        #region Constructors
+
+        /// <summary>
+        /// กำหนดค่าเริ่มต้นให้กับตัวตรวจสอบความถูกต้องของข้อมูล
+        /// </summary>
         public CRC16()
         {
             const ushort polynomial = 0x1021;
@@ -27,6 +39,14 @@ namespace Saladpuk.PromptPay
             }
         }
 
+        #endregion Constructors
+
+        #region Methods
+
+        /// <summary>
+        /// สร้างรหัสเช็คความถูกต้องของข้อมูล
+        /// </summary>
+        /// <param name="data">ข้อมูลที่ต้องการนำไปสร้างรหัส</param>
         public string ComputeChecksum(string data)
         {
             ushort crc = 0xffff;
@@ -37,5 +57,7 @@ namespace Saladpuk.PromptPay
             }
             return crc.ToString("X").PadLeft(4, '0');
         }
+
+        #endregion Methods
     }
 }

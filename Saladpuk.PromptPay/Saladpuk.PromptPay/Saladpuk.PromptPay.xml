@@ -4,6 +4,22 @@
         <name>Saladpuk.PromptPay</name>
     </assembly>
     <members>
+        <member name="T:Saladpuk.PromptPay.CRC16">
+            <summary>
+            ตัวตรวจสอบความถูกต้องของข้อมูล
+            </summary>
+        </member>
+        <member name="M:Saladpuk.PromptPay.CRC16.#ctor">
+            <summary>
+            กำหนดค่าเริ่มต้นให้กับตัวตรวจสอบความถูกต้องของข้อมูล
+            </summary>
+        </member>
+        <member name="M:Saladpuk.PromptPay.CRC16.ComputeChecksum(System.String)">
+            <summary>
+            สร้างรหัสเช็คความถูกต้องของข้อมูล
+            </summary>
+            <param name="data">ข้อมูลที่ต้องการนำไปสร้างรหัส</param>
+        </member>
         <member name="T:Saladpuk.PromptPay.Facades.PPay">
             <summary>
             พร้อมเพย์
@@ -22,6 +38,88 @@
         <member name="P:Saladpuk.PromptPay.Facades.PPay.Reader">
             <summary>
             ตัวอ่าน QR
+            </summary>
+        </member>
+        <member name="T:Saladpuk.PromptPay.Models.QrDataObject">
+            <summary>
+            ตัวเก็บข้อมูล QR Data Object
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Models.QrDataObject.RawValue">
+            <summary>
+            ข้อมูลดิบ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Models.QrDataObject.Id">
+            <summary>
+            รหัสประเภทข้อมูลที่อ่านจากข้อมูลดิบ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Models.QrDataObject.Length">
+            <summary>
+            ความยาวของข้อมูลที่อ่านจากข้อมูลดิบ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Models.QrDataObject.Value">
+            <summary>
+            ข้อมูลที่อ่านจากข้อมูลดิบ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Models.QrDataObject.IdByConvention">
+            <summary>
+            รหัสประเภทข้อมูลตามมาตรฐาน
+            </summary>
+        </member>
+        <member name="M:Saladpuk.PromptPay.Models.QrDataObject.#ctor(System.String)">
+            <summary>
+            กำหนดค่าพื้นฐานของ QR Data Object
+            </summary>
+            <param name="rawValue">ข้อมูลดิบ</param>
+        </member>
+        <member name="T:Saladpuk.PromptPay.Models.QrInfo">
+            <summary>
+            รายละเอียดของ QR
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Models.QrInfo.Reusable">
+            <summary>
+            QR นี้สามารถจ่ายเงินซ้ำได้หรือไม่ ?
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Models.QrInfo.Currency">
+            <summary>
+            สกุลเงินที่ใช้จ่าย
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Models.QrInfo.CreditTransfer">
+            <summary>
+            ข้อมูลการโอนเงินผ่านบริการพร้อมเพย
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Models.QrInfo.BillPayment">
+            <summary>
+            ข้อมูลการขอเรียกเก็บเงินสำหรับผู้ประกอบการ
+            </summary>
+        </member>
+        <member name="M:Saladpuk.PromptPay.Models.QrInfo.#ctor(System.Collections.Generic.List{Saladpuk.Contracts.IQrDataObject})">
+            <summary>
+            กำหนดค่าเริ่มต้นให้กับรายละเอียดของ QR
+            </summary>
+            <param name="segments">ส่วนประกอบทั้งหมดของ QR code</param>
+        </member>
+        <member name="T:Saladpuk.PromptPay.PromptPayQrBuilder">
+            <summary>
+            ตัวสร้าง QR PromptPay
+            </summary>
+        </member>
+        <member name="M:Saladpuk.PromptPay.PromptPayQrBuilder.#ctor">
+            <summary>
+            กำหนดค่าเริ่มต้นให้กับ ตัวสร้าง QR PromptPay
+            </summary>
+        </member>
+        <member name="M:Saladpuk.PromptPay.PromptPayQrBuilder.ToString">
+            <summary>
+            เรียกดูโค้ดทั้งหมดโดยไม่ระบุประเภทการใช้งาน
             </summary>
         </member>
     </members>

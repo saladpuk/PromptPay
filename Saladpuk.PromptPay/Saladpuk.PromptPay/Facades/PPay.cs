@@ -6,8 +6,10 @@ namespace Saladpuk.PromptPay.Facades
     /// <summary>
     /// พร้อมเพย์
     /// </summary>
-    public class PPay
+    public static class PPay
     {
+        #region Properties
+
         /// <summary>
         /// สร้าง QR ที่ใช้ซ้ำได้หลายครั้ง
         /// </summary>
@@ -26,12 +28,16 @@ namespace Saladpuk.PromptPay.Facades
         public static IQrReader Reader
             => new PromptPayQrReader();
 
+        #endregion Properties
+
+        #region Methods
+
         private static IPromptPayBuilder initializeQrBuilder()
             => new PromptPayQrBuilder()
-                .DomesticMerchant()
-                .MerchantPresentedQR()
                 .SetPayloadFormatIndicator()
                 .SetCurrencyCode(CurrencyCode.THB)
                 .SetCountryCode("th");
+
+        #endregion Methods
     }
 }
