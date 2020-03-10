@@ -4,7 +4,7 @@ using Saladpuk.Contracts.PromptPay.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using emv = Saladpuk.Contracts.EMVCo.EMVCoValues;
+using emv = Saladpuk.Contracts.EMVCo.EMVCoCodeConventions;
 
 namespace Saladpuk.PromptPay.Models
 {
@@ -32,7 +32,7 @@ namespace Saladpuk.PromptPay.Models
         public string UnreservedTemplates => getSegment(QrIdentifier.UnreservedTemplates);
 
         public bool Reusable => (PointOfInitiationMethod ?? string.Empty) == emv.Static;
-        public string Currency => Enum.TryParse(TransactionCurrency, out CurrencyCode currencyCode) ? currencyCode.ToString() : "undefine";
+        public string Currency => Enum.TryParse(TransactionCurrency, out CurrencyCode currencyCode) ? currencyCode.ToString() : null;
 
         public CreditTransfer CreditTransfer { get; set; }
         public BillPayment BillPayment { get; set; }
@@ -43,6 +43,6 @@ namespace Saladpuk.PromptPay.Models
         }
 
         private string getSegment(QrIdentifier identifier)
-            => Segments?.LastOrDefault(it => it.Identifier == identifier)?.Value ?? null;
+            => Segments?.LastOrDefault(it => it.IdByConvention == identifier)?.Value ?? null;
     }
 }

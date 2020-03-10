@@ -4,7 +4,7 @@ using Saladpuk.Contracts.EMVCo;
 using Saladpuk.Contracts.PromptPay.Models;
 using Saladpuk.PromptPay.Models;
 using System.Linq;
-using emv = Saladpuk.Contracts.EMVCo.EMVCoValues;
+using emv = Saladpuk.Contracts.EMVCo.EMVCoCodeConventions;
 
 namespace Saladpuk.PromptPay.Tests
 {
@@ -38,8 +38,8 @@ namespace Saladpuk.PromptPay.Tests
         {
             if (skipChecksum)
             {
-                qr.Segments.Remove(qr.Segments.FirstOrDefault(it => it.Identifier == QrIdentifier.CRC));
-                expected.Segments.Remove(expected.Segments.FirstOrDefault(it => it.Identifier == QrIdentifier.CRC));
+                qr.Segments.Remove(qr.Segments.FirstOrDefault(it => it.IdByConvention == QrIdentifier.CRC));
+                expected.Segments.Remove(expected.Segments.FirstOrDefault(it => it.IdByConvention == QrIdentifier.CRC));
             }
             qr.Should().BeEquivalentTo(expected);
         }

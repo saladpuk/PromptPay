@@ -3,7 +3,7 @@ using Saladpuk.Contracts;
 using Saladpuk.Contracts.EMVCo;
 using System;
 using System.Linq;
-using emv = Saladpuk.Contracts.EMVCo.EMVCoValues;
+using emv = Saladpuk.Contracts.EMVCo.EMVCoCodeConventions;
 
 namespace Saladpuk.PromptPay.Models
 {
@@ -15,7 +15,7 @@ namespace Saladpuk.PromptPay.Models
         public string Value { get; }
 
         [JsonIgnore]
-        public QrIdentifier Identifier
+        public QrIdentifier IdByConvention
         {
             get
             {
@@ -24,16 +24,27 @@ namespace Saladpuk.PromptPay.Models
                     throw new ArgumentOutOfRangeException("QR identifier code isn't valid.");
                 }
 
-                var merchantIdentifierRange = Enumerable.Range(2, 50);
-                var isMerchant = merchantIdentifierRange.Contains((int)identifier);
-                return isMerchant ? QrIdentifier.MerchantAccountInformation : identifier;
+                var id = (int)identifier;
+                var isMerchant = emv.MerchantIdRange.Contains(id);
+                if (isMerchant)
+                {
+                    return QrIdentifier.MerchantAccountInformation;
+                }
+
+                var isReserved = emv.RFUIdRange.Contains(id);
+                if (isReserved)
+                {
+                    return QrIdentifier.RFU;
+                }
+
+                return identifier;
             }
         }
 
         public QrDataObject(string rawValue)
         {
             var isArgumentValid = !string.IsNullOrWhiteSpace(rawValue)
-                && rawValue.Length >= emv.MinContentLength;
+                && rawValue.Length >= emv.MinSegmentLength;
             if (!isArgumentValid)
             {
                 throw new ArgumentException("Content must has a minimum length of 5 characters.");

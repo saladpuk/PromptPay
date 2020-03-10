@@ -12,6 +12,10 @@
     <PackageTags>promptpay</PackageTags>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Z:\PromptPay22222\Saladpuk.PromptPay\Saladpuk.PromptPay\Saladpuk.PromptPay.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>

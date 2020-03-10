@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Saladpuk.PromptPay.Facades;
 using Xunit;
-using ppay = Saladpuk.Contracts.PromptPay.PromptPayValues;
+using ppay = Saladpuk.Contracts.PromptPay.PromptPayCodeConventions;
 
 namespace Saladpuk.PromptPay.Tests
 {
@@ -20,7 +20,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void DefaultStaticCreditTransferQRMustBeMerchantPresentedQRFormat()
         {
-            var actual = PPay.StaticQR.GetCreditTransferQR();
+            var actual = PPay.StaticQR.CreateCreditTransferQrCode();
             var Merchant = $"29200016{ppay.MerchantPresented}";
             var expected = $"{EMVCoVersion}{Static}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -29,7 +29,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void DefaultDynamicCreditTransferQRMustBeMerchantPresentedQRFormat()
         {
-            var actual = PPay.DynamicQR.GetCreditTransferQR();
+            var actual = PPay.DynamicQR.CreateCreditTransferQrCode();
             var Merchant = $"29200016{ppay.MerchantPresented}";
             var expected = $"{EMVCoVersion}{Dynamic}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -38,7 +38,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void DefaultStaticBillPaymentQRMustBeDomesticMerchantFormat()
         {
-            var actual = PPay.StaticQR.GetBillPaymentQR();
+            var actual = PPay.StaticQR.GetBillPaymentQrCode();
             var Merchant = $"30200016{ppay.DomesticMerchant}";
             var expected = $"{EMVCoVersion}{Static}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -47,7 +47,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void DefaultDynamicBillPaymentQRMustBeDomesticMerchantFormat()
         {
-            var actual = PPay.DynamicQR.GetBillPaymentQR();
+            var actual = PPay.DynamicQR.GetBillPaymentQrCode();
             var Merchant = $"30200016{ppay.DomesticMerchant}";
             var expected = $"{EMVCoVersion}{Dynamic}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -60,7 +60,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void SimpleStaticCreditTransferQRWithMerchantPresentedShouldInTheRightFormat()
         {
-            var actual = PPay.StaticQR.MerchantPresentedQR().GetCreditTransferQR();
+            var actual = PPay.StaticQR.MerchantPresentedQR().CreateCreditTransferQrCode();
             var Merchant = $"29200016{ppay.MerchantPresented}";
             var expected = $"{EMVCoVersion}{Static}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -69,7 +69,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void SimpleStaticCreditTransferQRWithCustomerPresentedShouldInTheRightFormat()
         {
-            var actual = PPay.StaticQR.CustomerPresentedQR().GetCreditTransferQR();
+            var actual = PPay.StaticQR.CustomerPresentedQR().CreateCreditTransferQrCode();
             var Merchant = $"29200016{ppay.CustomerPresented}";
             var expected = $"{EMVCoVersion}{Static}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -78,7 +78,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void SimpleDynamicCreditTransferQRWithMerchantPresentedShouldInTheRightFormat()
         {
-            var actual = PPay.DynamicQR.GetCreditTransferQR();
+            var actual = PPay.DynamicQR.CreateCreditTransferQrCode();
             var Merchant = $"29200016{ppay.MerchantPresented}";
             var expected = $"{EMVCoVersion}{Dynamic}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -87,7 +87,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void SimpleDynamicCreditTransferQRWithCustomerPresentedShouldInTheRightFormat()
         {
-            var actual = PPay.DynamicQR.CustomerPresentedQR().GetCreditTransferQR();
+            var actual = PPay.DynamicQR.CustomerPresentedQR().CreateCreditTransferQrCode();
             var Merchant = $"29200016{ppay.CustomerPresented}";
             var expected = $"{EMVCoVersion}{Dynamic}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -100,7 +100,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void SimpleStaticBillPaymentQRWithDomesticMerchantShouldInTheRightFormat()
         {
-            var actual = PPay.StaticQR.DomesticMerchant().GetBillPaymentQR();
+            var actual = PPay.StaticQR.DomesticMerchant().GetBillPaymentQrCode();
             var Merchant = $"30200016{ppay.DomesticMerchant}";
             var expected = $"{EMVCoVersion}{Static}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -109,7 +109,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void SimpleStaticBillPaymentQRWithCrosBorderMerchantShouldInTheRightFormat()
         {
-            var actual = PPay.StaticQR.CrossBorderMerchant().GetBillPaymentQR();
+            var actual = PPay.StaticQR.CrossBorderMerchant().GetBillPaymentQrCode();
             var Merchant = $"30200016{ppay.CrossBorderMerchant}";
             var expected = $"{EMVCoVersion}{Static}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -118,7 +118,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void SimpleDynamicBillPaymentQRWithDomesticMerchantShouldInTheRightFormat()
         {
-            var actual = PPay.DynamicQR.DomesticMerchant().GetBillPaymentQR();
+            var actual = PPay.DynamicQR.DomesticMerchant().GetBillPaymentQrCode();
             var Merchant = $"30200016{ppay.DomesticMerchant}";
             var expected = $"{EMVCoVersion}{Dynamic}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);
@@ -127,7 +127,7 @@ namespace Saladpuk.PromptPay.Tests
         [Fact]
         public void SimpleDynamicBillPaymentQRWithCrosBorderMerchantShouldInTheRightFormat()
         {
-            var actual = PPay.DynamicQR.CrossBorderMerchant().GetBillPaymentQR();
+            var actual = PPay.DynamicQR.CrossBorderMerchant().GetBillPaymentQrCode();
             var Merchant = $"30200016{ppay.CrossBorderMerchant}";
             var expected = $"{EMVCoVersion}{Dynamic}{Merchant}{Currency}{Country}{CRC16Prefix}";
             validateQRFormat(actual, expected);

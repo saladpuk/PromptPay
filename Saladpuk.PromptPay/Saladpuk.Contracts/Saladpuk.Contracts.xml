@@ -1,0 +1,1611 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Saladpuk.Contracts</name>
+    </assembly>
+    <members>
+        <member name="T:Saladpuk.Contracts.CurrencyCode">
+            <summary>
+            รหัสสกุลเงินที่ใช้ในการทำธุรกรรมตามมาตรฐาน ISO 4217
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.AED">
+            <summary>
+             UAE Dirham
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.AFN">
+            <summary>
+            Afghani
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ALL">
+            <summary>
+            Lek
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.AMD">
+            <summary>
+            Armenian Dram
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ANG">
+            <summary>
+            Netherlands Antillean Guilder
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.AOA">
+            <summary>
+            Kwanza
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ARS">
+            <summary>
+            Argentine Peso
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.AUD">
+            <summary>
+            Australian Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.AWG">
+            <summary>
+            Aruban Florin
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.AZN">
+            <summary>
+            Azerbaijan Manat
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BAM">
+            <summary>
+            Convertible Mark
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BBD">
+            <summary>
+            Barbados Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BDT">
+            <summary>
+            Taka
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BGN">
+            <summary>
+            Bulgarian Lev
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BHD">
+            <summary>
+            Bahraini Dinar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BIF">
+            <summary>
+            Burundi Franc
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BMD">
+            <summary>
+            Bermudian Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BND">
+            <summary>
+            Brunei Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BOB">
+            <summary>
+            Boliviano
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BOV">
+            <summary>
+            Mvdol
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BRL">
+            <summary>
+            Brazilian Real
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BSD">
+            <summary>
+            Bahamian Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BTN">
+            <summary>
+            Ngultrum
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BWP">
+            <summary>
+            Pula
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BYN">
+            <summary>
+            Belarusian Ruble
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BYR">
+            <summary>
+            Belarussian Ruble
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.BZD">
+            <summary>
+            Belize Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CAD">
+            <summary>
+            Canadian Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CDF">
+            <summary>
+            Congolese Franc
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CHE">
+            <summary>
+            WIR Euro
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CHF">
+            <summary>
+            Swiss Franc
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CHW">
+            <summary>
+            WIR Franc
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CLF">
+            <summary>
+            Unidad de Fomento
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CLP">
+            <summary>
+            Chilean Peso
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CNY">
+            <summary>
+            Yuan Renminbi
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.COP">
+            <summary>
+            Colombian Peso
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.COU">
+            <summary>
+            Unidad de Valor Real
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CRC">
+            <summary>
+            Costa Rican Colon
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CUC">
+            <summary>
+            Peso Convertible
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CUP">
+            <summary>
+            Cuban Peso
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CVE">
+            <summary>
+            Cape Verde Escudo
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.CZK">
+            <summary>
+            Czech Koruna
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.DJF">
+            <summary>
+            Djibouti Franc
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.DKK">
+            <summary>
+            Danish Krone
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.DOP">
+            <summary>
+            Dominican Peso
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.DZD">
+            <summary>
+            Algerian Dinar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.EEK">
+            <summary>
+            Estonian Kroon
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.EGP">
+            <summary>
+            Egyptian Pound
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ERN">
+            <summary>
+            Nakfa
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ETB">
+            <summary>
+            Ethiopian Birr
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.EUR">
+            <summary>
+            Euro
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.FJD">
+            <summary>
+            Fiji Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.FKP">
+            <summary>
+            Falkland Islands Pound
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.GBP">
+            <summary>
+            Pound Sterling
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.GEL">
+            <summary>
+            Lari
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.GHS">
+            <summary>
+            Ghana Cedi
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.GIP">
+            <summary>
+            Gibraltar Pound
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.GMD">
+            <summary>
+            Dalasi
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.GNF">
+            <summary>
+            Guinean Franc
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.GTQ">
+            <summary>
+            Quetzal
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.GYD">
+            <summary>
+            Guyana Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.HKD">
+            <summary>
+            Hong Kong Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.HNL">
+            <summary>
+            Lempira
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.HRK">
+            <summary>
+            Croatian Kuna
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.HTG">
+            <summary>
+            Gourde
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.HUF">
+            <summary>
+            Forint
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.IDR">
+            <summary>
+            Rupiah
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ILS">
+            <summary>
+            New Israeli Sheqel
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.INR">
+            <summary>
+            Indian Rupee
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.IQD">
+            <summary>
+            Iraqi Dinar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.IRR">
+            <summary>
+            Iranian Rial
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ISK">
+            <summary>
+            Iceland Krona
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.JMD">
+            <summary>
+            Jamaican Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.JOD">
+            <summary>
+            Jordanian Dinar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.JPY">
+            <summary>
+            Yen
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.KES">
+            <summary>
+            Kenyan Shilling
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.KGS">
+            <summary>
+            Som
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.KMF">
+            <summary>
+            Comorian Franc
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.KHR">
+            <summary>
+            Riel
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.KPW">
+            <summary>
+            North Korean Won
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.KRW">
+            <summary>
+            Won
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.KWD">
+            <summary>
+            Kuwaiti Dinar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.KYD">
+            <summary>
+            Cayman Islands Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.KZT">
+            <summary>
+            Tenge
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.LAK">
+            <summary>
+            Lao Kip
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.LBP">
+            <summary>
+            Lebanese Pound
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.LKR">
+            <summary>
+            Sri Lanka Rupee
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.LRD">
+            <summary>
+            Liberian Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.LSL">
+            <summary>
+            Loti
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.LTL">
+            <summary>
+            Lithuanian Litas
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.LVL">
+            <summary>
+            Latvian Lats
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.LYD">
+            <summary>
+            Libyan Dinar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MAD">
+            <summary>
+            Moroccan Dirham
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MDL">
+            <summary>
+            Moldovan Leu
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MGA">
+            <summary>
+            Malagasy Ariary
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MKD">
+            <summary>
+            Denar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MMK">
+            <summary>
+            Kyat
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MNT">
+            <summary>
+            Tugrik
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MOP">
+            <summary>
+            Pataca
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MRO">
+            <summary>
+            Ouguiya
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MRU">
+            <summary>
+            Ouguiya
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MUR">
+            <summary>
+            Mauritius Rupee
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MVR">
+            <summary>
+            Rufiyaa
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MWK">
+            <summary>
+            Kwacha
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MXN">
+            <summary>
+            Mexican Peso
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MXV">
+            <summary>
+            Mexican Unidad de Inversion (UDI)
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MYR">
+            <summary>
+            Malaysian Ringgit
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.MZN">
+            <summary>
+            Mozambique Metical
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.NAD">
+            <summary>
+            Namibia Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.NGN">
+            <summary>
+            Naira
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.NIO">
+            <summary>
+            Cordoba Oro
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.NOK">
+            <summary>
+            Norwegian Krone
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.NPR">
+            <summary>
+            Nepalese Rupee
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.NZD">
+            <summary>
+            New Zealand Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.OMR">
+            <summary>
+            Rial Omani
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.PAB">
+            <summary>
+            Balboa
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.PEN">
+            <summary>
+            Nuevo Sol
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.PGK">
+            <summary>
+            Kina
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.PHP">
+            <summary>
+            Philippine Peso
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.PKR">
+            <summary>
+            Pakistan Rupee
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.PLN">
+            <summary>
+            Zloty
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.PYG">
+            <summary>
+            Guarani
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.QAR">
+            <summary>
+            Qatari Rial
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.RON">
+            <summary>
+            New Romanian Leu
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.RSD">
+            <summary>
+            Serbian Dinar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.RUB">
+            <summary>
+            Russian Ruble
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.RWF">
+            <summary>
+            Rwanda Franc
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SAR">
+            <summary>
+            Saudi Riyal
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SBD">
+            <summary>
+            Solomon Islands Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SCR">
+            <summary>
+            Seychelles Rupee
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SDG">
+            <summary>
+            Sudanese Pound
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SEK">
+            <summary>
+            Swedish Krona
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SGD">
+            <summary>
+            Singapore Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SHP">
+            <summary>
+            Saint Helena Pound
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SLL">
+            <summary>
+            Leone
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SOS">
+            <summary>
+            Somali Shilling
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SRD">
+            <summary>
+            Surinam Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SSP">
+            <summary>
+            South Sudanese Pound
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.STD">
+            <summary>
+            Dobra
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.STN">
+            <summary>
+            Dobra
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SVC">
+            <summary>
+            El Salvador Colon
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SYP">
+            <summary>
+            Syrian Pound
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.SZL">
+            <summary>
+            Lilangeni
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.THB">
+            <summary>
+            Baht
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.TJS">
+            <summary>
+            Somoni
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.TMT">
+            <summary>
+            Turkmenistan New Manat
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.TND">
+            <summary>
+            Tunisian Dinar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.TOP">
+            <summary>
+            Paʻanga
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.TRY">
+            <summary>
+            Turkish Lira
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.TTD">
+            <summary>
+            Trinidad and Tobago Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.TWD">
+            <summary>
+            New Taiwan Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.TZS">
+            <summary>
+            Tanzanian Shilling
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.UAH">
+            <summary>
+            Hryvnia
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.UGX">
+            <summary>
+            Uganda Shilling
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.USD">
+            <summary>
+            US Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.USN">
+            <summary>
+            US Dollar (Next day)
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.USS">
+            <summary>
+            US Dollar (Same day)
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.UYI">
+            <summary>
+            >Uruguay Peso en Unidades Indexadas (UI)
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.UYU">
+            <summary>
+            Peso Uruguayo
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.UYW">
+            <summary>
+            Unidad Previsional
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.UZS">
+            <summary>
+            Uzbekistan Sum
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.VEF">
+            <summary>
+            Bolivar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.VES">
+            <summary>
+            Bolívar Soberano
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.VND">
+            <summary>
+            Dong
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.VUV">
+            <summary>
+            Vatu
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.WST">
+            <summary>
+            Tala
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XAF">
+            <summary>
+            CFA Franc BEAC
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XAG">
+            <summary>
+            Silver
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XAU">
+            <summary>
+            Gold
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XBA">
+            <summary>
+            European Composite Unit (EURCO)
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XBB">
+            <summary>
+            European Monetary Unit (E.M.U.-6)
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XBC">
+            <summary>
+            European Unit of Account 9(E.U.A.-9)
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XBD">
+            <summary>
+            European Unit of Account 17(E.U.A.-17)
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XCD">
+            <summary>
+            East Caribbean Dollar
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XDR">
+            <summary>
+            SDR (Special Drawing Right)
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XOF">
+            <summary>
+            CFA Franc BCEAO
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XPD">
+            <summary>
+            Palladium
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XPF">
+            <summary>
+            CFP Franc
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XPT">
+            <summary>
+            Platinum
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XSU">
+            <summary>
+            Sucre
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XTS">
+            <summary>
+            Test currency
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XUA">
+            <summary>
+            ADB Unit of Account
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.XXX">
+            <summary>
+            No currency
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.YER">
+            <summary>
+            Yemeni Rial
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ZAR">
+            <summary>
+            Rand
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ZMK">
+            <summary>
+            Zambian Kwacha
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ZMW">
+            <summary>
+            Zambian Kwacha
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.CurrencyCode.ZWL">
+            <summary>
+            Zimbabwe Dollar
+            </summary>
+        </member>
+        <member name="T:Saladpuk.Contracts.EMVCo.EMVCoCodeConventions">
+            <summary>
+            รหัสมาตรฐานของ EMVCo
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.EMVCoCodeConventions.Dynamic">
+            <summary>
+            QR ประเภทจ่ายเงินได้เพียงครั้งเดียวแล้วทิ้ง
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.EMVCoCodeConventions.Static">
+            <summary>
+            QR ประเภทใช้ซ้ำได้หลายครั้ง
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.EMVCoCodeConventions.MerchantIdRange">
+            <summary>
+            Reserved for Identifies the merchant (02~51).
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.EMVCoCodeConventions.RFUIdRange">
+            <summary>
+            Reserved for Future Use (65~79).
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.EMVCoCodeConventions.MinSegmentLength">
+            <summary>
+            ความยาวขั้นต่ำของ QR data object
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.EMVCoCodeConventions.CRCDigits">
+            <summary>
+            ความยาวของค่า CRC
+            </summary>
+        </member>
+        <member name="T:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1">
+            <summary>
+            มาตรฐานตัวสร้าง QR ตามมาตรฐาน EMVCo
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1.Add(System.String)">
+            <summary>
+            เพิ่มข้อมูลดิบ
+            </summary>
+            <param name="rawData"></param>
+        </member>
+        <member name="M:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1.Add(Saladpuk.Contracts.EMVCo.QrIdentifier,System.String)">
+            <summary>
+            เพิ่มข้อมูลตามประเภทของข้อมูล
+            </summary>
+            <param name="identifier">ประเภทข้อมูล</param>
+            <param name="data">ข้อมูล</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1.SetStaticQR">
+            <summary>
+            กำหนดให้เป็น QR ประเภทใช้ซ้ำได้หลายครั้ง
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1.SetDynamicQR">
+            <summary>
+            กำหนดให้เป็น QR ประเภทจ่ายเงินได้เพียงครั้งเดียวแล้วทิ้ง
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1.SetTransactionAmount(System.Double)">
+            <summary>
+            กำหนดจำนวนเงินที่จะเรียกเก็บ
+            </summary>
+            <param name="amount">จำนวนเงินที่จะเรียกเก็บ</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1.SetCountryCode(System.String)">
+            <summary>
+            กำหนดรหัสประเทศของร้านค้า (ตามมาตรฐาน ISO 3166)
+            </summary>
+            <param name="code">รหัสประเทศ</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1.SetCurrencyCode(Saladpuk.Contracts.CurrencyCode)">
+            <summary>
+            กำหนดรหัสสกุลเงินที่ใช้ในการทำธุรกรรม (ตามมาตรฐาน ISO 4217)
+            </summary>
+            <param name="code">รหัสสกุลเงินที่ใช้ในการทำธุรกรรม</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1.SetPayloadFormatIndicator(System.String)">
+            <summary>
+            กำหนดเวอร์ชั่นของการทำธุรกรรม
+            </summary>
+            <param name="version">เวอร์ชั่น</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.EMVCo.IEMVCoBuilder`1.SetCyclicRedundancyCheck(Saladpuk.Contracts.ICyclicRedundancyCheck)">
+            <summary>
+            กำหนดการตรวจสอบความถูกต้องของข้อมูล
+            </summary>
+            <param name="crc">ตัวตรวจสอบความถูกต้องของข้อมูล</param>
+        </member>
+        <member name="T:Saladpuk.Contracts.EMVCo.QrIdentifier">
+            <summary>
+            ประเภทข้อมูล
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.PayloadFormatIndicator">
+            <summary>
+            Version of the QR Code template.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.PointOfInitiationMethod">
+            <summary>
+            Identifies the communication technology and whether the data is static or dynamic.
+            </summary>
+            <remarks>
+            The value of "11" is used when the same QR Code is shown for more than one transaction.
+            The value of "12" is used when a new QR Code is shown for each transaction.
+            </remarks>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.MerchantAccountInformation">
+            <summary>
+            Identifies the merchant (02~51).
+            </summary>
+            <remarks>
+            02-03 are Reserved for Visa.
+            04-05 are Reserved for Mastercard
+            06-08 are Reserved by EMVCo
+            09-10 are Reserved for Discover
+            11-12 are Reserved for Amex
+            13-14 are Reserved for JCB
+            15-16 are Reserved for UnionPay
+            17-25 are Reserved by EMVCo
+            26-51 are Templates reserved for additional payment networks.
+            </remarks>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.MerchantCategoryCode">
+            <summary>
+            The Merchant Category Code (MCC) shall contain an MCC as defined by [ISO18245].
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.TransactionCurrency">
+            <summary>
+            Indicates the currency code of the transaction.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.TransactionAmount">
+            <summary>
+            The transaction amount, if known. If present, this value is displayed to the consumer
+            by the mobile application when processing the transaction.
+            If this data object is not present, the consumer is prompted to input the transaction
+            amount to be paid to the merchant.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.TipOrConvenienceIndicator">
+            <summary>
+            Indicates whether the consumer will be prompted to enter a tip or whether
+            the merchant has determined that a flat, or percentage convenience fee is charged.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.ValueOfConvenienceFeeFixed">
+            <summary>
+            The fixed amount convenience fee.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.ValueOfConvenienceFeePercentage">
+            <summary>
+            The percentage convenience fee.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.CountryCode">
+            <summary>
+            The Country Code shall contain a value as defined by [ISO 3166-1 alpha 2].
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.MerchantName">
+            <summary>
+            The Merchant Name shall be present.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.MerchantCity">
+            <summary>
+            The Merchant City shall be present.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.PostalCode">
+            <summary>
+            If present, the Postal Code should indicate the postal code of the merchant’s
+            physical location. Depending on the country, the Postal code is the Zip code or
+            PIN code or Postal code of the merchant.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.CRC">
+            <summary>
+            Checksum calculated over all the data objects included in the QR Code.
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.MerchantInformationLanguageTemplate">
+            <summary>
+            The Merchant Information—Language Template includes merchant information in an alternate
+            language and may use a character set different from the Common Character Set.
+            It provides an alternative to the merchant information under the root. 
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.EMVCo.QrIdentifier.RFU">
+            <summary>
+            Reserved for Future Use (65~79).
+            </summary>
+        </member>
+        <member name="T:Saladpuk.Contracts.ICyclicRedundancyCheck">
+            <summary>
+            มาตรฐานตัวตรวจสอบความถูกต้องตามมาตรฐาน ISO / IEC 13239
+            </summary>
+            <remarks>
+            The checksum shall be calculated according to[ISO / IEC 13239] using the
+            polynomial '1021' (hex) and initial value 'FFFF' (hex). The data over which the
+            checksum is calculated shall cover all data objects, including their ID, Length and
+            Value, to be included in the QR Code, in their respective order, as well as the ID
+            and Length of the CRC itself(but excluding its Value).
+            Following the calculation of the checksum, the resulting 2-byte hexadecimal value
+            shall be encoded as a 4-character Alphanumeric Special value by converting each
+            nibble to an Alphanumeric Special character.
+            </remarks>
+            <example>
+            A CRC with a two-byte hexadecimal value of '007B' is included in the
+            QR Code as "6304007B"
+            </example>
+        </member>
+        <member name="M:Saladpuk.Contracts.ICyclicRedundancyCheck.ComputeChecksum(System.String)">
+            <summary>
+            สร้างรหัสเช็คความถูกต้องของข้อมูล
+            </summary>
+            <param name="data">ข้อมูลที่ต้องการนำไปสร้างรหัส</param>
+        </member>
+        <member name="T:Saladpuk.Contracts.IQrDataObject">
+            <summary>
+            มาตรฐานตัวเก็บข้อมูล QR Data Object
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrDataObject.RawValue">
+            <summary>
+            ข้อมูลดิบ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrDataObject.Id">
+            <summary>
+            รหัสประเภทข้อมูลที่อ่านจากข้อมูลดิบ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrDataObject.Length">
+            <summary>
+            ความยาวของข้อมูลที่อ่านจากข้อมูลดิบ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrDataObject.Value">
+            <summary>
+            ข้อมูลที่อ่านจากข้อมูลดิบ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrDataObject.IdByConvention">
+            <summary>
+            รหัสประเภทข้อมูลตามมาตรฐาน
+            </summary>
+        </member>
+        <member name="T:Saladpuk.Contracts.IQrInfo">
+            <summary>
+            มาตรฐานรายละเอียดของ QR
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.Segments">
+            <summary>
+            ส่วนประกอบทั้งหมดของ QR code
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.PayloadFormatIndicator">
+            <summary>
+            เวอร์ชั่นของการทำธุรกรรม
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.PointOfInitiationMethod">
+            <summary>
+            รหัสรูปแบบของการทำธุรกรรม
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.MerchantAccountInformation">
+            <summary>
+            รหัสรายละเอียดข้อมูลของ Merchant
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.MerchantCategoryCode">
+            <summary>
+            รหัสหมวดของ Merchant ตามมาตรฐาน ISO 18245
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.TransactionCurrency">
+            <summary>
+            รหัสสกุลเงินที่ใช้ในการทำธุรกรรม
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.TransactionAmount">
+            <summary>
+            กำหนดจำนวนเงินที่จะเรียกเก็บ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.TipOrConvenienceIndicator">
+            <summary>
+            ทิปที่ฝั่งจ่ายเงินพอใจจะมอบให้
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.ValueOfConvenienceFeeFixed">
+            <summary>
+            ค่าธรรมเนียมที่ถูกเรียกเก็บแบบตายตัว
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.ValueOfConvenienceFeePercentage">
+            <summary>
+            ค่าธรรมเนียมที่ถูกเรียกเก็บแบบเป็นเปอร์เซ็นต์
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.CountryCode">
+            <summary>
+            รหัสประเทศของร้านค้า (ตามมาตรฐาน ISO 3166)
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.MerchantName">
+            <summary>
+            ชื่อ Merchant
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.MerchantCity">
+            <summary>
+            รหัสเมืองที่ตั้งของ Merchant
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.PostalCode">
+            <summary>
+            รหัสไปรษณีย์ของ Merchant
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.AdditionalData">
+            <summary>
+            รหัสรายละเอียดเพิ่มเติมอื่นๆ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.CRC">
+            <summary>
+            รหัสในการตรวจสอบความถูกต้องของข้อมูล
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.MerchantInformationLanguageTemplate">
+            <summary>
+            รายละเอียดเพิ่มเติมต่างๆของ Merchant
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.IQrInfo.RFU">
+            <summary>
+            รหัสข้อมูลอื่นๆ
+            </summary>
+        </member>
+        <member name="T:Saladpuk.Contracts.IQrReader">
+            <summary>
+            มาตรฐานในการอ่านข้อมูลจาก QR code
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.IQrReader.Read(System.String)">
+            <summary>
+            แปลความหมายของข้อความให้เป็ QR code
+            </summary>
+            <param name="code">รหัส QR code ที่ต้องการอ่าน</param>
+            <returns>รายละเอียดของ QR</returns>
+        </member>
+        <member name="T:Saladpuk.Contracts.PromptPay.IPromptPayBuilder">
+            <summary>
+            มาตรฐานตัวสร้าง QR PromptPay
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.CreateCreditTransferQrCode">
+            <summary>
+            สร้างรหัส QR สำหรับโอนเงินผ่านบริการพร้อมเพย
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.CreateCreditTransferQrCode(Saladpuk.Contracts.PromptPay.Models.CreditTransfer)">
+            <summary>
+            สร้างรหัส QR สำหรับโอนเงินผ่านบริการพร้อมเพย
+            </summary>
+            <param name="transfer">ข้อมูลการโอนเงินผ่านบริการพร้อมเพย</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.MobileNumber(System.String)">
+            <summary>
+            กำหนดเบอร์มือถือของผู้รับเงิน (Credit Transfer)
+            </summary>
+            <param name="value">เบอร์มือถือของผู้รับเงิน</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.EWallet(System.String)">
+            <summary>
+            กำหนดรหัสกระเป๋าเงินอิเล็กทรอนิกส์ (Credit Transfer)
+            </summary>
+            <param name="value">รหัสกระเป๋าเงินอิเล็กทรอนิกส์</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.BankAccount(System.String)">
+            <summary>
+            กำหนดรหัสบัญชีธนาคารผู้รับเงิน (Credit Transfer)
+            </summary>
+            <param name="value">รหัสบัญชีธนาคารผู้รับเงิน</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.OTA(System.String)">
+            <summary>
+            กำหนดค่า OTA (Credit Transfer)
+            </summary>
+            <param name="value">ค่า OTA</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.MerchantPresentedQR">
+            <summary>
+            กำหนดให้เป็นรูปแบบร้านเป็นผู้แสดง QR ให้ลูกค้าสแกน (Credit Transfer)
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.CustomerPresentedQR">
+            <summary>
+            กำหนดให้เป็นรูปแบบลูกค้าเป็นผู้แสดง QR Code ให้ร้านค้าสแกน (Credit Transfer)
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.GetBillPaymentQrCode">
+            <summary>
+            สร้างรหัส QR ขอเรียกเก็บเงินสำหรับผู้ประกอบการ
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.GetBillPaymentQrCode(Saladpuk.Contracts.PromptPay.Models.BillPayment)">
+            <summary>
+            สร้างรหัส QR ขอเรียกเก็บเงินสำหรับผู้ประกอบการ
+            </summary>
+            <param name="payment">ข้อมูลการขอเรียกเก็บเงินสำหรับผู้ประกอบการ</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.BillerSuffix(System.String)">
+            <summary>
+            กำหนดเลขผู้ให้บริการที่เป็นตัวแทนในการรับชำระเงิน (Bill Payment)
+            </summary>
+            <param name="value">เลขผู้ให้บริการที่เป็นตัวแทนในการรับชำระเงิน</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.BillRef1(System.String)">
+            <summary>
+            กำหนดรหัสอ้างอิง 1 (Bill Payment)
+            </summary>
+            <param name="value">รหัสอ้างอิง 1</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.BillRef2(System.String)">
+            <summary>
+            กำหนดรหัสอ้างอิง 2 (Bill Payment)
+            </summary>
+            <param name="value">รหัสอ้างอิง 2</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.DomesticMerchant">
+            <summary>
+            กำหนดให้เป็นการใช้ภายในประเทศ (Bill Payment)
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.CrossBorderMerchant">
+            <summary>
+            กำหนดให้เป็นการใช้ข้ามประเทศ (Bill Payment)
+            </summary>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.NationalId(System.String)">
+            <summary>
+            กำหนดรหัสประจำตัวประชาชน หรือ เลขทะเบียนนิติบุคคล
+            </summary>
+            <param name="value">รหัสประจำตัวประชาชน หรือ เลขทะเบียนนิติบุคคล</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.TaxId(System.String)">
+            <summary>
+            กำหนดเลขประจำตัวผู้เสียภาษี หรือ เลขประจำตัวผู้เสียภาษีของร้านค้า
+            </summary>
+            <param name="value">เลขประจำตัวผู้เสียภาษี หรือ เลขประจำตัวผู้เสียภาษีของร้านค้า</param>
+        </member>
+        <member name="M:Saladpuk.Contracts.PromptPay.IPromptPayBuilder.Amount(System.Double)">
+            <summary>
+            จำนวนเงินที่จะเรียกเก็บ
+            </summary>
+            <param name="amount">จำนวนเงิน</param>
+        </member>
+        <member name="T:Saladpuk.Contracts.PromptPay.Models.BillPayment">
+            <summary>
+            ข้อมูลการขอเรียกเก็บเงินสำหรับผู้ประกอบการ
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.BillPayment.AID">
+            <summary>
+            ถ้าเป็นการใช้ภายในประเทศจะมีค่าเป็น "A000000677010112"
+            ถ้าเป็นการใช้ข้ามประเทศจะมีค่าเป็น "A000000677012006"
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.BillPayment.BillerId">
+            <summary>
+            เลขทะเบียนนิติบุคคล หรือ เลขประจำตัวผู้เสียภาษีของร้านค้า
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.BillPayment.Suffix">
+            <summary>
+            เลขผู้ให้บริการที่เป็นตัวแทนในการรับชำระเงิน
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.BillPayment.Reference1">
+            <summary>
+            รหัสอ้างอิง 1
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.BillPayment.Reference2">
+            <summary>
+            รหัสอ้างอิง 2
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.BillPayment.DomesticMerchant">
+            <summary>
+            เป็นการใช้ภายในประเทศหรือไม่ ?
+            </summary>
+        </member>
+        <member name="T:Saladpuk.Contracts.PromptPay.Models.CreditTransfer">
+            <summary>
+            ข้อมูลการโอนเงินผ่านบริการพร้อมเพย
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.CreditTransfer.AID">
+            <summary>
+            ถ้าเป็นรูปแบบร้านเป็นผู้แสดง QR ให้ลูกค้าสแกนจะมีค่าเป็น "A000000677010111"
+            ถ้าเป็นรูปแบบลูกค้าเป็นผู้แสดง QR Code ให้ร้านค้าสแกนจะมีค่าเป็น "A000000677010114"
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.CreditTransfer.MobileNumber">
+            <summary>
+            เบอร์มือถือของผู้รับเงิน
+            </summary>
+            <remarks>
+            ต้องเป็นรหัสตามรูปแบบนี้ 0066XXXXXXXXX
+            </remarks>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.CreditTransfer.NationalIdOrTaxId">
+            <summary>
+            รหัสประจำตัวประชาชน หรือ เลขประจำตัวผู้เสียภาษี
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.CreditTransfer.EWalletId">
+            <summary>
+            รหัสกระเป๋าเงินอิเล็กทรอนิกส์
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.CreditTransfer.BankAccount">
+            <summary>
+            รหัสบัญชีธนาคารผู้รับเงิน
+            </summary>
+            <remarks>
+            Bank code(3 digit) + account no.
+            </remarks>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.CreditTransfer.OTA">
+            <summary>
+            ถ้าเป็น QR รูปแบบร้านค้าเป็นผู้แสดง QR ให้ลูกค้าสแกน ต้องกำหนดค่านี้ด้วย
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.CreditTransfer.MerchantPresentedQR">
+            <summary>
+            เป็นรูปแบบร้านเป็นผู้แสดง QR ให้ลูกค้าสแกนหรือไม่?
+            </summary>
+        </member>
+        <member name="T:Saladpuk.Contracts.PromptPay.Models.SellerVat">
+            <summary>
+            ข้อมูลภาษี
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.SellerVat.SellerTaxBranchId">
+            <summary>
+            รหัสอ้างอิงตามระบบ ITMX
+            </summary>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.SellerVat.VATRate">
+            <summary>
+            ภาษีที่เรียกเก็บในรูปแบบเปอร์เซ็นต์ (ต้องระบุทศนิยม 2 ตำแหน่งเสมอ)
+            </summary>
+            <remarks>
+            ภาษี 10% จะต้องกำหนดเป็น "10.00"
+            กรณีที่ไม่มีทศนิยมถือว่าไม่ถูกรูปแบบ เช่น "10"
+            </remarks>
+        </member>
+        <member name="P:Saladpuk.Contracts.PromptPay.Models.SellerVat.VATAmount">
+            <summary>
+            มูลค่าภาษีที่แสดงอยู่บนใบเรียกเก็บ
+            </summary>
+        </member>
+        <member name="T:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions">
+            <summary>
+            รหัสและแท๊กมาตรฐานของ PromptPay
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.AIDTag">
+            <summary>
+            แท๊ก AID
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.CreditTransferTag">
+            <summary>
+            แท๊กการโอนเงินผ่านบริการพร้อมเพย
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.MobileTag">
+            <summary>
+            แท๊กเบอร์มือถือของผู้รับเงิน
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.NationalIdOrTaxIdTag">
+            <summary>
+            แท๊กรหัสประจำตัวประชาชน หรือ เลขประจำตัวผู้เสียภาษี
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.EWalletTag">
+            <summary>
+            แท๊กรหัสกระเป๋าเงินอิเล็กทรอนิกส์
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.BankAccountTag">
+            <summary>
+            แท๊กรหัสบัญชีธนาคารผู้รับเงิน
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.OTATag">
+            <summary>
+            แท๊ก OTA
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.MerchantPresented">
+            <summary>
+            รูปแบบร้านเป็นผู้แสดง QR ให้ลูกค้าสแกน
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.CustomerPresented">
+            <summary>
+            รูปแบบลูกค้าเป็นผู้แสดง QR Code ให้ร้านค้าสแกน
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.BillPaymentTag">
+            <summary>
+            แท๊กการเรียกเก็บเงินสำหรับผู้ประกอบการ
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.BillderIdTag">
+            <summary>
+            แท๊กเลขทะเบียนนิติบุคคล หรือ เลขประจำตัวผู้เสียภาษีของร้านค้า
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.Reference1Tag">
+            <summary>
+            แท๊กรหัสอ้างอิง 1
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.Reference2Tag">
+            <summary>
+            แท๊กรหัสอ้างอิง 2
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.DomesticMerchant">
+            <summary>
+            เป็นการใช้ภายในประเทศ
+            </summary>
+        </member>
+        <member name="F:Saladpuk.Contracts.PromptPay.PromptPayCodeConventions.CrossBorderMerchant">
+            <summary>
+            การใช้ข้ามประเทศ
+            </summary>
+        </member>
+    </members>
+</doc>

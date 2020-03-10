@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Saladpuk.PromptPay</name>
+    </assembly>
+    <members>
+        <member name="T:Saladpuk.PromptPay.Facades.PPay">
+            <summary>
+            พร้อมเพย์
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Facades.PPay.StaticQR">
+            <summary>
+            สร้าง QR ที่ใช้ซ้ำได้หลายครั้ง
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Facades.PPay.DynamicQR">
+            <summary>
+            สร้าง QR ที่ใช้จ่ายเงินได้เพียงครั้งเดียวแล้วทิ้ง
+            </summary>
+        </member>
+        <member name="P:Saladpuk.PromptPay.Facades.PPay.Reader">
+            <summary>
+            ตัวอ่าน QR
+            </summary>
+        </member>
+    </members>
+</doc>

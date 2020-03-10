@@ -5,7 +5,7 @@ using Saladpuk.PromptPay.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ppay = Saladpuk.Contracts.PromptPay.PromptPayValues;
+using ppay = Saladpuk.Contracts.PromptPay.PromptPayCodeConventions;
 
 namespace Saladpuk.PromptPay
 {
@@ -47,7 +47,7 @@ namespace Saladpuk.PromptPay
 
         private BillPayment getBillPayment()
         {
-            var segments = extractSegment(ppay.BillPaymentTagId);
+            var segments = extractSegment(ppay.BillPaymentTag);
             if (!segments.Any())
             {
                 return null;
@@ -58,18 +58,18 @@ namespace Saladpuk.PromptPay
             {
                 switch (item.Id)
                 {
-                    case ppay.AID:
+                    case ppay.AIDTag:
                         result.DomesticMerchant = item.Value == ppay.DomesticMerchant;
                         break;
-                    case ppay.BillderId:
+                    case ppay.BillderIdTag:
                         const int SuffixLength = 2;
-                        result.NationalIdOrTaxId = item.Value.Substring(0, item.Value.Length - SuffixLength);
+                        result.BillerId = item.Value.Substring(0, item.Value.Length - SuffixLength);
                         result.Suffix = item.Value.Substring(item.Value.Length - SuffixLength);
                         break;
-                    case ppay.Reference1:
+                    case ppay.Reference1Tag:
                         result.Reference1 = item.Value;
                         break;
-                    case ppay.Reference2:
+                    case ppay.Reference2Tag:
                         result.Reference2 = item.Value;
                         break;
                     default: break;
@@ -79,7 +79,7 @@ namespace Saladpuk.PromptPay
         }
         private CreditTransfer getCreditTransfer()
         {
-            var segments = extractSegment(ppay.CreditTransferTagId);
+            var segments = extractSegment(ppay.CreditTransferTag);
             if (!segments.Any())
             {
                 return null;
@@ -90,20 +90,20 @@ namespace Saladpuk.PromptPay
             {
                 switch (item.Id)
                 {
-                    case ppay.AID:
+                    case ppay.AIDTag:
                         result.MerchantPresentedQR = item.Value == ppay.MerchantPresented;
                         break;
-                    case ppay.MobileId:
+                    case ppay.MobileTag:
                         const int SkipTagId = 2;
                         result.MobileNumber = item.Value.Substring(SkipTagId);
                         break;
-                    case ppay.NationalOrTaxId:
+                    case ppay.NationalIdOrTaxIdTag:
                         result.NationalIdOrTaxId = item.Value;
                         break;
-                    case ppay.EWalletId:
+                    case ppay.EWalletTag:
                         result.EWalletId = item.Value;
                         break;
-                    case ppay.OTAId:
+                    case ppay.OTATag:
                         result.OTA = item.Value;
                         break;
                     default: break;
@@ -113,7 +113,7 @@ namespace Saladpuk.PromptPay
         }
         private IEnumerable<IQrDataObject> extractSegment(string specificTagId)
         {
-            var merchant = segments.LastOrDefault(it => it.Identifier == QrIdentifier.MerchantAccountInformation);
+            var merchant = segments.LastOrDefault(it => it.IdByConvention == QrIdentifier.MerchantAccountInformation);
             var shouldSkip = merchant == null || merchant.Id != specificTagId;
             if (shouldSkip)
             {

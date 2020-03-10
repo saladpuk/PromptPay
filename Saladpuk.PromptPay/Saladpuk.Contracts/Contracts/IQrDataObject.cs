@@ -2,25 +2,34 @@
 
 namespace Saladpuk.Contracts
 {
+    /// <summary>
+    /// มาตรฐานตัวเก็บข้อมูล QR Data Object
+    /// </summary>
     public interface IQrDataObject
     {
+        /// <summary>
+        /// ข้อมูลดิบ
+        /// </summary>
         string RawValue { get; }
 
         /// <summary>
-        /// The ID is coded as a two-digit numeric value, with a value ranging from "00" to "99".
+        /// รหัสประเภทข้อมูลที่อ่านจากข้อมูลดิบ
         /// </summary>
         string Id { get; }
 
         /// <summary>
-        /// The length is coded as a two-digit numeric value, with a value ranging from "01" to "99".
+        /// ความยาวของข้อมูลที่อ่านจากข้อมูลดิบ
         /// </summary>
         string Length { get; }
 
         /// <summary>
-        /// The value field has a minimum length of one character and maximum length of 99 characters.
+        /// ข้อมูลที่อ่านจากข้อมูลดิบ
         /// </summary>
         string Value { get; }
 
-        QrIdentifier Identifier { get; }
+        /// <summary>
+        /// รหัสประเภทข้อมูลตามมาตรฐาน
+        /// </summary>
+        QrIdentifier IdByConvention { get; }
     }
 }

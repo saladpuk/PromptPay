@@ -1,5 +1,8 @@
 ﻿namespace Saladpuk.Contracts
 {
+    /// <summary>
+    /// รหัสสกุลเงินที่ใช้ในการทำธุรกรรมตามมาตรฐาน ISO 4217
+    /// </summary>
     public enum CurrencyCode
     {
         ///<summary>

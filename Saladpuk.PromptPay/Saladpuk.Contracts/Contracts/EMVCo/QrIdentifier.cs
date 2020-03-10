@@ -1,5 +1,8 @@
 ﻿namespace Saladpuk.Contracts.EMVCo
 {
+    /// <summary>
+    /// ประเภทข้อมูล
+    /// </summary>
     public enum QrIdentifier
     {
         /// <summary>
@@ -80,6 +83,11 @@
         /// Checksum calculated over all the data objects included in the QR Code.
         /// </summary>
         CRC = 63,
+        /// <summary>
+        /// The Merchant Information—Language Template includes merchant information in an alternate
+        /// language and may use a character set different from the Common Character Set.
+        /// It provides an alternative to the merchant information under the root. 
+        /// </summary>
         MerchantInformationLanguageTemplate = 64,
         /// <summary>
         /// Reserved for Future Use (65~79).

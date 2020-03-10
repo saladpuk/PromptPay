@@ -15,13 +15,13 @@ namespace Saladpuk.PromptPay.App
                 .BillRef1("ref1")
                 .BillRef2("ref2")
                 .Amount(50)
-                .GetBillPaymentQR();
+                .GetBillPaymentQrCode();
             Console.WriteLine($"Bill Payment: {billPaymentQR}");
 
-            var creditTransferQR = PPay.StaticQR
+            var creditTransferQR = PPay.DynamicQR
                 .MobileNumber("0914185401")
                 .Amount(50)
-                .GetCreditTransferQR();
+                .CreateCreditTransferQrCode();
             Console.WriteLine($"Credit Transfer: {creditTransferQR}");
 
             // QR Reader

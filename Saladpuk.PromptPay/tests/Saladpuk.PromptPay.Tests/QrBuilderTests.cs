@@ -37,6 +37,13 @@ namespace Saladpuk.PromptPay.Tests
 
         // TODO: Test cases
         // The Payload Format Indicator (ID "00") shall be the first data object in the QR Code.
-        // The CRC (ID "63") shall be the last data object in the QR Code. (All other data objects under the root may be placed at any position.
+        // The CRC (ID "63") shall be the last data object in the QR Code. All other data objects under the root may be placed at any position.
+        // The length of the payload should not exceed 512 alphanumeric characters.
+
+        // PayloadFormatIndicator, MerchantAccountInformation, MerchantCategoryCode, TransactionCurrency, CountryCode and MerchantName shall be present under the root of the QR Code.
+        // If MerchantInformationLanguage Template (ID "64") is present, then the data objects that are labelled[M] in Table 3.8 shall be present in the template.
+        // If the Additional Data Field Template(ID "62") is present, then the data objects that are labelled[O] in Table 3.7 may be present in this template.
+        // Transaction Amount shall only include (numeric) digits "0" to "9" and may contain a single "." character as the decimal mark even if there are no decimals.
+        // The Transaction Currency shall conform to [ISO 4217] and shall contain the 3-digit numeric representation of the currency.
     }
 }

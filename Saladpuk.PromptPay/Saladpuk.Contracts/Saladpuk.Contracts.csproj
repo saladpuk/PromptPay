@@ -5,4 +5,8 @@
     <RootNamespace>Saladpuk</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Z:\PromptPay22222\Saladpuk.PromptPay\Saladpuk.Contracts\Saladpuk.Contracts.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

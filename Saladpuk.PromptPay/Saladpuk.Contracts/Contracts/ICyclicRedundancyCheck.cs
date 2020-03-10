@@ -1,7 +1,7 @@
 ﻿namespace Saladpuk.Contracts
 {
     /// <summary>
-    /// Checksum calculated over all the data objects included in the QR Code.
+    /// มาตรฐานตัวตรวจสอบความถูกต้องตามมาตรฐาน ISO / IEC 13239
     /// </summary>
     /// <remarks>
     /// The checksum shall be calculated according to[ISO / IEC 13239] using the
@@ -19,6 +19,10 @@
     /// </example>
     public interface ICyclicRedundancyCheck
     {
+        /// <summary>
+        /// สร้างรหัสเช็คความถูกต้องของข้อมูล
+        /// </summary>
+        /// <param name="data">ข้อมูลที่ต้องการนำไปสร้างรหัส</param>
         string ComputeChecksum(string data);
     }
 }
