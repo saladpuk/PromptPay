@@ -6,19 +6,13 @@
 
 > ใครอยากเอาไปปู้ยี้ปู้ยำอะไรก็ตามสบาย ถ้าทำแล้วดีหรือเจอจุดผิดก็ฝาก `pull-request` เข้ามาด้วยจะเป็นประคุณมาก
 
-> โค้ดตัวนี้ใช้ .NET Standard 2.0 ดังนั้นใครใช้ .NET เวอร์ชั่นไหนก็ลองเช็คกันดูนะว่ารองรับหรือเปล่า
+> โค้ดตัวนี้ใช้ .NET Standard 2.0 นะจ๊ะ
 
-|Framework|Support version|
-|--|--|
-|.NET Core|2.0|
-|.NET Framework|4.6.1|
-|Mono|5.4|
-|Xamarin.iOS|10.14|
-|Xamarin.Mac|3.8|
-|Xamarin.Android|8.0|
-|Universal Windows Platform|10.0.16299|
-|Unity|2018.1|
-
+## การติดตั้ง
+สามารถติดตั้งผ่าน nuget ได้เลย `Saladpuk.PromptPay` หรือจะติดตั้งผ่าน .NET CLI ก็ตามสะดวกนะเจ๊ะ
+```
+dotnet add package Saladpuk.PromptPay
+```
 
 ## การใช้งาน
 QR ตามมาตรฐานของ EMVCo ได้แบ่งไว้ 2 ลักษณะการใช้งานคือ
@@ -92,6 +86,17 @@ string qr = PPay.StaticQR.BankAccount("000000000000000").Amount(50).GetCreditTra
 string qr = PPay.StaticQR.EWallet("000000000000000").Amount(50).GetCreditTransferQR();
 ```
 
+สำหรับคนที่อยากสร้าง QR โดยไม่ต้องรู้เรื่องอะไรเลยก็สามารถเรียกใช้งานแบบนี้ได้
+```csharp
+// โอนเงินพร้อมเพย์ไปที่ เลขประจำตัวประชาชน 0-0000-00000-00-0
+var qr = PPay.StaticQR
+    .CreateCreditTransferQrCode(new CreditTransfer
+    {
+        NationalIdOrTaxId = "0000000000000"
+    });
+Console.WriteLine($"Credit Transfer (PID): {creditTransferQR2}");
+```
+
 ### เพิ่มเติม
 กรณีที่เป็น QR ประเภท Merchant Presented QR สามารถกำหนดโดยเรียกใช้เมธอด `MerchantPresentedQR()`
 ```csharp
@@ -151,6 +156,20 @@ string qr = PPay.StaticQR
     .GetBillPaymentQR();
 ```
 
+สำหรับคนที่อยากสร้าง QR โดยไม่ต้องรู้เรื่องอะไรเลยก็สามารถเรียกใช้งานแบบนี้ได้
+```csharp
+// จ่ายเงินพร้อมเพย์ไปที่ เลขประจำตัวผู้เสียภาษี 0-0000-00000-00-0 รหัสร้านสาขา 99 (2 หลัก)
+// รหัสอ้างอิง 1: 1234, รหัสอ้างอิง 2: 5678 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
+var qr = PPay.DynamicQR
+    .CreateBillPaymentQrCode(new BillPayment
+    {
+        BillerId = "000000000000099",
+        Suffix = "02",
+        Reference1 = "1234",
+        Reference2 = "5678",
+    });
+```
+
 ### เพิ่มเติม
 กรณีที่เป็น QR ประเภทใช้ Domestic Merchant สามารถกำหนดโดยเรียกใช้เมธอด `DomesticMerchant()`
 ```csharp
@@ -179,43 +198,50 @@ IQrInfo model = PPay.Reader.Read(qr);
             "RawValue": "000201",
             "Id": "00",
             "Length": "02",
-            "Value": "01"
+            "Value": "01",
+            "IdByConvention": 0
         },
         {
             "RawValue": "010212",
             "Id": "01",
             "Length": "02",
-            "Value": "12"
+            "Value": "12",
+            "IdByConvention": 1
         },
         {
             "RawValue": "29370016A00000067701011101130066914185401",
             "Id": "29",
             "Length": "37",
-            "Value": "0016A00000067701011101130066914185401"
+            "Value": "0016A00000067701011101130066914185401",
+            "IdByConvention": 2
         },
         {
             "RawValue": "5303764",
             "Id": "53",
             "Length": "03",
-            "Value": "764"
+            "Value": "764",
+            "IdByConvention": 53
         },
         {
             "RawValue": "540550.00",
             "Id": "54",
             "Length": "05",
-            "Value": "50.00"
+            "Value": "50.00",
+            "IdByConvention": 54
         },
         {
             "RawValue": "5802TH",
             "Id": "58",
             "Length": "02",
-            "Value": "TH"
+            "Value": "TH",
+            "IdByConvention": 58
         },
         {
             "RawValue": "630401F8",
             "Id": "63",
             "Length": "04",
-            "Value": "01F8"
+            "Value": "01F8",
+            "IdByConvention": 63
         }
     ],
     "PayloadFormatIndicator": "01",
@@ -235,16 +261,16 @@ IQrInfo model = PPay.Reader.Read(qr);
     "CRC": "01F8",
     "MerchantInformationLanguageTemplate": null,
     "RFU": null,
-    "UnreservedTemplates": null,
     "Reusable": true,
     "Currency": "THB",
     "CreditTransfer": {
+        "AID": "A000000677010111",
         "MobileNumber": "66914185401",
         "NationalIdOrTaxId": null,
         "EWalletId": null,
         "BankAccount": null,
         "OTA": null,
-        "MerchantPresentedQR": true
+        "CustomerPresentedQR": false
     },
     "BillPayment": null
 }

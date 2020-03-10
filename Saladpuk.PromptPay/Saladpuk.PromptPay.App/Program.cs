@@ -23,12 +23,14 @@ namespace Saladpuk.PromptPay.App
                 .MobileNumber("0914185401")
                 .Amount(50)
                 .CreateCreditTransferQrCode();
-            Console.WriteLine($"Credit Transfer: {creditTransferQR}");
+            Console.WriteLine($"Credit Transfer (mobile): {creditTransferQR}");
 
-            var creditTransferQR2 = PPay.DynamicQR.CreateCreditTransferQrCode(new CreditTransfer
-            {
-                BankAccount = ""
-            });
+            var creditTransferQR2 = PPay.DynamicQR
+                .CreateCreditTransferQrCode(new CreditTransfer
+                {
+                    NationalIdOrTaxId = "1234567890123"
+                });
+            Console.WriteLine($"Credit Transfer (PID): {creditTransferQR2}");
 
             // QR Reader
             var staticMobileTransferQrCode = "00020101021229370016A000000677010111011300669141854015303764540550.005802TH630401F8";
