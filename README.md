@@ -15,8 +15,8 @@ dotnet add package Saladpuk.PromptPay
 
 ## การใช้งาน
 QR ตามมาตรฐานของ EMVCo ได้แบ่งไว้ 2 ลักษณะการใช้งานคือ
-1. Static QR - เป็น QR ที่ใช้จ่ายเงินได้หลายครั้ง
-1. Dynamic QR -เป็น QR ที่ใช้ครั้งเดียวแล้วทิ้ง
+1. **Static QR** เป็น QR ประเภทใช้จ่ายเงินได้หลายครั้ง (ใช้ซ้ำได้)
+1. **Dynamic QR** เป็น QR ประเภทจ่ายเงินได้เพียงครั้งเดียวแล้วทิ้ง (ใช้ซ้ำไม่ได้)
 
 สำหรับโค้ดในการสร้าง QR แต่ละรูปแบบก็ตามด้านล่างนี่แหละ
 ```csharp
@@ -97,12 +97,12 @@ Console.WriteLine($"Credit Transfer (PID): {creditTransferQR2}");
 ```
 
 ### เพิ่มเติม
-กรณีที่เป็น QR ประเภท Merchant Presented QR สามารถกำหนดโดยเรียกใช้เมธอด `MerchantPresentedQR()`
+กรณีที่เป็น QR ประเภท **ร้านเป็นผู้แสดง QR ให้ลูกค้าสแกน** สามารถกำหนดโดยเรียกใช้เมธอด `MerchantPresentedQR()`
 ```csharp
 string qr = PPay.StaticQR.MerchantPresentedQR().GetCreditTransferQR();
 ```
 
-กรณีที่เป็น QR ประเภท Customer Presented QR สามารถกำหนดโดยเรียกใช้เมธอด `CustomerPresentedQR()`
+กรณีที่เป็น QR ประเภท **ลูกค้าเป็นผู้แสดง QR Code ให้ร้านค้าสแกน** สามารถกำหนดโดยเรียกใช้เมธอด `CustomerPresentedQR()`
 ```csharp
 string qr = PPay.StaticQR.CustomerPresentedQR().GetCreditTransferQR();
 ```
@@ -170,12 +170,12 @@ string qr = PPay.DynamicQR
 ```
 
 ### เพิ่มเติม
-กรณีที่เป็น QR ประเภทใช้ Domestic Merchant สามารถกำหนดโดยเรียกใช้เมธอด `DomesticMerchant()`
+กรณีที่เป็น QR ประเภท **ใช้ภายในประเทศ** สามารถกำหนดโดยเรียกใช้เมธอด `DomesticMerchant()`
 ```csharp
 string qr = PPay.StaticQR.DomesticMerchant().GetBillPaymentQR();
 ```
 
-กรณีที่เป็น QR ประเภทใช้ Cross-Border Merchant สามารถกำหนดโดยเรียกใช้เมธอด `CrossBorderMerchant()`
+กรณีที่เป็น QR ประเภท **ใช้ข้ามประเทศ** สามารถกำหนดโดยเรียกใช้เมธอด `CrossBorderMerchant()`
 ```csharp
 string qr = PPay.StaticQR.CrossBorderMerchant().GetBillPaymentQR();
 ```
