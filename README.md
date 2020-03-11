@@ -35,10 +35,10 @@ IPromptPayQrReader reader = PPay.Reader;
 
 # การสร้าง QR
 ## 1.สร้าง QR โอนเงินสำหรับบุคคลทั่วไป (Credit Transfer - Tag 29)
-เป็นการโอนเงินระหว่างประชาชนทั่วไปไม่เกี่ยวกับธุรกิจหรือบริษัทใดๆ โดยการสร้าง QR ประเภทนี้ จะต้องเรียกใช้ผ่านเมธอด `GetCreditTransferQR()` ตามโค้ดด้านล่างนี้
+เป็นการโอนเงินระหว่างประชาชนทั่วไปไม่เกี่ยวกับธุรกิจหรือบริษัทใดๆ โดยการสร้าง QR ประเภทนี้ จะต้องเรียกใช้ผ่านเมธอด `CreateCreditTransferQrCode()` ตามโค้ดด้านล่างนี้
 ```csharp
 // สร้าง QR โอนเงินสำหรับบุคคลทั่วไป
-string qr = PPay.StaticQR.GetCreditTransferQR();
+string qr = PPay.StaticQR.CreateCreditTransferQrCode();
 ```
 
 ### การระบุผู้รับเงิน
@@ -47,42 +47,42 @@ string qr = PPay.StaticQR.GetCreditTransferQR();
 1. ระบุผู้รับเงินด้วย `เบอร์มือถือ`
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ เบอร์มือถือ 091-418-5401 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-string qr = PPay.StaticQR.MobileNumber("0914185401").GetCreditTransferQR();
+string qr = PPay.StaticQR.MobileNumber("0914185401").CreateCreditTransferQrCode();
 ```
 
 2. ระบุผู้รับเงินด้วย `เลขประจำตัวประชาชน`
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ เลขประจำตัวประชาชน 0-0000-00000-00-0 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-string qr = PPay.StaticQR.NationalId("0000000000000").GetCreditTransferQR();
+string qr = PPay.StaticQR.NationalId("0000000000000").CreateCreditTransferQrCode();
 ```
 
 3. ระบุผู้รับเงินด้วย `เลขบัญชีธนาคาร`
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ เลขบัญชีธนาคาร 0000000000 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-string qr = PPay.StaticQR.BankAccount("000000000000000").GetCreditTransferQR();
+string qr = PPay.StaticQR.BankAccount("000000000000000").CreateCreditTransferQrCode();
 ```
 
 4. ระบุผู้รับเงินด้วย `e-wallet`
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ e-Wallet Id 000000000000000 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-string qr = PPay.StaticQR.EWallet("000000000000000").GetCreditTransferQR();
+string qr = PPay.StaticQR.EWallet("000000000000000").CreateCreditTransferQrCode();
 ```
 
 ### การกำหนดจำนวนเงินที่ต้องจ่าย
 เราสามารถสร้าง QR ที่มีการกำหนดเงินที่ต้องจ่ายเป็นค่าตายตัวได้เลย โดยการเรียกใช้เมธอด `Amount()` ตามโค้ดตัวอย่างด้านล่าง
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ เบอร์มือถือ 091-418-5401 จำนวน 50 บาท
-string qr = PPay.StaticQR.MobileNumber("0914185401").Amount(50).GetCreditTransferQR();
+string qr = PPay.StaticQR.MobileNumber("0914185401").Amount(50).CreateCreditTransferQrCode();
 
 // โอนเงินพร้อมเพย์ไปที่ เลขประจำตัวประชาชน 0-0000-00000-00-0 จำนวน 50 บาท
-string qr = PPay.StaticQR.NationalId("0000000000000").Amount(50).GetCreditTransferQR();
+string qr = PPay.StaticQR.NationalId("0000000000000").Amount(50).CreateCreditTransferQrCode();
 
 
 // โอนเงินพร้อมเพย์ไปที่ เลขบัญชีธนาคาร 0000000000 จำนวน 50 บาท
-string qr = PPay.StaticQR.BankAccount("000000000000000").Amount(50).GetCreditTransferQR();
+string qr = PPay.StaticQR.BankAccount("000000000000000").Amount(50).CreateCreditTransferQrCode();
 
 // โอนเงินพร้อมเพย์ไปที่ e-Wallet Id 000000000000000 จำนวน 50 บาท
-string qr = PPay.StaticQR.EWallet("000000000000000").Amount(50).GetCreditTransferQR();
+string qr = PPay.StaticQR.EWallet("000000000000000").Amount(50).CreateCreditTransferQrCode();
 ```
 
 สำหรับคนที่อยากสร้าง QR โดยไม่ต้องรู้เรื่องอะไรเลยก็สามารถเรียกใช้งานแบบนี้ได้
@@ -99,19 +99,19 @@ Console.WriteLine($"Credit Transfer (PID): {creditTransferQR2}");
 ### เพิ่มเติม
 กรณีที่เป็น QR ประเภท **ร้านเป็นผู้แสดง QR ให้ลูกค้าสแกน** สามารถกำหนดโดยเรียกใช้เมธอด `MerchantPresentedQR()`
 ```csharp
-string qr = PPay.StaticQR.MerchantPresentedQR().GetCreditTransferQR();
+string qr = PPay.StaticQR.MerchantPresentedQR().CreateCreditTransferQrCode();
 ```
 
 กรณีที่เป็น QR ประเภท **ลูกค้าเป็นผู้แสดง QR Code ให้ร้านค้าสแกน** สามารถกำหนดโดยเรียกใช้เมธอด `CustomerPresentedQR()`
 ```csharp
-string qr = PPay.StaticQR.CustomerPresentedQR().GetCreditTransferQR();
+string qr = PPay.StaticQR.CustomerPresentedQR().CreateCreditTransferQrCode();
 ```
 
 ## 2.สร้าง QR สำหรับธุรกิจ (Bill Payment - Tag 30)
-เป็นการสร้าง QR สำหรับเรียกเก็บเงินจาก ร้านค้า/บริษัท โดยการสร้าง QR ประเภทนี้ จะต้องเรียกใช้ผ่านเมธอด `GetBillPaymentQR()` ตามโค้ดด้านล่างนี้
+เป็นการสร้าง QR สำหรับเรียกเก็บเงินจาก ร้านค้า/บริษัท โดยการสร้าง QR ประเภทนี้ จะต้องเรียกใช้ผ่านเมธอด `CreateBillPaymentQrCode()` ตามโค้ดด้านล่างนี้
 ```csharp
 // สร้าง QR สำหรับธุรกิจ
-string qr = PPay.StaticQR.GetBillPaymentQR();
+string qr = PPay.StaticQR.CreateBillPaymentQrCode();
 ```
 
 ### การระบุผู้รับเงิน
@@ -126,7 +126,7 @@ string qr = PPay.StaticQR
     .BillerSuffix("99")
     .BillRef1("1234")
     .BillRef2("5678")
-    .GetBillPaymentQR();
+    .CreateBillPaymentQrCode();
 ```
 
 2. ระบุผู้รับเงินด้วย `เลขประจำตัวผู้เสียภาษี`
@@ -138,7 +138,7 @@ string qr = PPay.StaticQR
     .BillerSuffix("99")
     .BillRef1("1234")
     .BillRef2("5678")
-    .GetBillPaymentQR();
+    .CreateBillPaymentQrCode();
 ```
 
 ### การกำหนดจำนวนเงินที่ต้องจ่าย
@@ -152,7 +152,7 @@ string qr = PPay.StaticQR
     .BillRef1("1234")
     .BillRef2("5678")
     .Amount(50)
-    .GetBillPaymentQR();
+    .CreateBillPaymentQrCode();
 ```
 
 สำหรับคนที่อยากสร้าง QR โดยไม่ต้องรู้เรื่องอะไรเลยก็สามารถเรียกใช้งานแบบนี้ได้
@@ -172,12 +172,12 @@ string qr = PPay.DynamicQR
 ### เพิ่มเติม
 กรณีที่เป็น QR ประเภท **ใช้ภายในประเทศ** สามารถกำหนดโดยเรียกใช้เมธอด `DomesticMerchant()`
 ```csharp
-string qr = PPay.StaticQR.DomesticMerchant().GetBillPaymentQR();
+string qr = PPay.StaticQR.DomesticMerchant().CreateBillPaymentQrCode();
 ```
 
 กรณีที่เป็น QR ประเภท **ใช้ข้ามประเทศ** สามารถกำหนดโดยเรียกใช้เมธอด `CrossBorderMerchant()`
 ```csharp
-string qr = PPay.StaticQR.CrossBorderMerchant().GetBillPaymentQR();
+string qr = PPay.StaticQR.CrossBorderMerchant().CreateBillPaymentQrCode();
 ```
 
 # ตัวถอดความหมาย QR
