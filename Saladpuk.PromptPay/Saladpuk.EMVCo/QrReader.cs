@@ -3,7 +3,7 @@ using Saladpuk.EMVCo.Models;
 using System;
 using System.Collections.Generic;
 
-namespace Saladpuk.PromptPay
+namespace Saladpuk.EMVCo
 {
     /// <summary>
     /// ตัวอ่านข้อมูลจาก QR code
