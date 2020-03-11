@@ -1,4 +1,5 @@
-﻿using Saladpuk.EMVCo.Contracts;
+﻿using Saladpuk.EMVCo;
+using Saladpuk.EMVCo.Contracts;
 using Saladpuk.EMVCo.Models;
 using Saladpuk.PromptPay.Contracts;
 using Saladpuk.PromptPay.Contracts.Models;
