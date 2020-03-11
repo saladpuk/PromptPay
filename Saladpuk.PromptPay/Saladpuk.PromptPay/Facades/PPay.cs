@@ -25,7 +25,7 @@ namespace Saladpuk.PromptPay.Facades
         /// <summary>
         /// ตัวอ่าน QR
         /// </summary>
-        public static IQrReader Reader
+        public static IPromptPayQrReader Reader
             => new PromptPayQrReader();
 
         #endregion Properties

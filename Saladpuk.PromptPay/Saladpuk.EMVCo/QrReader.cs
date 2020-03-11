@@ -26,9 +26,9 @@ namespace Saladpuk.PromptPay
         /// </summary>
         /// <param name="code">รหัส QR code ที่ต้องการอ่าน</param>
         /// <returns>รายละเอียดของ QR</returns>
-        public IQrInfo Read(string qrCode)
+        public IQrInfo Read(string code)
         {
-            ExtractText(qrCode);
+            ExtractText(code);
             return CreateQrInfo();
         }
 

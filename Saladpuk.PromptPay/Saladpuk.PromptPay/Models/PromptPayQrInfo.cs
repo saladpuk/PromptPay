@@ -10,7 +10,7 @@ namespace Saladpuk.PromptPay.Models
     /// <summary>
     /// รายละเอียดของ QR
     /// </summary>
-    public class PromptPayQrInfo : QrInfo
+    public class PromptPayQrInfo : QrInfo, IPromptPayQrInfo
     {
         #region Properties
 

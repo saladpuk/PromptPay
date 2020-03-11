@@ -6,7 +6,7 @@
     public interface IQrReader
     {
         /// <summary>
-        /// แปลความหมายของข้อความให้เป็ QR code
+        /// แปลความหมายของข้อความให้อยู่ในรูปแบบ QR EMVCo
         /// </summary>
         /// <param name="code">รหัส QR code ที่ต้องการอ่าน</param>
         /// <returns>รายละเอียดของ QR</returns>

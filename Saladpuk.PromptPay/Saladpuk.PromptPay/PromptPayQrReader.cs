@@ -1,5 +1,6 @@
 ﻿using Saladpuk.EMVCo.Contracts;
 using Saladpuk.EMVCo.Models;
+using Saladpuk.PromptPay.Contracts;
 using Saladpuk.PromptPay.Contracts.Models;
 using Saladpuk.PromptPay.Models;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Saladpuk.PromptPay
     /// <summary>
     /// ตัวอ่านข้อมูลจาก QR code ในรูปแบบ PromptPay
     /// </summary>
-    public class PromptPayQrReader : QrReader
+    public class PromptPayQrReader : QrReader, IPromptPayQrReader
     {
         #region Methods
 
@@ -111,5 +112,17 @@ namespace Saladpuk.PromptPay
         }
 
         #endregion Methods
+
+        #region IPromptPayQrReader members
+
+        /// <summary>
+        /// แปลความหมายของข้อความให้อยู่ในรูปแบบ QR PromptPay
+        /// </summary>
+        /// <param name="code">รหัส QR code ที่ต้องการอ่าน</param>
+        /// <returns>รายละเอียดของ QR</returns>
+        public IPromptPayQrInfo ReadQrPromptPay(string code)
+            => Read(code) as PromptPayQrInfo;
+
+        #endregion IPromptPayQrReader members
     }
 }

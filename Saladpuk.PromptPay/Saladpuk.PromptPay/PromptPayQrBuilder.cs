@@ -8,6 +8,7 @@ using ppay = Saladpuk.PromptPay.Contracts.PromptPayCodeConventions;
 
 namespace Saladpuk.PromptPay
 {
+    // HACK: มันควรจะสืบทอดความสามารถของ QrBuilder ดีไหม?
     /// <summary>
     /// ตัวสร้าง QR PromptPay
     /// </summary>

@@ -37,8 +37,8 @@ namespace Experiment.ConsoleApp.NetCore
             // QR Reader
             var staticMobileTransferQrCode = "00020101021229370016A000000677010111011300669141854015303764540550.005802TH630401F8";
             Console.WriteLine($"Are equal: {creditTransferQR == staticMobileTransferQrCode}");
-            var model = PPay.Reader.Read(staticMobileTransferQrCode) as PromptPayQrInfo;
-            var content = JsonSerializer.Serialize(model);
+            var model = PPay.Reader.ReadQrPromptPay(staticMobileTransferQrCode);
+            var content = JsonSerializer.Serialize(model as PromptPayQrInfo);
             Console.WriteLine(content);
         }
     }
