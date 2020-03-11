@@ -1,49 +1,31 @@
-﻿using Saladpuk.Contracts;
-using Saladpuk.Contracts.EMVCo;
-using Saladpuk.Contracts.PromptPay.Models;
+﻿using Saladpuk.EMVCo.Contracts;
+using Saladpuk.EMVCo.Models;
+using Saladpuk.PromptPay.Contracts;
+using Saladpuk.PromptPay.Contracts.Models;
 using Saladpuk.PromptPay.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using ppay = Saladpuk.Contracts.PromptPay.PromptPayCodeConventions;
+using ppay = Saladpuk.PromptPay.Contracts.PromptPayCodeConventions;
 
 namespace Saladpuk.PromptPay
 {
-    public class PromptPayQrReader : IQrReader
+    /// <summary>
+    /// ตัวอ่านข้อมูลจาก QR code ในรูปแบบ PromptPay
+    /// </summary>
+    public class PromptPayQrReader : QrReader, IPromptPayQrReader
     {
-        private List<IQrDataObject> segments = new List<IQrDataObject>();
+        #region Methods
 
-        public IQrInfo Read(string qrCode)
-        {
-            extractText(qrCode);
-            return new QrInfo(segments)
+        /// <summary>
+        /// สร้างรายละเอียดของ QR
+        /// </summary>
+        /// <returns>รายละเอียดของ QR</returns>
+        protected override IQrInfo CreateQrInfo()
+            => new PromptPayQrInfo(Segments)
             {
                 BillPayment = getBillPayment(),
                 CreditTransfer = getCreditTransfer(),
             };
-        }
-
-        private void extractText(string text)
-        {
-            var reader = new QrDataObject(text);
-            var (targetSegment, other) = extractSegments(reader);
-            segments.Add(targetSegment);
-            if (!string.IsNullOrWhiteSpace(other))
-            {
-                extractText(other);
-            }
-        }
-        private (IQrDataObject, string) extractSegments(IQrDataObject data)
-        {
-            if (!int.TryParse(data.Length, out int length))
-            {
-                throw new ArgumentException("LengthCode isn't valid.");
-            }
-            var currentValue = $"{data.Id}{data.Length}{data.Value.Substring(0, length)}";
-            var firstSegment = new QrDataObject(currentValue);
-            var other = data.RawValue.Substring(currentValue.Length);
-            return (firstSegment, other);
-        }
 
         private BillPayment getBillPayment()
         {
@@ -113,7 +95,7 @@ namespace Saladpuk.PromptPay
         }
         private IEnumerable<IQrDataObject> extractSegment(string specificTagId)
         {
-            var merchant = segments.LastOrDefault(it => it.IdByConvention == QrIdentifier.MerchantAccountInformation);
+            var merchant = Segments.LastOrDefault(it => it.IdByConvention == QrIdentifier.MerchantAccountInformation);
             var shouldSkip = merchant == null || merchant.Id != specificTagId;
             if (shouldSkip)
             {
@@ -123,10 +105,24 @@ namespace Saladpuk.PromptPay
             var nextValue = merchant.Value;
             while (!string.IsNullOrWhiteSpace(nextValue))
             {
-                var (segment, next) = extractSegments(new QrDataObject(nextValue));
+                var (segment, next) = ExtractSegments(new QrDataObject(nextValue));
                 nextValue = next;
                 yield return segment;
             }
         }
+
+        #endregion Methods
+
+        #region IPromptPayQrReader members
+
+        /// <summary>
+        /// แปลความหมายของข้อความให้อยู่ในรูปแบบ QR PromptPay
+        /// </summary>
+        /// <param name="code">รหัส QR code ที่ต้องการอ่าน</param>
+        /// <returns>รายละเอียดของ QR</returns>
+        public IPromptPayQrInfo ReadQrPromptPay(string code)
+            => Read(code) as PromptPayQrInfo;
+
+        #endregion IPromptPayQrReader members
     }
 }

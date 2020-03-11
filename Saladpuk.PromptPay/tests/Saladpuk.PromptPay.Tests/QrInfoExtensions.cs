@@ -1,16 +1,16 @@
 ﻿using FluentAssertions;
-using Saladpuk.Contracts;
-using Saladpuk.Contracts.EMVCo;
-using Saladpuk.Contracts.PromptPay.Models;
+using Saladpuk.EMVCo.Contracts;
+using Saladpuk.EMVCo.Models;
+using Saladpuk.PromptPay.Contracts.Models;
 using Saladpuk.PromptPay.Models;
 using System.Linq;
-using emv = Saladpuk.Contracts.EMVCo.EMVCoCodeConventions;
+using emv = Saladpuk.EMVCo.Contracts.EMVCoCodeConventions;
 
 namespace Saladpuk.PromptPay.Tests
 {
     public static class QrInfoExtensions
     {
-        public static QrInfo InitializeDefault(this QrInfo qr, bool staticQr = true, CurrencyCode currency = CurrencyCode.THB, string country = "TH")
+        public static PromptPayQrInfo InitializeDefault(this PromptPayQrInfo qr, bool staticQr = true, CurrencyCode currency = CurrencyCode.THB, string country = "TH")
         {
             var PointOfInitiationMethod = staticQr ? emv.Static : emv.Dynamic;
             qr.Segments.Add(new QrDataObject("000201"));
@@ -20,14 +20,14 @@ namespace Saladpuk.PromptPay.Tests
             return qr;
         }
 
-        public static IQrInfo SetPlainCreditTransfer(this QrInfo qr)
+        public static IQrInfo SetPlainCreditTransfer(this PromptPayQrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("29200016A000000677010111"));
             qr.CreditTransfer = new CreditTransfer();
             return qr;
         }
 
-        public static IQrInfo SetPlainBillPayment(this QrInfo qr)
+        public static IQrInfo SetPlainBillPayment(this PromptPayQrInfo qr)
         {
             qr.Segments.Add(new QrDataObject("30200016A000000677010112"));
             qr.BillPayment = new BillPayment();

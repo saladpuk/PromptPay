@@ -1,5 +1,5 @@
-﻿using Saladpuk.Contracts;
-using Saladpuk.Contracts.PromptPay;
+﻿using Saladpuk.EMVCo.Contracts;
+using Saladpuk.PromptPay.Contracts;
 
 namespace Saladpuk.PromptPay.Facades
 {
@@ -25,7 +25,7 @@ namespace Saladpuk.PromptPay.Facades
         /// <summary>
         /// ตัวอ่าน QR
         /// </summary>
-        public static IQrReader Reader
+        public static IPromptPayQrReader Reader
             => new PromptPayQrReader();
 
         #endregion Properties
