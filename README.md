@@ -1,12 +1,17 @@
 # Prompt Pay (EMVCo)
-ตัวช่วยในการ `อ่าน` และ `สร้าง` QR Prompt Pay ตามมาตรฐานของธนาคารแห่งประเทศไทย **BOT** (Bank of Thailand) โดยอ้างอิงจากเอกสารสำคัญ 3 ตัวด้านล่างนี้
-1. [Thai QR Code - Payment Standard](https://www.bot.or.th/Thai/PaymentSystems/StandardPS/Documents/ThaiQRCode_Payment_Standard.pdf)
-1. [ENVCo Consumer Presented Mode](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Consumer-Presented-QR-Specification-v1-1.pdf)
-1. [EMVCo Merchant Presented Mode](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Merchant-Presented-QR-Specification-v1-1.pdf)
+
+## ติดตั้ง
+อยากเอาไปใช้ก็ติดตั้งผ่าน nuget ได้เลย หรือจะใช้ .NET CLI ก็ได้เช่นกันขอรับ
+```
+dotnet add package Saladpuk.PromptPay
+```
 
 > ใครอยากเอาไปปู้ยี้ปู้ยำอะไรก็ตามสบาย ถ้าทำแล้วดีหรือเจอจุดผิดก็ฝาก `pull-request` เข้ามาด้วยจะเป็นประคุณมาก
-
 > โค้ดตัวนี้ใช้ .NET Standard 2.0 นะจ๊ะ
+
+มีคำอธิบายเป็นภาษาไทย เพื่อให้นักพัฒนาชาวไทยสามารถเข้าถึงได้ง่าย
+
+![intellisense](thai-intellisense.png)
 
 ## การใช้งาน
 QR ตามมาตรฐานของ EMVCo ได้แบ่งไว้ 2 ลักษณะการใช้งานคือ
@@ -83,7 +88,7 @@ string qr = PPay.StaticQR.EWallet("000000000000000").Amount(50).GetCreditTransfe
 สำหรับคนที่อยากสร้าง QR โดยไม่ต้องรู้เรื่องอะไรเลยก็สามารถเรียกใช้งานแบบนี้ได้
 ```csharp
 // โอนเงินพร้อมเพย์ไปที่ เลขประจำตัวประชาชน 0-0000-00000-00-0
-var qr = PPay.StaticQR
+string qr = PPay.StaticQR
     .CreateCreditTransferQrCode(new CreditTransfer
     {
         NationalIdOrTaxId = "0000000000000"
@@ -154,7 +159,7 @@ string qr = PPay.StaticQR
 ```csharp
 // จ่ายเงินพร้อมเพย์ไปที่ เลขประจำตัวผู้เสียภาษี 0-0000-00000-00-0 รหัสร้านสาขา 99 (2 หลัก)
 // รหัสอ้างอิง 1: 1234, รหัสอ้างอิง 2: 5678 (จำนวนเงินที่จะโอนผู้ใช้ต้องกรอกเอง)
-var qr = PPay.DynamicQR
+string qr = PPay.DynamicQR
     .CreateBillPaymentQrCode(new BillPayment
     {
         BillerId = "000000000000099",
@@ -180,7 +185,7 @@ string qr = PPay.StaticQR.CrossBorderMerchant().GetBillPaymentQR();
 ```csharp
 // QR โอนเงินพร้อมเพย์ไปยังเบอร์โทร 0914185401 จำนวนเงิน 50 บาท
 string qr = "00020101021229370016A000000677010111011300669141854015303764540550.005802TH630401F8";
-IQrInfo model = PPay.Reader.Read(qr);
+IPromptPayQrInfo model = PPay.Reader.ReadQrPromptPay(qr);
 ```
 
 **ผลลัพท์**
@@ -269,6 +274,12 @@ IQrInfo model = PPay.Reader.Read(qr);
     "BillPayment": null
 }
 ```
+
+## อ้างอิง
+ตัวช่วยในการ `อ่าน` และ `สร้าง` QR Prompt Pay ตามมาตรฐานของธนาคารแห่งประเทศไทย **BOT** (Bank of Thailand) โดยอ้างอิงจากเอกสารสำคัญ 3 ตัวด้านล่างนี้
+1. [Thai QR Code - Payment Standard](https://www.bot.or.th/Thai/PaymentSystems/StandardPS/Documents/ThaiQRCode_Payment_Standard.pdf)
+1. [ENVCo Consumer Presented Mode](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Consumer-Presented-QR-Specification-v1-1.pdf)
+1. [EMVCo Merchant Presented Mode](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Merchant-Presented-QR-Specification-v1-1.pdf)
 
 ## Progress
 |Feature|สถานะ|หมายเหตุ|
