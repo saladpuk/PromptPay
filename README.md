@@ -21,16 +21,16 @@ QR ตามมาตรฐานของ EMVCo ได้แบ่งไว้ 
 สำหรับโค้ดในการสร้าง QR แต่ละรูปแบบก็ตามด้านล่างนี่แหละ
 ```csharp
 // Static QR
-IQrBuilder builder = PPay.StaticQR;
+IPromptPayBuilder builder = PPay.StaticQR;
 
 // Dynamic QR
-IQrBuilder builder = PPay.DynamicQR;
+IPromptPayBuilder builder = PPay.DynamicQR;
 ```
 
 ตัวโค้ดที่เขียนไว้ได้เพิ่มความสามารถในการ **ถอดความหมาย** ของ `EMVCo` และ `PromptPay` เอาไว้ด้วย โดยสามารถเรียกใช้งานตามด้านล่าง
 ```csharp
 // ตัวอ่าน QR ตามมาตรฐาน EMVCo และ PromptPay
-IQrReader reader = PPay.Reader;
+IPromptPayQrReader reader = PPay.Reader;
 ```
 
 # การสร้าง QR
