@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Saladpuk.EMVCo.Models;
 using Saladpuk.PromptPay.Models;
 using Xunit;
 

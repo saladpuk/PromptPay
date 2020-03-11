@@ -1,14 +1,10 @@
-﻿using Saladpuk.Contracts;
-using Saladpuk.Contracts.EMVCo;
-using Saladpuk.Contracts.PromptPay;
-using Saladpuk.Contracts.PromptPay.Models;
-using Saladpuk.PromptPay.Models;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using Saladpuk.EMVCo;
+using Saladpuk.EMVCo.Contracts;
+using Saladpuk.PromptPay.Contracts;
+using Saladpuk.PromptPay.Contracts.Models;
 using System.Linq;
-using emv = Saladpuk.Contracts.EMVCo.EMVCoCodeConventions;
-using ppay = Saladpuk.Contracts.PromptPay.PromptPayCodeConventions;
+using emv = Saladpuk.EMVCo.Contracts.EMVCoCodeConventions;
+using ppay = Saladpuk.PromptPay.Contracts.PromptPayCodeConventions;
 
 namespace Saladpuk.PromptPay
 {
@@ -19,9 +15,9 @@ namespace Saladpuk.PromptPay
     {
         #region Fields
 
+        private QrBuilder qrBuilder;
         private BillPayment billPayment;
         private CreditTransfer creditTransfer;
-        private readonly List<IQrDataObject> qrDataObjects;
 
         #endregion Fields
 
@@ -32,9 +28,9 @@ namespace Saladpuk.PromptPay
         /// </summary>
         public PromptPayQrBuilder()
         {
+            qrBuilder = new QrBuilder();
             billPayment = new BillPayment();
             creditTransfer = new CreditTransfer();
-            qrDataObjects = new List<IQrDataObject>();
         }
 
         #endregion Constructors
@@ -45,57 +41,55 @@ namespace Saladpuk.PromptPay
 
         public IPromptPayBuilder Add(QrIdentifier identifier, string data)
         {
-            if (string.IsNullOrWhiteSpace(data))
-            {
-                throw new ArgumentException("Invalid data");
-            }
-
-            var id = getIdCode(identifier);
-            var digits = getLengthDigits(data ?? string.Empty);
-            removeOldRecordIfExists(id);
-            qrDataObjects.Add(new QrDataObject($"{id}{digits}{data}"));
+            qrBuilder.Add(identifier, data);
             return this;
         }
 
         public IPromptPayBuilder Add(string rawData)
         {
-            var isArgumentValid = !string.IsNullOrWhiteSpace(rawData)
-                && rawData.Length >= emv.MinSegmentLength;
-            if (!isArgumentValid)
-            {
-                throw new ArgumentException("Invalid data");
-            }
-
-            var data = new QrDataObject(rawData);
-            removeOldRecordIfExists(data.Id);
-            qrDataObjects.Add(data);
+            qrBuilder.Add(rawData);
             return this;
         }
 
         public IPromptPayBuilder SetStaticQR()
-            => Add(QrIdentifier.PointOfInitiationMethod, emv.Static);
+        {
+            qrBuilder.SetStaticQR();
+            return this;
+        }
 
         public IPromptPayBuilder SetDynamicQR()
-            => Add(QrIdentifier.PointOfInitiationMethod, emv.Dynamic);
+        {
+            qrBuilder.SetDynamicQR();
+            return this;
+        }
 
         public IPromptPayBuilder SetTransactionAmount(double amount)
-            => Add(QrIdentifier.TransactionAmount, Math.Abs(amount).ToString("0.00"));
+        {
+            qrBuilder.SetTransactionAmount(amount);
+            return this;
+        }
 
         public IPromptPayBuilder SetCountryCode(string code)
-            => Add(QrIdentifier.CountryCode, new RegionInfo(code).TwoLetterISORegionName);
+        {
+            qrBuilder.SetCountryCode(code);
+            return this;
+        }
 
         public IPromptPayBuilder SetCurrencyCode(CurrencyCode code)
-            => Add(QrIdentifier.TransactionCurrency, ((int)code).ToString("000"));
+        {
+            qrBuilder.SetCurrencyCode(code);
+            return this;
+        }
 
         public IPromptPayBuilder SetPayloadFormatIndicator(string version = "01")
-            => Add(QrIdentifier.PayloadFormatIndicator, version);
+        {
+            qrBuilder.SetPayloadFormatIndicator(version);
+            return this;
+        }
 
         public IPromptPayBuilder SetCyclicRedundancyCheck(ICyclicRedundancyCheck crc)
         {
-            var id = getIdCode(QrIdentifier.CRC);
-            var currentCode = $"{ToString()}{id}{emv.CRCDigits.ToString("00")}";
-            var computedValue = crc.ComputeChecksum(currentCode);
-            Add(QrIdentifier.CRC, computedValue);
+            qrBuilder.SetCyclicRedundancyCheck(crc);
             return this;
         }
 
@@ -182,7 +176,7 @@ namespace Saladpuk.PromptPay
 
         #endregion Credit transfer
 
-        #region Billder
+        #region Bill payment
 
         public string CreateBillPaymentQrCode()
             => CreateBillPaymentQrCode(billPayment);
@@ -238,7 +232,7 @@ namespace Saladpuk.PromptPay
             return this;
         }
 
-        #endregion Billder
+        #endregion Bill payment
 
         public IPromptPayBuilder NationalId(string value)
         {
@@ -267,11 +261,11 @@ namespace Saladpuk.PromptPay
         public override string ToString()
         {
             var crcId = getIdCode(QrIdentifier.CRC);
-            var crc = qrDataObjects
+            var crc = qrBuilder.QrDataObjects
                 .Where(it => it.Id == crcId)
                 .LastOrDefault()
                 ?.RawValue ?? string.Empty;
-            var qry = qrDataObjects
+            var qry = qrBuilder.QrDataObjects
                 .Where(it => it.Id != crcId)
                 .OrderBy(it => it.Id)
                 .Select(it => it.RawValue)
@@ -282,24 +276,15 @@ namespace Saladpuk.PromptPay
         private void removeMerchantRecordsIfExists()
         {
             var merchantIdentifierRange = emv.MerchantIdRange.Select(it => it.ToString());
-            var merchantRecords = qrDataObjects.Where(it => merchantIdentifierRange.Contains(it.Id)).ToList();
+            var merchantRecords = qrBuilder.QrDataObjects.Where(it => merchantIdentifierRange.Contains(it.Id)).ToList();
             foreach (var item in merchantRecords)
             {
-                qrDataObjects.Remove(item);
+                qrBuilder.QrDataObjects.Remove(item);
             }
         }
 
         private string formatRecord(string id, string value)
             => $"{id}{getLengthDigits(value)}{value}";
-
-        private void removeOldRecordIfExists(string id)
-        {
-            var selected = qrDataObjects.FirstOrDefault(it => it.Id == id);
-            if (selected != null)
-            {
-                qrDataObjects.Remove(selected);
-            }
-        }
 
         private string getLengthDigits(string value)
             => value.Length.ToString("00");

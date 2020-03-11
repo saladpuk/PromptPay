@@ -1,5 +1,5 @@
-﻿using Saladpuk.Contracts;
-using Saladpuk.Contracts.PromptPay;
+﻿using Saladpuk.EMVCo.Contracts;
+using Saladpuk.PromptPay.Contracts;
 
 namespace Saladpuk.PromptPay.Facades
 {
