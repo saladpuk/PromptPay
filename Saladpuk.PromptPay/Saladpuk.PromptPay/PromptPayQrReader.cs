@@ -42,7 +42,7 @@ namespace Saladpuk.PromptPay
                 switch (item.Id)
                 {
                     case ppay.AIDTag:
-                        result.CrossBorderMerchantQR = item.Value == ppay.DomesticMerchant;
+                        result.CrossBorderMerchantQR = item.Value == ppay.CrossBorderMerchant;
                         break;
                     case ppay.BillderIdTag:
                         const int SuffixLength = 2;
@@ -96,7 +96,9 @@ namespace Saladpuk.PromptPay
         }
         private IEnumerable<IQrDataObject> extractSegment(string specificTagId)
         {
-            var merchant = Segments.LastOrDefault(it => it.IdByConvention == QrIdentifier.MerchantAccountInformation);
+            var qry = Segments
+                .Where(it => it.IdByConvention == QrIdentifier.MerchantAccountInformation && it.Id == specificTagId);
+            var merchant = qry.LastOrDefault();
             var shouldSkip = merchant == null || merchant.Id != specificTagId;
             if (shouldSkip)
             {
