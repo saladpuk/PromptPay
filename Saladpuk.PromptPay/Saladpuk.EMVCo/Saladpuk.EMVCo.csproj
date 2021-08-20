@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Saladpuk</Authors>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Description>EMVCo standard.</Description>
     <Copyright>Saladpuk</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
