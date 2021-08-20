@@ -8,8 +8,8 @@ namespace Saladpuk.PromptPay.Tests
     public class PPayTests
     {
         private const string EMVCoVersion = "000201";
-        private const string Static = "010212";
-        private const string Dynamic = "010211";
+        private const string Static = "010211";
+        private const string Dynamic = "010212";
         private const string Country = "5802TH";
         private const string Currency = "5303764";
         private const string CRC16Prefix = "6304";
