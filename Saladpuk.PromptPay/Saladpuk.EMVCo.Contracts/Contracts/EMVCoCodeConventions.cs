@@ -11,12 +11,12 @@ namespace Saladpuk.EMVCo.Contracts
         /// <summary>
         /// QR ประเภทจ่ายเงินได้เพียงครั้งเดียวแล้วทิ้ง
         /// </summary>
-        public const string Dynamic = "11";
+        public const string Dynamic = "12";
 
         /// <summary>
         /// QR ประเภทใช้ซ้ำได้หลายครั้ง
         /// </summary>
-        public const string Static = "12";
+        public const string Static = "11";
 
         /// <summary>
         /// Reserved for Identifies the merchant (02~51).
