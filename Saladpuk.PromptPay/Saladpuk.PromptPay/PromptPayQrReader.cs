@@ -86,6 +86,9 @@ namespace Saladpuk.PromptPay
                     case ppay.EWalletTag:
                         result.EWalletId = item.Value;
                         break;
+                    case ppay.BankAccountTag:
+                        result.BankAccount = item.Value;
+                        break;
                     case ppay.OTATag:
                         result.OTA = item.Value;
                         break;
